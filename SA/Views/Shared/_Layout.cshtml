@@ -1,1 +1,31 @@
-﻿
+﻿<!DOCTYPE	html>
+<html>
+<head>
+    <title>Solicitações ao Almoxarifado</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li>@Html.ActionLink("Novo Login", "NovoLogin","Login")</li>
+        </ul>
+    </nav>
+    <header>
+        <center>
+            <table>
+                <tr>
+                    <td><img src="/Content/Images/ico warehouse 50x50.png" alt="warehoseico" style="width:50px;height:50px;"></td>
+                    <td width="50px"></td>
+                    <td><h1>SOLICITAÇÕES AO ALMOXARIFADO</h1></td>
+                </tr>
+            </table>
+            <br />
+        </center>
+    </header>
+    <div class="conteudo">
+        <main>
+            @RenderBody()
+        </main>       
+    </div>
+</body>
+@RenderSection("Scripts", false)    
+</html>

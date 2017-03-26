@@ -1,16 +1,37 @@
 ﻿@model SA.ViewModel.Login
+    <br /><br />
 
-    <center>
-        @using (Html.BeginForm("ValidarLogin", "Login", FormMethod.Post)){
-            @Html.LabelFor(l => l.Cpf, "CPF: ")
-            @Html.TextBoxFor(l => l.Cpf, new { rows = 11 })
-            <input type="submit" value="Logar" />       
-            <p>
-                @if (!Model.Valido && !Model.Cpf.IsEmpty())
-                {
-                    <h5>Login inválido!</h5>
-                }
+        <center>
+            @using (Html.BeginForm("ValidarLogin", "Login", FormMethod.Post, new { id ="FormLogin"}))
+            {
+                @Html.LabelFor(l => l.Cpf, "CPF: ")
+                @Html.TextBoxFor(l => l.Cpf, new { rows = 11 })
+                <input type="submit" value="Logar" />
+            }
+            <div id="result"</div>           
+        </center>
+<br />
 
-            </p>    
-        }        
-    </center>
+
+@section Scripts
+{   
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#FormLogin").on("submit", function (e) {
+                e.preventDefault();
+                debugger
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        $("#result").html(data);
+                    }
+                });
+            });
+        });        
+    </script>
+}

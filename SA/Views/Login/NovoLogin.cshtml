@@ -1,0 +1,28 @@
+﻿@model SA.Models.Usuario
+@{
+    ViewBag.Title = "NovoLogin";
+}
+
+@using (Html.BeginForm("ValidarLogin", "Login", FormMethod.Post))
+{
+    @Html.LabelFor(u => u.Cpf)
+    @Html.TextBoxFor(l => l.Cpf, new { rows = 11 })
+
+    @Html.LabelFor(u => u.Requerente)
+    @Html.TextBoxFor(u => u.Requerente)
+
+    @Html.LabelFor(u => u.CentroCusto)
+    @Html.TextBoxFor(u => u.CentroCusto)
+
+    @Html.LabelFor(u => u.Departamento)   
+    @*@Html.DropDownListFor(u => u.Departamento,*@
+    
+    @Html.LabelFor(u => u.Funcao)
+    
+    @Html.LabelFor(u => u.Tercerizado)
+    
+    @Html.Label("Empresa Tercerizada: ")
+
+
+    <input type="submit" value="Gravar" />
+}
