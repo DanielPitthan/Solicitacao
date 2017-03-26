@@ -1,0 +1,16 @@
+﻿@model SA.ViewModel.Login
+
+    <center>
+        @using (Html.BeginForm("ValidarLogin", "Login", FormMethod.Post)){
+            @Html.LabelFor(l => l.Cpf, "CPF: ")
+            @Html.TextBoxFor(l => l.Cpf, new { rows = 11 })
+            <input type="submit" value="Logar" />       
+            <p>
+                @if (!Model.Valido && !Model.Cpf.IsEmpty())
+                {
+                    <h5>Login inválido!</h5>
+                }
+
+            </p>    
+        }        
+    </center>
