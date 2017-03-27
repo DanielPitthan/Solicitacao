@@ -2,13 +2,13 @@
 <html>
 <head>
     <title>Solicitações ao Almoxarifado</title>
+    <link href="~/Content/Css/material.css" rel="stylesheet" /> 
+    <link href="~/Content/Css/solicitacao.css" rel="stylesheet" /> 
+    <script src="~/Scripts/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
-<body>
-    <nav>
-        <ul>
-            <li>@Html.ActionLink("Novo Login", "NovoLogin","Login")</li>
-        </ul>
-    </nav>
+<body class="fundodocorpo">
+    @Html.Partial("_Menu")   
     <header>
         <center>
             <table>

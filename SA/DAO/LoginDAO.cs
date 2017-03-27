@@ -5,6 +5,7 @@ using System.Web;
 using SA.ViewModel;
 using SA.Helpers;
 using NHibernate;
+using SA.Models;
 
 namespace SA.DAO
 {
@@ -19,8 +20,20 @@ namespace SA.DAO
             this.session = session;
         }
 
+        /// <summary>
+        /// Retorna uma lista de usuários
+        /// </summary>
+        /// <returns>IList&lt;Usuario&gt;.</returns>
+        public IList<Usuario> Lista() {
+
+
+            string hql = "select u from Usuario u ";
+            IQuery query = this.session.CreateQuery(hql);
+            return query.List<Usuario>();
+        }
+            
         
-        public  bool ValidaLogin(Login login)
+        public bool ValidaLogin(Login login)
         {
             //using(ISession session = NHibernateHelper.OpenSession())
             //{

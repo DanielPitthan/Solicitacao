@@ -3,26 +3,70 @@
     ViewBag.Title = "NovoLogin";
 }
 
-@using (Html.BeginForm("ValidarLogin", "Login", FormMethod.Post))
-{
-    @Html.LabelFor(u => u.Cpf)
-    @Html.TextBoxFor(l => l.Cpf, new { rows = 11 })
+<center>
+    @using (Html.BeginForm("ValidarLogin", "Login", FormMethod.Post))
+    {
 
-    @Html.LabelFor(u => u.Requerente)
-    @Html.TextBoxFor(u => u.Requerente)
+        <table class="mdl-data-table mdl-js-data-table">
+            <tbody>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        @Html.LabelFor(u => u.Cpf)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(l => l.Cpf, new { rows = 11 })
+                    </td>
+                    <td>
+                        @Html.LabelFor(u => u.Departamento)
+                    </td>
+                    <td>
+                        @Html.TextBox("Dep")
+                    </td>
 
-    @Html.LabelFor(u => u.CentroCusto)
-    @Html.TextBoxFor(u => u.CentroCusto)
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(u => u.CentroCusto)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(u => u.CentroCusto)
+                    </td>
+                    <td>
+                        @Html.LabelFor(u => u.Funcao)
+                    </td>
+                    <td>
+                        @Html.TextBox("Fun")
+                    </td>
 
-    @Html.LabelFor(u => u.Departamento)   
-    @*@Html.DropDownListFor(u => u.Departamento,*@
-    
-    @Html.LabelFor(u => u.Funcao)
-    
-    @Html.LabelFor(u => u.Tercerizado)
-    
-    @Html.Label("Empresa Tercerizada: ")
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(u => u.Requerente)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(u => u.Requerente)
+                    </td>
+                    <td>
+                        @Html.LabelFor(u => u.Tercerizado)
+                    </td>
+                    <td>
+                        @Html.TextBox("Terc")
+                    </td>
+                    <td>
+                        @Html.Label("Empresa Tercerizada: ")
+                    </td>
+                    <td>
+                        @Html.TextBox("Emp")
+                    </td>
+                </tr>
 
 
-    <input type="submit" value="Gravar" />
-}
+
+                @*@Html.DropDownListFor(u => u.Departamento,*@
+
+            </tbody>
+        </table>
+
+        <input type="submit" value="Gravar" />
+    }
+</center>

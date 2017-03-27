@@ -52,7 +52,7 @@ namespace SA.Controllers
         public ActionResult NovoLogin()
         {
 
-            //ViewBag.Usuarios = this.usuarioDAO.Lista();
+            ViewBag.Usuarios = loginDAO.Lista();
             return View();
         }
 
