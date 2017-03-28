@@ -1,0 +1,12 @@
+﻿@model SA.Models.Departamento
+@{
+    ViewBag.Title = "Form";
+}
+
+@using (Html.BeginForm("Adiciona", "Departamento", FormMethod.Post))
+{
+    @Html.Partial("_FormDepartamento")
+    <input type="submit" value="Cadastrar" />
+}
+@Html.ValidationMessage("Departamento Inválido")
+@Html.ValidationMessageFor(d => d.Departamentos)

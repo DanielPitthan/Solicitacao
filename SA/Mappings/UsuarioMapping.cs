@@ -13,7 +13,7 @@ namespace SA.Mappings
         {
             Table("Z13010");
 
-            Id(u => u.Cpf).Column("Z13_CFP");
+            Id(u => u.Cpf).Column("Z13_CPF");
             Map(u => u.Filial).Column("Z13_FILIAL");
             Map(u => u.Requerente).Column("Z13_REQUIS");
             Map(u => u.Departamento).Column("Z13_DEPART");

@@ -1,0 +1,28 @@
+﻿@model IList<SA.Models.Departamento>
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.ActionLink("Novo Departamento","Form","Departamento")
+<br />
+<center>
+    <table>
+        <thead>
+        <th>Id</th>
+        <th>Departamento</th>
+        <th colspan="2">Opções</th>        
+        </thead>
+        <tbody>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td>@d.Id</td>
+                    <td>@d.Departamentos</td>
+                    <td>@Html.ActionLink("Alterar", "Alter", "Departamento", new { id = d.Id })</td>
+                    <td>@Html.ActionLink("Excluir", "Delete", "Departamento", new { id = d.Id })</td>                    
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</center>
