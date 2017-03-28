@@ -206,8 +206,9 @@
     <Content Include="Views\Shared\Login\_Login.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Departamento\Index.cshtml" />
-    <Content Include="Views\Departamento\Form.cshtml" />
+    <Content Include="Views\Departamento\FormInclui.cshtml" />
     <Content Include="Views\Shared\_FormDepartamento.cshtml" />
+    <Content Include="Views\Departamento\FormAltera.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

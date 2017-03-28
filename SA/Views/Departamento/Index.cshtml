@@ -18,11 +18,12 @@
                 <tr>
                     <td>@d.Id</td>
                     <td>@d.Departamentos</td>
-                    <td>@Html.ActionLink("Alterar", "Alter", "Departamento", new { id = d.Id })</td>
-                    <td>@Html.ActionLink("Excluir", "Delete", "Departamento", new { id = d.Id })</td>                    
+                    <td><a href=@Url.Action("FormAltera", "Departamento",new { id = d.Id })><i class="material-icons">mode_edit</i></a>@*@Html.ActionLink("Alterar", "Alter", "Departamento", new { id = d.Id },new { @class = "icon-mode-edit:before" })*@</td>
+                    <td><a href=@Url.Action("Excluir","Departamento",new { id = d.Id })><i class="material-icons">delete_forever</i></a>@*@Html.ActionLink("Excluir", "Delete", "Departamento", new { id = d.Id })*@</td> 
                 </tr>
             }
         </tbody>
     </table>
+   
 
 </center>
