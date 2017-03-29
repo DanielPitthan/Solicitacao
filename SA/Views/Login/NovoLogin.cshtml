@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "NovoLogin";
 }
-
+<br /><br /><br />
 <center>
-    @using (Html.BeginForm("ValidarLogin", "Login", FormMethod.Post))
+    @using (Html.BeginForm("Add", "Login", FormMethod.Post))
     {
 
         <table class="mdl-data-table mdl-js-data-table">
@@ -35,7 +35,7 @@
                         @Html.LabelFor(u => u.Funcao)
                     </td>
                     <td>
-                        @Html.TextBox("Fun")
+                        @Html.DropDownListFor( u => u.Funcao , new SelectList(ViewBag.Funcao,"Id","Funcoes"))
                     </td>
 
                 </tr>
@@ -50,7 +50,7 @@
                         @Html.LabelFor(u => u.Tercerizado)
                     </td>
                     <td>
-                        @Html.TextBox("Terc")
+                        @Html.DropDownListFor( u=> u.Tercerizado,new SelectList(ViewBag.Tercerizado, "Tercerizado"))
                     </td>
                     <td>
                         @Html.Label("Empresa Tercerizada: ")
@@ -59,11 +59,6 @@
                         @Html.TextBox("Emp")
                     </td>
                 </tr>
-
-
-
-                @*@Html.DropDownListFor(u => u.Departamento,*@
-
             </tbody>
         </table>
 

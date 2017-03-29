@@ -1,0 +1,15 @@
+﻿@model SA.Models.Funcao
+@{
+    ViewBag.Title = "FormAltera";
+}
+
+<center>
+    @using (Html.BeginForm("Alterar", "Funcao", FormMethod.Post))
+    {
+        @Html.HiddenFor(d => d.Id)
+        @Html.Partial("_FormFuncao")
+        <input type="submit" value="Alterar" />
+    }
+    @Html.ValidationMessage("Funcao Inválido")
+    @Html.ValidationMessageFor(d => d.Funcaos)
+</center>

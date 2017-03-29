@@ -1,0 +1,18 @@
+﻿@model SA.Models.Funcao
+@{
+    ViewBag.Title = "FormInclui";
+    
+}
+
+<br />
+<br />
+<br />
+<center>
+    @using (Html.BeginForm("Adiciona", "Funcao", FormMethod.Post))
+    {
+        @Html.Partial("_FormFuncao")
+        <input type="submit" value="Cadastrar" />
+    }
+    @Html.ValidationMessage("Funcao Inválido")
+    @Html.ValidationMessageFor(d => d.Funcoes)
+</center>

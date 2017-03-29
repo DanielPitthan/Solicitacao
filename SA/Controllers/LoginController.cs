@@ -13,12 +13,16 @@ namespace SA.Controllers
     {
         private LoginDAO loginDAO;
         private DepartamentoDAO departamentoDAO;
+        private FuncaoDAO funcaoDAO;
+        private UsuarioDAO usuarioDAO;
 
         //Ninject usado aqui!
-        public LoginController(LoginDAO login, DepartamentoDAO dep)
+        public LoginController(LoginDAO login, DepartamentoDAO dep,FuncaoDAO fun,UsuarioDAO user)
         {
             this.loginDAO = login;
             this.departamentoDAO = dep;
+            this.funcaoDAO = fun;
+            this.usuarioDAO = user;
         }
 
         //Home Page do Login
@@ -53,8 +57,9 @@ namespace SA.Controllers
         /// <returns>ActionResult.</returns>
         public ActionResult NovoLogin()
         {
-
+            ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
+            ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
             return View();
         }
 

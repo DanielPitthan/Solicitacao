@@ -172,17 +172,22 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FuncaoController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="DAO\FuncaoDAO.cs" />
     <Compile Include="DAO\DepartamentoDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\NhibernateHelper.cs" />
+    <Compile Include="Mappings\FuncaoMapping.cs" />
     <Compile Include="Mappings\DepartamentoMapping.cs" />
     <Compile Include="Mappings\UsuarioMapping.cs" />
+    <Compile Include="Models\Funcao.cs" />
     <Compile Include="Models\Departamento.cs" />
     <Compile Include="Models\Solicitacao.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -209,6 +214,10 @@
     <Content Include="Views\Departamento\FormInclui.cshtml" />
     <Content Include="Views\Shared\_FormDepartamento.cshtml" />
     <Content Include="Views\Departamento\FormAltera.cshtml" />
+    <Content Include="Views\Funcao\FormAltera.cshtml" />
+    <Content Include="Views\Funcao\FormInclui.cshtml" />
+    <Content Include="Views\Funcao\Index.cshtml" />
+    <Content Include="Views\Shared\_FormFuncao.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
