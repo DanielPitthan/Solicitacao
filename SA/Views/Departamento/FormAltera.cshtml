@@ -3,10 +3,13 @@
     ViewBag.Title = "FormAltera";
 }
 
-@using (Html.BeginForm("Alterar", "Departamento", FormMethod.Post))
-{
-    @Html.Partial("_FormDepartamento")
-    <input type="submit" value="Alterar" />
-}
-@Html.ValidationMessage("Departamento Inválido")
-@Html.ValidationMessageFor(d => d.Departamentos)
+<center>
+    @using (Html.BeginForm("Alterar", "Departamento", FormMethod.Post))
+    {
+        @Html.HiddenFor(d => d.Id)
+        @Html.Partial("_FormDepartamento")
+        <input type="submit" value="Alterar" />
+    }
+    @Html.ValidationMessage("Departamento Inválido")
+    @Html.ValidationMessageFor(d => d.Departamentos)
+</center>

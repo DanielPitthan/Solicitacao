@@ -3,10 +3,13 @@
     ViewBag.Title = "FormInclui";
 }
 
-@using (Html.BeginForm("Adiciona", "Departamento", FormMethod.Post))
-{
-    @Html.Partial("_FormDepartamento")
-    <input type="submit" value="Cadastrar" />
-}
-@Html.ValidationMessage("Departamento Inválido")
-@Html.ValidationMessageFor(d => d.Departamentos)
+<br />
+<center>
+    @using (Html.BeginForm("Adiciona", "Departamento", FormMethod.Post))
+    {
+        @Html.Partial("_FormDepartamento")
+        <input type="submit" value="Cadastrar" />
+    }
+    @Html.ValidationMessage("Departamento Inválido")
+    @Html.ValidationMessageFor(d => d.Departamentos)
+</center>

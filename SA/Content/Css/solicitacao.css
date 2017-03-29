@@ -10,7 +10,7 @@
 .dropbtn {
             background-color: #3C8CAD;
             color: white;
-            padding: 10px;
+            padding: 13px;
             font-size: 16px;
             border: none;
             cursor: pointer;
@@ -51,12 +51,17 @@
         }
         /*O nome já diz tudo, mas se está com dúvida é o fundo do menu*/
         .fundo-estranho{
-			background:#3C8CAD;
-			background-color: #3C8CAD;
-			height: 40px;
+			 background: rgba(60, 140, 173, 0.28);		
+			height: 45px;
 
 		}
         /*Fundo do Header*/
         .cabecalho{
-            background-color: beige;
+        
+            position: relative;
+            margin-top: -65px;
+            left:50%;
+            right:50%;
+            transform: translate(-35%, 0%);
+            height: 45px;
         }

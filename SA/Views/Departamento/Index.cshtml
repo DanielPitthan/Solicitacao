@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-@Html.ActionLink("Novo Departamento","Form","Departamento")
+@Html.ActionLink("Novo Departamento", "FormInclui", "Departamento")
 <br />
 <center>
     <table>
@@ -13,6 +13,7 @@
         <th colspan="2">Opções</th>        
         </thead>
         <tbody>
+            <br />
             @foreach (var d in Model)
             {
                 <tr>
@@ -24,6 +25,4 @@
             }
         </tbody>
     </table>
-   
-
 </center>

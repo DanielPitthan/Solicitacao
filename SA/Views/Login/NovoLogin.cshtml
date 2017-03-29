@@ -20,7 +20,7 @@
                         @Html.LabelFor(u => u.Departamento)
                     </td>
                     <td>
-                        @Html.TextBox("Dep")
+                        @Html.DropDownListFor(u => u.Departamento, new SelectList( ViewBag.Departamento,"Id","Departamentos"))
                     </td>
 
                 </tr>

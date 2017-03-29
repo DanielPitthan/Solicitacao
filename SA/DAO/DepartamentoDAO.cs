@@ -35,10 +35,19 @@ namespace SA.DAO
             tran.Commit();
         }
 
+        public void GetByName(string nome)
+        {
+            string hql = "select d from Departamento d where d.Departamentos ";
+            
+        }
+
+        /// <summary>
+        /// Procura um departamenteo pelo Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Departamento GetById(int id)
         {
-            
-
             string hql = "select d from Departamento d where d.Id= :id";
             IQuery query = session.CreateQuery(hql);
             query.SetParameter("id", id);

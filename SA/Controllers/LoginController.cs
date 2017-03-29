@@ -12,11 +12,13 @@ namespace SA.Controllers
     public class LoginController : Controller
     {
         private LoginDAO loginDAO;
-        
+        private DepartamentoDAO departamentoDAO;
+
         //Ninject usado aqui!
-        public LoginController(LoginDAO login)
+        public LoginController(LoginDAO login, DepartamentoDAO dep)
         {
             this.loginDAO = login;
+            this.departamentoDAO = dep;
         }
 
         //Home Page do Login
@@ -52,7 +54,7 @@ namespace SA.Controllers
         public ActionResult NovoLogin()
         {
 
-            ViewBag.Usuarios = loginDAO.Lista();
+            ViewBag.Departamento = departamentoDAO.Lista();
             return View();
         }
 

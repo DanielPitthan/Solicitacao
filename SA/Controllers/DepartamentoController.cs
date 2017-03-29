@@ -25,7 +25,7 @@ namespace SA.Controllers
         }
 
         /// <summary>
-        /// Formulário desse Controller
+        /// Formulário de inclusão desse Controller
         /// </summary>
         /// <returns>ActionResult.</returns>
         public ActionResult FormInclui()
@@ -34,7 +34,7 @@ namespace SA.Controllers
         }
 
         /// <summary>
-        /// Formulário de Alteração 
+        /// Formulário de Alteração desse Controller 
         /// </summary>
         /// <returns>ActionResult.</returns>
         public ActionResult FormAltera( int id)
@@ -61,10 +61,21 @@ namespace SA.Controllers
             }
         }
 
+        /// <summary>
+        /// Alteração de um Departamento
+        /// </summary>
+        /// <param name="dep"></param>
+        /// <returns></returns>
         public ActionResult Alterar (Departamento dep)
         {
             departamentoDAO.Alter(dep);
             return RedirectToAction("Index", "Departamento");
+        }
+
+        public ActionResult Excluir (int id)
+        {
+            departamentoDAO.Delete(departamentoDAO.GetById(id));
+            return RedirectToAction("Index");
         }
 
     }
