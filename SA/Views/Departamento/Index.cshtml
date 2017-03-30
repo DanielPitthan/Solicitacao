@@ -3,9 +3,9 @@
     ViewBag.Title = "Index";
 }
 <br />
-@Html.ActionLink("Novo Departamento", "FormInclui", "Departamento")
+@Html.ActionLink("Novo Departamento", "FormInclui", "Departamento", new { id = "FormLogin" })
 <br />
-<center>
+<center>   
     <table>
         <thead>
         <th>Id</th>
@@ -19,10 +19,35 @@
                 <tr>
                     <td>@d.Id</td>
                     <td>@d.Departamentos</td>
-                    <td><a href=@Url.Action("FormAltera", "Departamento",new { id = d.Id })><i class="material-icons">mode_edit</i></a>@*@Html.ActionLink("Alterar", "Alter", "Departamento", new { id = d.Id },new { @class = "icon-mode-edit:before" })*@</td>
-                    <td><a href=@Url.Action("Excluir","Departamento",new { id = d.Id })><i class="material-icons">delete_forever</i></a>@*@Html.ActionLink("Excluir", "Delete", "Departamento", new { id = d.Id })*@</td> 
+                    <td><a href=@Url.Action("FormAltera", "Departamento",new { id = d.Id })><i class="material-icons">mode_edit</i></a></td>
+                    <td><a href=@Url.Action("Excluir","Departamento",new { id = d.Id })><i class="material-icons">delete_forever</i></a></td> 
                 </tr>
             }
         </tbody>
     </table>
+    <br />
+    <div id="result"</div>
 </center>
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#FormLogin").on("click", function (e) {
+                e.preventDefault();
+                
+                $.ajax({
+                    url: "Departamento/FormInclui",
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        $("#result").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+}

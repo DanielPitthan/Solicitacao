@@ -65,6 +65,7 @@ namespace SA.Controllers
 
         public ActionResult Add(Usuario user)
         {
+            usuarioDAO.Add(user);
             return RedirectToAction("ListaUsuarios", "Login");
         }
 

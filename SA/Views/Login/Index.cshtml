@@ -9,7 +9,7 @@
                 <input type="submit" value="Logar" />                
             }
            
-            <div id="result"</div>           
+            <div id="result"></div>           
         </center>
 <br />
 
@@ -22,8 +22,7 @@
 
         $(function () {
             $("#FormLogin").on("submit", function (e) {
-                e.preventDefault();
-                debugger
+                e.preventDefault();                
                 $.ajax({
                     url: this.action,
                     type: this.method,

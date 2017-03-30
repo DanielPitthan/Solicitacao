@@ -29,8 +29,9 @@ namespace SA.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         public ActionResult FormInclui()
-        {           
-            return View();
+        {
+            //return View();
+            return PartialView("Departamento/_FormInclui");
         }
 
         /// <summary>
@@ -57,7 +58,8 @@ namespace SA.Controllers
                 return RedirectToAction("Index", "Departamento");
             }else
             {
-                return View("Form",dep);
+                //return View("Form",dep);
+                return PartialView("Departamento/_FormInclui");
             }
         }
 
