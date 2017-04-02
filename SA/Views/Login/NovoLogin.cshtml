@@ -6,7 +6,20 @@
 <center>
     @using (Html.BeginForm("Add", "Login", FormMethod.Post))
     {
-
+        <div id="errormessage">
+            @Html.ValidationMessage("Cadastro inválido", new { style = "color:red" })
+            <br />
+            @Html.ValidationMessageFor(u => u.Cpf)
+            <br />
+            @Html.ValidationMessageFor(u => u.CentroCusto)
+            <br />
+            @Html.ValidationMessageFor(u => u.Requerente)
+            <br />
+            @Html.ValidationMessage("Usuario.tercerizado")
+            <br />
+            @Html.ValidationMessage("Usuario.jaexiste")
+            <br />
+        </div>
         <table class="mdl-data-table mdl-js-data-table">
             <tbody>
                 <tr>
@@ -65,3 +78,9 @@
         <input type="submit" value="Gravar" />
     }
 </center>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}

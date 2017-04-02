@@ -1,15 +1,15 @@
 ﻿@model SA.ViewModel.Login
     <br /><br />
 
-        <center>
-            @using (Html.BeginForm("ValidarLogin", "Login", FormMethod.Post, new { id ="FormLogin"}))
-            {
-                @Html.LabelFor(l => l.Cpf, "CPF: ")
-                @Html.TextBoxFor(l => l.Cpf, new { rows = 11 })
-                <input type="submit" value="Logar" />                
-            }
-           
-            <div id="result"></div>           
+    <center>
+        @using (Html.BeginForm("ValidarLogin", "Login", FormMethod.Post, new { id = "FormLogin" }))
+        {
+            @Html.LabelFor(l => l.Cpf, "CPF: ")
+            @Html.TextBoxFor(l => l.Cpf, new { rows = 11 })
+            <input type="submit" value="Logar" />
+        }
+
+        <div id="result"></div>           
         </center>
 <br />
 
@@ -27,8 +27,9 @@
                     url: this.action,
                     type: this.method,
                     data: $(this).serialize(),
-                    success: function (data) {
+                    success: function (data) {                        
                         $("#result").html(data);
+                        $("#FormLogin").html("");
                     }
                 });
             });

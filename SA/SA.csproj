@@ -152,9 +152,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Css\solicitacao.css" />
-    <Content Include="Content\Images\2091-512.png" />
     <Content Include="Content\Css\material.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Scripts\jquery-3.2.1.js" />
+    <Content Include="Content\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Content\Scripts\jquery.validate.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
@@ -176,9 +178,9 @@
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\Validates\Login\UsuarioValidates.cs" />
     <Compile Include="DAO\FuncaoDAO.cs" />
     <Compile Include="DAO\DepartamentoDAO.cs" />
-    <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\RECNO.cs" />
     <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="Global.asax.cs">
@@ -221,6 +223,7 @@
     <Content Include="Views\Funcao\Index.cshtml" />
     <Content Include="Views\Shared\_FormFuncao.cshtml" />
     <Content Include="Views\Shared\Departamento\_FormInclui.cshtml" />
+    <Content Include="Views\Login\ListaUsuarios.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -228,7 +231,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\Images\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

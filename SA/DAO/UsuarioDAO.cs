@@ -1,6 +1,7 @@
 ﻿using NHibernate;
 using SA.Helpers;
 using SA.Models;
+using SA.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace SA.DAO
 
             user.DescricaoCentroCusto = CentroCustoDAO.GetCustoName(user.CentroCusto);
 
-            user.Tercerizado = user.Tercerizado.Substring(1, 1);
+            user.Tercerizado = user.Tercerizado.Substring(0, 1);
             if (String.IsNullOrEmpty(user.EmpresaTercerizada))
             {
                 user.EmpresaTercerizada = "";
@@ -58,6 +59,7 @@ namespace SA.DAO
             ITransaction tran = session.BeginTransaction();
             session.Save(user);
             tran.Commit();
+
         }
 
         /// <summary>
@@ -106,6 +108,30 @@ namespace SA.DAO
             sn.Add("Sim");
 
             return sn;
+        }
+
+        
+       
+
+        /// <summary>
+        /// Verifica se já existe o usuário na Base
+        /// </summary>
+        /// <param name="usuario">The login.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool ExisteUsuario(Usuario user)
+        {
+            
+            string hql = "select u from Usuario u where u.Cpf = :cpf ";
+            IQuery query = this.session.CreateQuery(hql);
+            query.SetParameter("cpf", user.Cpf);
+
+            Usuario usuario = query.UniqueResult<Usuario>();
+            if (usuario == null)
+            {
+                return false;
+            }
+        
+            return true;
         }
     }
 }

@@ -14,12 +14,12 @@ namespace SA.DAO
             using (IDbConnection conexao = ConnectionFactory.CriaConexao())
             using (IDbCommand comando = conexao.CreateCommand())
             {
-                string query = "select max(R_E_C_N_O_)+1 as RECNO from @tabela ";
+                string query = "select max(R_E_C_N_O_)+1 as RECNO from "+ tabela;
 
                 comando.CommandText = query;
 
                 IDbDataParameter paramTitulo = comando.CreateParameter();
-                paramTitulo.ParameterName = "tabela";
+                paramTitulo.ParameterName = "@tabela";
                 paramTitulo.Value = tabela;
                 comando.Parameters.Add(paramTitulo);
 

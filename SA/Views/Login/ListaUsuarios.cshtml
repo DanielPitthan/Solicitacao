@@ -1,0 +1,35 @@
+﻿@model IList<SA.Models.Usuario>
+@{
+    ViewBag.Title = "ListaUsuarios";
+}
+
+<br /><br /><br />
+
+<table class="tabelaSolic">
+    <thead class="headert">
+        <tr class="tr">
+            <th class="rgreen">Requerente</th>
+            <th class="rgreen">CPF</th>
+            <th class="rgreen">Departamento</th>
+            <th class="rgreen">Função</th>
+            <th class="rgreen">Centro de Custo</th>
+            <th class="rgreen">Descrição Centro de Custo</th>
+            <th class="rgreen">Tercerizado</th>
+            <th class="rgreen">Empresa</th>
+        </tr>
+    </thead>
+    @foreach (var u in Model)
+    {   
+       <tr class="tr">
+        <td class="cell">@u.Requerente</td>
+        <td class="cell">@u.Cpf</td>
+        <td class="cell">@u.DescricaoDepartamento</td>
+        <td class="cell">@u.Funcao</td>
+        <td class="cell">@u.CentroCusto</td>
+        <td class="cell">@u.DescricaoCentroCusto</td>
+        <td class="cell">@u.Tercerizado</td>
+        <td class="cell">@u.EmpresaTercerizada</td>
+       </tr>
+    }
+    
+</table>

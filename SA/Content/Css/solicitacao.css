@@ -65,3 +65,34 @@
             transform: translate(-35%, 0%);
             height: 45px;
         }
+
+        /*Tabela*/
+        
+.tabelaSolic {
+  margin: 0 0 40px 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;   
+}
+.tr {
+  display: table-row;
+  background: #f6f6f6;
+}
+.headert {
+  font-weight: 900;
+  color: #ffffff;
+  background: #ea6153;
+}
+.rgreen {
+  background: #3c8cad;
+}
+
+.cell {
+  padding: 6px 12px;
+  display: table-cell;
+}
+
+/*Mensagens de erro*/
+.errormessage{
+    color: red;
+}
