@@ -106,9 +106,21 @@ namespace SA.Controllers
             return View(model);
         }
 
-        public ActionResult Excluir()
+        /// <summary>
+        /// Faz a exclusão de usuário
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>ActionResult.</returns>
+        public ActionResult Excluir(Usuario user)
         {
+            usuarioDAO.Delete(user);
             return View("ListaUsuarios");
+        }
+
+        public ActionResult FormAltera(Usuario user)
+        {
+            usuarioDAO.GetById(user.Cpf);
+            return View();
         }
 
 

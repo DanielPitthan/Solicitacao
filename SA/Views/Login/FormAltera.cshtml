@@ -1,12 +1,12 @@
 ﻿@model SA.Models.Usuario
 @{
-    ViewBag.Title = "NovoLogin";
+    ViewBag.Title = "FormAltera";
 }
 <br /><br /><br />
 <center>
     @using (Html.BeginForm("Add", "Login", FormMethod.Post))
     {
-       @Html.Partial("_FormLogin")
+        @Html.Partial("_FormLogin")
 
         <input type="submit" value="Gravar" />
     }

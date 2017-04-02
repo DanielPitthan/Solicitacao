@@ -224,6 +224,8 @@
     <Content Include="Views\Shared\_FormFuncao.cshtml" />
     <Content Include="Views\Shared\Departamento\_FormInclui.cshtml" />
     <Content Include="Views\Login\ListaUsuarios.cshtml" />
+    <Content Include="Views\Login\FormAltera.cshtml" />
+    <Content Include="Views\Shared\_FormLogin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

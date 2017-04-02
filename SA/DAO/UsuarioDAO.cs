@@ -63,15 +63,15 @@ namespace SA.DAO
         }
 
         /// <summary>
-        /// Procura um departamenteo pelo Id
+        /// Procura um usuario pelo CPF
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Usuario GetById(int id)
+        public Usuario GetById(string cpf)
         {
-            string hql = "select d from Usuario d where d.Id= :id";
+            string hql = "select d from Usuario d where d.Cpf= :cpf";
             IQuery query = session.CreateQuery(hql);
-            query.SetParameter("id", id);
+            query.SetParameter("id", cpf);
             return query.UniqueResult<Usuario>();
         }
 
@@ -109,8 +109,6 @@ namespace SA.DAO
 
             return sn;
         }
-
-        
        
 
         /// <summary>

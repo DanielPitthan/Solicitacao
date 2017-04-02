@@ -1,0 +1,74 @@
+﻿@model SA.Models.Usuario
+@{
+    ViewBag.Title = "_FormLogin";
+}
+
+<div id="errormessage">
+    @Html.ValidationMessage("Cadastro inválido", new { style = "color:red" })
+    <br />
+    @Html.ValidationMessageFor(u => u.Cpf)
+    <br />
+    @Html.ValidationMessageFor(u => u.CentroCusto)
+    <br />
+    @Html.ValidationMessageFor(u => u.Requerente)
+    <br />
+    @Html.ValidationMessage("Usuario.tercerizado")
+    <br />
+    @Html.ValidationMessage("Usuario.jaexiste")
+    <br />
+</div>
+<table class="mdl-data-table mdl-js-data-table">
+    <tbody>
+        <tr>
+            <td class="mdl-data-table__cell--non-numeric">
+                @Html.LabelFor(u => u.Cpf)
+            </td>
+            <td>
+                @Html.TextBoxFor(l => l.Cpf, new { rows = 11 })
+            </td>
+            <td>
+                @Html.LabelFor(u => u.Departamento)
+            </td>
+            <td>
+                @Html.DropDownListFor(u => u.Departamento, new SelectList(ViewBag.Departamento, "Id", "Departamentos"))
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(u => u.CentroCusto)
+            </td>
+            <td>
+                @Html.TextBoxFor(u => u.CentroCusto)
+            </td>
+            <td>
+                @Html.LabelFor(u => u.Funcao)
+            </td>
+            <td>
+                @Html.DropDownListFor(u => u.Funcao, new SelectList(ViewBag.Funcao, "Id", "Funcoes"))
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(u => u.Requerente)
+            </td>
+            <td>
+                @Html.TextBoxFor(u => u.Requerente)
+            </td>
+            <td>
+                @Html.LabelFor(u => u.Tercerizado)
+            </td>
+            <td>
+                @Html.DropDownListFor(u => u.Tercerizado, new SelectList(ViewBag.Tercerizado, "Tercerizado"))
+            </td>
+            <td>
+                @Html.Label("Empresa Tercerizada: ")
+            </td>
+            <td>
+                @Html.TextBox("Emp")
+            </td>
+        </tr>
+    </tbody>
+</table>
+
