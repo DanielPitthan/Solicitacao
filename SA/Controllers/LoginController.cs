@@ -106,6 +106,11 @@ namespace SA.Controllers
             return View(model);
         }
 
+        public ActionResult Excluir()
+        {
+            return View("ListaUsuarios");
+        }
+
 
     }
 }
