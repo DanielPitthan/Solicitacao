@@ -34,26 +34,8 @@ namespace SA.DAO
         /// <param name="dep">The dep.</param>
         public void Add(Usuario user)
         {
-            //Preeche os campos faltantes
-
-            user.Filial = "01";
-
-            Departamento dep = departamentoDAO.GetById(Convert.ToInt32(user.Departamento));
-            user.DescricaoDepartamento = dep.Departamentos;
-
-            user.DescricaoCentroCusto = CentroCustoDAO.GetCustoName(user.CentroCusto);
-
-            user.Tercerizado = user.Tercerizado.Substring(0, 1);
-            if (String.IsNullOrEmpty(user.EmpresaTercerizada))
-            {
-                user.EmpresaTercerizada = "";
-            }
-            
-            user.CodImpressaora = ""; //Compatibilidade
-            user.PathImpressora = ""; //Compatibilidade
-            user.NomeImpressora = ""; //Compatibilidade
-            user.DELETE = 0;
-            user.R_E_C_N_O_ = RECNO.GetNextRecno("Z13010");
+            //Completa cadastro
+            user = this.CompletaCadastro(user);
 
             //Salva o usuário
             ITransaction tran = session.BeginTransaction();
@@ -62,18 +44,7 @@ namespace SA.DAO
 
         }
 
-        /// <summary>
-        /// Procura um usuario pelo CPF
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Usuario GetById(string cpf)
-        {
-            string hql = "select d from Usuario d where d.Cpf= :cpf";
-            IQuery query = session.CreateQuery(hql);
-            query.SetParameter("id", cpf);
-            return query.UniqueResult<Usuario>();
-        }
+        
 
         /// <summary>
         /// Altera um Usuario no banco de dados 
@@ -81,6 +52,9 @@ namespace SA.DAO
         /// <param name="dep">The dep.</param>
         public void Alter(Usuario user)
         {
+            //Completa cadastro
+            user = this.CompletaCadastro(user);
+
             ITransaction tran = session.BeginTransaction();
             session.Merge(user);
             tran.Commit();
@@ -110,6 +84,18 @@ namespace SA.DAO
             return sn;
         }
        
+        /// <summary>
+        /// Procura um usuario pelo CPF
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Usuario GetByCpf(string cpf)
+        {
+            string hql = "select d from Usuario d where d.Cpf= :cpf";
+            IQuery query = session.CreateQuery(hql);
+            query.SetParameter("cpf", cpf);
+            return query.UniqueResult<Usuario>();
+        }
 
         /// <summary>
         /// Verifica se já existe o usuário na Base
@@ -130,6 +116,31 @@ namespace SA.DAO
             }
         
             return true;
+        }
+
+        public Usuario CompletaCadastro(Usuario user)
+        {
+            //Preeche os campos faltantes
+
+            user.Filial = "01";
+
+            Departamento dep = departamentoDAO.GetById(Convert.ToInt32(user.Departamento));
+            user.DescricaoDepartamento = dep.Departamentos;
+
+            user.DescricaoCentroCusto = CentroCustoDAO.GetCustoName(user.CentroCusto);
+
+            user.Tercerizado = user.Tercerizado.Substring(0, 1);
+            if (String.IsNullOrEmpty(user.EmpresaTercerizada))
+            {
+                user.EmpresaTercerizada = "";
+            }
+
+            user.CodImpressaora = ""; //Compatibilidade
+            user.PathImpressora = ""; //Compatibilidade
+            user.NomeImpressora = ""; //Compatibilidade
+            user.DELETE = 0;
+            user.R_E_C_N_O_ = RECNO.GetNextRecno("Z13010");
+            return user;
         }
     }
 }

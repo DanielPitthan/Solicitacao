@@ -37,6 +37,16 @@ namespace SA.Controllers
         }
 
         /// <summary>
+        /// Lista os usuários 
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        public ActionResult ListaUsuarios()
+        {
+            var model = usuarioDAO.Lista();
+            return View(model);
+        }
+
+        /// <summary>
         ///  Valida se o Login está válido 
         /// </summary>
         /// <param name="cpf"></param>
@@ -79,9 +89,14 @@ namespace SA.Controllers
                 ModelState.AddModelError("Usuario.jaexiste", "CPF já cadastrado");
             }
 
-            if (!UsuarioValidates.Validador(user))
+            if (!UsuarioValidates.TercerizadoValidate(user))
             {
                 ModelState.AddModelError("Usuario.tercerizado", "Você informou que essa pessoa é terceira, mas não preencheo o campo [Empresa Tercerizada]");
+            }
+
+            if (!UsuarioValidates.CpfValidate(user.Cpf))
+            {
+                ModelState.AddModelError("Usuario.CPF", "Número de CPF Inválido");
             }
 
             if (ModelState.IsValid)
@@ -96,31 +111,62 @@ namespace SA.Controllers
             return View("NovoLogin",user);            
         }
        
-        /// <summary>
-        /// Lista os usuários 
-        /// </summary>
-        /// <returns>ActionResult.</returns>
-        public ActionResult ListaUsuarios()
-        {
-            var model = usuarioDAO.Lista();
-            return View(model);
-        }
+  
 
         /// <summary>
         /// Faz a exclusão de usuário
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>ActionResult.</returns>
-        public ActionResult Excluir(Usuario user)
+        public ActionResult Excluir(string cpf)
         {
-            usuarioDAO.Delete(user);
-            return View("ListaUsuarios");
+            usuarioDAO.Delete(usuarioDAO.GetByCpf(cpf));
+            return RedirectToAction("ListaUsuarios");
         }
 
-        public ActionResult FormAltera(Usuario user)
+        /// <summary>
+        /// Faz a chamada do formulário de alteração
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>ActionResult.</returns>
+        public ActionResult FormAltera(string cpf)
         {
-            usuarioDAO.GetById(user.Cpf);
-            return View();
+            ViewBag.Funcao = funcaoDAO.Lista();
+            ViewBag.Departamento = departamentoDAO.Lista();
+            ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
+            var model = usuarioDAO.GetByCpf(cpf);
+            return View("FormAltera",model);
+        }
+
+        /// <summary>
+        /// Processo de alteração do cadastro
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>ActionResult.</returns>
+        public ActionResult Alterar(Usuario user)
+        {
+            
+            if (!UsuarioValidates.TercerizadoValidate(user))
+            {
+                ModelState.AddModelError("Usuario.tercerizado", "Você informou que essa pessoa é terceira, mas não preencheo o campo [Empresa Tercerizada]");
+            }
+
+            if (!UsuarioValidates.CpfValidate(user.Cpf))
+            {
+                ModelState.AddModelError("Usuario.CPF", "Número de CPF Inválido");
+            }
+
+            if (ModelState.IsValid)
+            {
+                usuarioDAO.Alter(user);
+                return RedirectToAction("ListaUsuarios");
+            }
+
+            ViewBag.Funcao = funcaoDAO.Lista();
+            ViewBag.Departamento = departamentoDAO.Lista();
+            ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
+            return View("FormAltera", user);
+
         }
 
 

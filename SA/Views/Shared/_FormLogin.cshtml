@@ -3,7 +3,7 @@
     ViewBag.Title = "_FormLogin";
 }
 
-<div id="errormessage">
+<div style="color: red">
     @Html.ValidationMessage("Cadastro inválido", new { style = "color:red" })
     <br />
     @Html.ValidationMessageFor(u => u.Cpf)
@@ -15,6 +15,8 @@
     @Html.ValidationMessage("Usuario.tercerizado")
     <br />
     @Html.ValidationMessage("Usuario.jaexiste")
+    <br />
+    @Html.ValidationMessage("Usuario.CPF")
     <br />
 </div>
 <table class="mdl-data-table mdl-js-data-table">
@@ -71,4 +73,5 @@
         </tr>
     </tbody>
 </table>
+
 
