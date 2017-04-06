@@ -183,6 +183,7 @@
     <Compile Include="DAO\FuncaoDAO.cs" />
     <Compile Include="DAO\DepartamentoDAO.cs" />
     <Compile Include="DAO\RECNO.cs" />
+    <Compile Include="DAO\SolicitacaoDAO.cs" />
     <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -192,6 +193,7 @@
     <Compile Include="Helpers\NhibernateHelper.cs" />
     <Compile Include="Mappings\FuncaoMapping.cs" />
     <Compile Include="Mappings\DepartamentoMapping.cs" />
+    <Compile Include="Mappings\SolicitacaoMapping.cs" />
     <Compile Include="Mappings\UsuarioMapping.cs" />
     <Compile Include="Models\Funcao.cs" />
     <Compile Include="Models\Departamento.cs" />
