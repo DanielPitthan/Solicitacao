@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using SA.Filters;
 
 namespace SA.Controllers
 {
@@ -39,7 +39,8 @@ namespace SA.Controllers
         /// <summary>
         /// Lista os usuários 
         /// </summary>
-        /// <returns>ActionResult.</returns>
+        /// <returns>ActionResult.</returns>       
+        [AutorizacaoAdminFilter]        
         public ActionResult ListaUsuarios()
         {
             var model = usuarioDAO.Lista();
@@ -53,21 +54,29 @@ namespace SA.Controllers
         /// <returns></returns>
         [HttpPost]
         public ActionResult ValidarLogin(Login login)
-        {   
+        {
+            Usuario usuario = usuarioDAO.ExisteUsuario(login.CriaUsuario());
 
-            if (!usuarioDAO.ExisteUsuario(login.CriaUsuario()))
+            if (usuario !=null)
             {
-                //Se o login não é válido, retorna mensagem, ou algo assim
-                return PartialView("Login/_Login", login);
+                //Abre a sessão do usuário 
+                Session["usuario"] = usuario;
+                Session.Timeout = 10; 
+
+                //Se tudo deu certo, redireciona para a Home do Caboclo
+                return RedirectToAction("Index", "Home");
+                
             }
-            //Se tudo deu certo, redireciona para a Home do Caboclo
-            return RedirectToAction("Index", "Home");
+            //Se o login não é válido, retorna mensagem, ou algo assim
+            return PartialView("Login/_Login", login);
+
         }
 
         /// <summary>
         /// Formulário de criação de Login
         /// </summary>
         /// <returns>ActionResult.</returns>
+        [AutorizacaoAdminFilter]
         public ActionResult NovoLogin()
         {
             ViewBag.Funcao = funcaoDAO.Lista();
@@ -81,10 +90,12 @@ namespace SA.Controllers
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>ActionResult.</returns>
+        [HttpPost]
         public ActionResult Add(Usuario user)
         {
+            Usuario usuario = usuarioDAO.ExisteUsuario(user);
 
-            if (usuarioDAO.ExisteUsuario(user))
+            if (usuario==null)
             {
                 ModelState.AddModelError("Usuario.jaexiste", "CPF já cadastrado");
             }
@@ -110,14 +121,15 @@ namespace SA.Controllers
             ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
             return View("NovoLogin",user);            
         }
-       
-  
+
+
 
         /// <summary>
         /// Faz a exclusão de usuário
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>ActionResult.</returns>
+        [HttpPost]
         public ActionResult Excluir(string cpf)
         {
             usuarioDAO.Delete(usuarioDAO.GetByCpf(cpf));
@@ -129,11 +141,14 @@ namespace SA.Controllers
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>ActionResult.</returns>
+        [AutorizacaoAdminFilter]
         public ActionResult FormAltera(string cpf)
         {
             ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
             ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
+
+
             var model = usuarioDAO.GetByCpf(cpf);
             return View("FormAltera",model);
         }
@@ -143,6 +158,7 @@ namespace SA.Controllers
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>ActionResult.</returns>
+        [HttpPost]
         public ActionResult Alterar(Usuario user)
         {
             
@@ -169,6 +185,15 @@ namespace SA.Controllers
 
         }
 
+        /// <summary>
+        /// Encerra a sessão e retona para a tela de login
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        public ActionResult Logout()
+        {
+            Session["usuario"] = null;
+            return RedirectToAction("Index","Login");
+        }
 
     }
 }

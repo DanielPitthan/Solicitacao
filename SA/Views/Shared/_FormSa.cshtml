@@ -1,0 +1,13 @@
+﻿@model SA.Models.Solicitacao
+
+@{
+    ViewBag.Title = "_FormSa";
+}
+
+@Html.LabelFor(s => s.TipoRequisicao)
+@Html.DropDownListFor(s => s.TipoRequisicao, new SelectList(ViewBag.TiposRequisicoes, "TipoRequisicao"))
+
+@Html.LabelFor(s => s.NUMTPR, "Numero:")
+@Html.TextBoxFor(s => s.NUMTPR)
+
+
