@@ -10,7 +10,9 @@
                 <input type="submit" value="Logar" />
             }
         </div>
-        <div id="result"></div>           
+        <div class="errormessage">
+            <div id="result"></div>
+        </div>        
         </center>
 <br />
 
@@ -23,17 +25,27 @@
 
         $(function () {
             $("#FormLogin").on("submit", function (e) {
-                e.preventDefault();                
+                debugger
+                e.preventDefault();
                 $.ajax({
                     url: this.action,
                     type: this.method,
                     data: $(this).serialize(),
-                    success: function (data) {                        
-                        $("#result").html(data);
-                        $("#login").html("");
+                    success: function (response) {
+                        if (response != null && response.success) {
+
+                            var url = "@Url.Action("Index", "Home")";
+                            window.location.replace(url);
+                        } else {
+                            $("#result").html("Login Inválido!");
+                        }
+
+                    },
+                    error: function (response) {
+                        $("#result").html("Login Inválido!");
                     }
                 });
             });
-        });        
+        });
     </script>
 }

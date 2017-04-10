@@ -17,18 +17,32 @@ namespace SA.Filters
         
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            object login = filterContext.HttpContext.Session["usuario"];
             Usuario usuario = (Usuario)filterContext.HttpContext.Session["usuario"];
 
-            if (!usuario.IsAdmin)
+            if (login == null)
             {
                 filterContext.Result = new RedirectToRouteResult(
-                    new RouteValueDictionary(
-                        new
-                        {
-                            controller = "Home",
-                            action = "Index"
-                        }));
+                        new RouteValueDictionary(
+                            new
+                            {
+                                controller = "Login",
+                                action = "Index"
+                            }));
             }
+            else
+            {
+                if (!usuario.IsAdmin)
+                {
+                    filterContext.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary(
+                            new
+                            {
+                                controller = "Home",
+                                action = "Index"
+                            }));
+                }
+            }      
         }
     }
 }

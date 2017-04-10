@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SA.Filters;
+using System.Net;
 
 namespace SA.Controllers
 {
@@ -61,14 +62,25 @@ namespace SA.Controllers
             {
                 //Abre a sessão do usuário 
                 Session["usuario"] = usuario;
-                Session.Timeout = 10; 
+                Session.Timeout = 10;
 
                 //Se tudo deu certo, redireciona para a Home do Caboclo
-                return RedirectToAction("Index", "Home");
-                
+                //return RedirectToAction("Index", "Home");
+                return Json(new {
+                                    success = true,
+                                    responseText = ""
+                                },
+                                    JsonRequestBehavior.AllowGet);
+
             }
             //Se o login não é válido, retorna mensagem, ou algo assim
-            return PartialView("Login/_Login", login);
+            //return PartialView("Login/_Login", login);
+            return Json(new {
+                                success = false,
+                                responseText = "Login Inválido!"
+                            }, 
+                            JsonRequestBehavior.AllowGet);
+
 
         }
 
