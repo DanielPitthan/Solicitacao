@@ -33,7 +33,8 @@ namespace SA.Models
         public virtual string CodImpressaora { get; set; }
         public virtual string PathImpressora { get; set; }
         public virtual string NomeImpressora { get; set; }
-        public virtual int DELETE { get; set; }
+        public virtual string DELETE { get; set; }
         public virtual int R_E_C_N_O_ { get; set; }
+        public virtual bool IsAdmin { get; set; }
     }
 }

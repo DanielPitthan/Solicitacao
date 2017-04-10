@@ -50,24 +50,19 @@
             background-color: #69AECB;
         }
         /*O nome já diz tudo, mas se está com dúvida é o fundo do menu*/
-        .fundo-estranho{
-			 background:  rgb(198, 221, 230);
-			 height: 48px;
-			 position: fixed;
-			 top: 0;
-			 right: 0;
-			 bottom: 0;
-			 left: 0;
-			 width: 100%;
+ .fundo-estranho{
+			 background: rgb(198, 221, 230);		
+			height: 45px;
+			width: 100%;
+			position: fixed;
 		}
-        /*Fundo do Header*/
-        .cabecalho{
-                    position: fixed;
-                    left: 15%;
-                    height: 45px;
-                    top: -10px;
-
+		  .cabecalho{
+            position: fixed;                        
+            height: 45px;
+            top: -20px;   
+             left: 20%;                     
         }
+
 
         /*Tabela*/
         
@@ -98,4 +93,11 @@
 /*Mensagens de erro*/
 .errormessage{
     color: red;
+}
+
+/* Renderização do Body*/
+.conteudo {
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 2em; 
 }

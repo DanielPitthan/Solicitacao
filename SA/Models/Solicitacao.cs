@@ -11,7 +11,7 @@ namespace SA.Models
     public class Solicitacao
     {
         public virtual string Filial { get; set; }
-        public virtual string Codigo { get; set; } //Sequencial
+        public virtual string Codigo { get; set; } //Código da Solicitacao
         public virtual string Produto { get; set; } //Código do produto 
         public virtual double Quantidade { get; set; } //Quantidade
         public virtual string Observacao { get; set; }
@@ -22,7 +22,7 @@ namespace SA.Models
         public virtual string StatusAtual { get; set; }
         public virtual string TipoRequisicao { get; set; }
         public virtual string NUMTPR { get; set; }
-        public virtual int DELETE { get; set;}
+        public virtual string DELETE { get; set;}
         public virtual int R_E_C_N_O_ { get; set; }
     }
 }

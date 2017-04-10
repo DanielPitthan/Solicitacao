@@ -1,8 +1,8 @@
-﻿
+﻿@model IList<SA.Models.Solicitacao>
 @{
     ViewBag.Title = "Index";
-    Layout = null;
+    //Layout = null;
 }
 
-<h2>Bem vindo Fulano, essa é a sua Home Page</h2>
+@Html.ActionLink("Nova Solicitação", "FormIncluir", "Home", new { id = "FormSaInclui" })
 

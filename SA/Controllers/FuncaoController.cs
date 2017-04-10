@@ -1,4 +1,5 @@
 ﻿using SA.DAO;
+using SA.Filters;
 using SA.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace SA.Controllers
 {
+    [AutorizacaoAdminFilter]
     public class FuncaoController : Controller
     {
         private FuncaoDAO FuncaoDAO; 
@@ -49,6 +51,7 @@ namespace SA.Controllers
         /// </summary>
         /// <param name="dep">The dep.</param>
         /// <returns>ActionResult.</returns>
+        [HttpPost]
         public ActionResult Adiciona(Funcao dep)
         {
             if (ModelState.IsValid)
@@ -66,12 +69,20 @@ namespace SA.Controllers
         /// </summary>
         /// <param name="dep"></param>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult Alterar (Funcao dep)
         {
             FuncaoDAO.Alter(dep);
             return RedirectToAction("Index", "Funcao");
         }
 
+
+        /// <summary>
+        /// Exclui uma função 
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        [HttpPost]
         public ActionResult Excluir (int id)
         {
             FuncaoDAO.Delete(FuncaoDAO.GetById(id));

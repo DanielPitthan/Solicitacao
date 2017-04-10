@@ -21,11 +21,18 @@ namespace SA.DAO
         }
 
         //Lista os Usuarios 
-        public IList<Usuario> Lista()
+        public  IList<Usuario> Lista()
         {
-            string hql = "select d from Usuario d";
+            string hql = "select d from Usuario d  ";
             IQuery query = session.CreateQuery(hql);
-            return query.List<Usuario>();
+            
+
+            //ISQLQuery query = session.CreateSQLQuery("select * from Z13010");
+            //var lista = query.List();
+
+            IList<Usuario> l = new List<Usuario>();
+
+            return  query.List<Usuario>();
         }
 
         /// <summary>
@@ -102,20 +109,14 @@ namespace SA.DAO
         /// </summary>
         /// <param name="usuario">The login.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool ExisteUsuario(Usuario user)
+        public Usuario ExisteUsuario(Usuario user)
         {
             
             string hql = "select u from Usuario u where u.Cpf = :cpf ";
             IQuery query = this.session.CreateQuery(hql);
             query.SetParameter("cpf", user.Cpf);
-
-            Usuario usuario = query.UniqueResult<Usuario>();
-            if (usuario == null)
-            {
-                return false;
-            }
-        
-            return true;
+            return query.UniqueResult<Usuario>();
+            
         }
 
         public Usuario CompletaCadastro(Usuario user)
@@ -138,7 +139,7 @@ namespace SA.DAO
             user.CodImpressaora = ""; //Compatibilidade
             user.PathImpressora = ""; //Compatibilidade
             user.NomeImpressora = ""; //Compatibilidade
-            user.DELETE = 0;
+            user.DELETE = "";
             user.R_E_C_N_O_ = RECNO.GetNextRecno("Z13010");
             return user;
         }

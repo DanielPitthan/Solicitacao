@@ -1,4 +1,5 @@
 ﻿using SA.DAO;
+using SA.Filters;
 using SA.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace SA.Controllers
 {
+    [AutorizacaoAdminFilter]
     public class DepartamentoController : Controller
     {
         private DepartamentoDAO departamentoDAO; 
@@ -50,6 +52,7 @@ namespace SA.Controllers
         /// </summary>
         /// <param name="dep">The dep.</param>
         /// <returns>ActionResult.</returns>
+        [HttpPost]
         public ActionResult Adiciona(Departamento dep)
         {
             if (ModelState.IsValid)
@@ -68,12 +71,20 @@ namespace SA.Controllers
         /// </summary>
         /// <param name="dep"></param>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult Alterar (Departamento dep)
         {
             departamentoDAO.Alter(dep);
             return RedirectToAction("Index", "Departamento");
         }
 
+
+        /// <summary>
+        /// Faz a exclusão de um departamento 
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        [HttpPost]
         public ActionResult Excluir (int id)
         {
             departamentoDAO.Delete(departamentoDAO.GetById(id));

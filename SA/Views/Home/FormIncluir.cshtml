@@ -1,0 +1,20 @@
+﻿@model SA.Models.Solicitacao
+@{
+    ViewBag.Title = "FormIncluir";
+}
+
+<br /><br /><br />
+
+<p>Fulano Beutrano - Empresa XYZ</p>
+@using (Html.BeginForm("Add", "Home", FormMethod.Post))
+{
+    @Html.Partial("_FormSa")
+    <input type="submit" value="Gravar" />
+}
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}
