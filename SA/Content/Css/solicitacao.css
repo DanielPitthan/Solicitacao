@@ -51,19 +51,22 @@
         }
         /*O nome já diz tudo, mas se está com dúvida é o fundo do menu*/
         .fundo-estranho{
-			 background: rgba(60, 140, 173, 0.28);		
-			height: 45px;
-
+			 background:  rgb(198, 221, 230);
+			 height: 48px;
+			 position: fixed;
+			 top: 0;
+			 right: 0;
+			 bottom: 0;
+			 left: 0;
+			 width: 100%;
 		}
         /*Fundo do Header*/
         .cabecalho{
-        
-            position: relative;
-            margin-top: -65px;
-            left:50%;
-            right:50%;
-            transform: translate(-35%, 0%);
-            height: 45px;
+                    position: fixed;
+                    left: 15%;
+                    height: 45px;
+                    top: -10px;
+
         }
 
         /*Tabela*/

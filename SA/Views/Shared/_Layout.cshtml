@@ -1,9 +1,11 @@
 ﻿<!DOCTYPE	html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
     <title>Solicitações ao Almoxarifado</title>
-    <link href="~/Content/Css/material.css" rel="stylesheet" /> 
+    @*<link href="~/Content/Css/material.css" rel="stylesheet" />*@ 
     <link href="~/Content/Css/solicitacao.css" rel="stylesheet" />    
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />    
     <script src="~/Scripts/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -12,11 +14,12 @@
     <br />  
     <header>        
     </header>
-    <div class="conteudo">
+    <div class="col-xs-9 col-md-9">
         <main>
             @RenderBody()
         </main>       
     </div>
 </body>
 @RenderSection("Scripts", false)    
+<script src="~/Content/Scripts/bootstrap.js"></script>
 </html>
