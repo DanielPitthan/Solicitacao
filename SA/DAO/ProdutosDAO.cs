@@ -22,12 +22,11 @@ namespace SA.DAO
         /// <returns>IList&lt;Produtos&gt;.</returns>
         public IList<Produtos> ListaProdutosByDesc(string text)
         {
-            string sql = " SELECT B1_COD,B1_DESC FROM SB1010" +
-            " WHERE B1_TIPO IN ('MM')" +
-            " AND B1_DESC LIKE '" + text.ToUpper() + "%' ";
-            
-            IQuery query = session.CreateSQLQuery(sql);
-           // query.SetParameter("nome", text.ToUpper() + "%");
+            string hql = " SELECT p.Codigo,p.Descricao FROM Produtos p" +
+            " WHERE p.Tipo IN ('MM')" +
+            " AND B1_DESC LIKE :codpord";            
+            IQuery query = session.CreateQuery(hql);
+            query.SetParameter("codpord", text.ToUpper() + "%");
 
             return query.List<Produtos>();
 

@@ -9,5 +9,6 @@ namespace SA.Models
     {
         public virtual string Codigo { get; set; }
         public virtual string Descricao { get; set; }
+        public virtual string Tipo { get; set; }
     }
 }
