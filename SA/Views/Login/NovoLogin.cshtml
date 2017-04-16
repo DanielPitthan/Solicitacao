@@ -2,15 +2,20 @@
 @{
     ViewBag.Title = "NovoLogin";
 }
-<br /><br /><br />
-<center>
+
+
     @using (Html.BeginForm("Add", "Login", FormMethod.Post))
     {
-       @Html.Partial("_FormLogin")
-
-        <input type="submit" value="Gravar" />
+        <fieldset>
+            <legend>Cadastro de Usuário</legend>
+            @Html.Partial("_FormLogin")
+        </fieldset>
+        <div class="text-center">
+            <input type="submit" value="Gravar" class="btn btn-primary" />
+        </div>
+        
     }
-</center>
+
 
 @section Scripts {
     <script src="~/Scripts/jquery-3.2.1.js"></script>

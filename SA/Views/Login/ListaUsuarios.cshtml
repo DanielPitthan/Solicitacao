@@ -2,38 +2,41 @@
 @{
     ViewBag.Title = "ListaUsuarios";
 }
+<div class="thumbnail text-right">
+    
+            <button type="button" class="btn btn-default">
+                @Html.ActionLink("Novo Login", "NovoLogin", "Login")
+            </button>    
+</div>
 
-<br /><br />
-@Html.ActionLink("Novo Login", "NovoLogin", "Login")
-<br />
 
-<table class="tabelaSolic">
-    <thead class="headert">
-        <tr class="tr">
-            <th class="rgreen">Requerente</th>
-            <th class="rgreen">CPF</th>
-            <th class="rgreen">Departamento</th>
-            <th class="rgreen">Função</th>
-            <th class="rgreen">Centro de Custo</th>
-            <th class="rgreen">Descrição Centro de Custo</th>
-            <th class="rgreen">Tercerizado</th>
-            <th class="rgreen">Empresa</th>
-            <th class="rgreen" colspan="2">Opções</th>        
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Requerente</th>
+            <th>CPF</th>
+            <th>Departamento</th>
+            <th>Função</th>
+            <th>Centro de Custo</th>
+            <th>Descrição Centro de Custo</th>
+            <th>Tercerizado</th>
+            <th>Empresa</th>
+            <th colspan="2">Opções</th>        
         </tr>
     </thead>
     @foreach (var u in Model)
     {   
-       <tr class="tr">
-        <td class="cell">@u.Requerente</td>
-        <td class="cell">@u.Cpf</td>
-        <td class="cell">@u.DescricaoDepartamento</td>
-        <td class="cell">@u.Funcao</td>           
-        <td class="cell">@u.CentroCusto</td>
-        <td class="cell">@u.DescricaoCentroCusto</td>
-        <td class="cell">@u.Tercerizado</td>
-        <td class="cell">@u.EmpresaTercerizada</td>
-        <td><a href=@Url.Action("FormAltera", "Login",new { Cpf = u.Cpf })><i class="material-icons">mode_edit</i></a></td>
-        <td><a href=@Url.Action("Excluir","Login",new { Cpf = u.Cpf })><i class="material-icons">delete_forever</i></a></td> 
+       <tr>
+        <td>@u.Requerente</td>
+        <td>@u.Cpf</td>
+        <td>@u.DescricaoDepartamento</td>
+        <td>@u.Funcao</td>           
+        <td>@u.CentroCusto</td>
+        <td>@u.DescricaoCentroCusto</td>
+        <td>@u.Tercerizado</td>
+        <td>@u.EmpresaTercerizada</td>
+        <td><a href=@Url.Action("FormAltera", "Login",new { Cpf = u.Cpf })><i class="glyphicon glyphicon-edit"></i></a></td>
+        <td><a href=@Url.Action("Excluir","Login",new { Cpf = u.Cpf })><i class="glyphicon glyphicon-erase"></i></a></td> 
        </tr>
     }
     

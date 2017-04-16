@@ -91,6 +91,7 @@ namespace SA.Controllers
         [AutorizacaoAdminFilter]
         public ActionResult NovoLogin()
         {
+            ViewBag.ModeloValido = ModelState.IsValid;
             ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
             ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
@@ -107,7 +108,7 @@ namespace SA.Controllers
         {
             Usuario usuario = usuarioDAO.ExisteUsuario(user);
 
-            if (usuario==null)
+            if (usuario!=null)
             {
                 ModelState.AddModelError("Usuario.jaexiste", "CPF já cadastrado");
             }
@@ -131,7 +132,9 @@ namespace SA.Controllers
             ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
             ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
+            ViewBag.ModeloValido = ModelState.IsValid;
             return View("NovoLogin",user);            
+
         }
 
 
@@ -159,7 +162,7 @@ namespace SA.Controllers
             ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
             ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
-
+            ViewBag.ModeloValido = ModelState.IsValid;
 
             var model = usuarioDAO.GetByCpf(cpf);
             return View("FormAltera",model);
@@ -189,7 +192,7 @@ namespace SA.Controllers
                 usuarioDAO.Alter(user);
                 return RedirectToAction("ListaUsuarios");
             }
-
+            ViewBag.ModeloValido = ModelState.IsValid;
             ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
             ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();

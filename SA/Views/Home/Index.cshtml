@@ -4,5 +4,15 @@
     //Layout = null;
 }
 
-@Html.ActionLink("Nova Solicitação", "FormIncluir", "Home", new { id = "FormSaInclui" })
+<div class="page-header">
+    <h5>@ViewBag.Usuario.Requerente <small>Solicitações Feitas</small></h5> 
+</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="thumbnail">
+                @Html.ActionLink("Nova Solicitação", "FormIncluir", "Home", new { id = "FormSaInclui", @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
 

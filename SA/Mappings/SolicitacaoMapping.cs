@@ -27,8 +27,10 @@ namespace SA.Mappings
             Map(s => s.StatusAtual).Column("Z11_FLAGDH").CustomSqlType("VARCHAR");
             Map(s => s.TipoRequisicao).Column("Z11_TPREQW").CustomSqlType("VARCHAR");
             Map(s => s.NUMTPR).Column("Z11_NUMTPR").CustomSqlType("VARCHAR");
-            Map( s=> s.DELETE).Column("D_E_L_E_T_").CustomSqlType("VARCHAR");
+            Map(s => s.DELETE).Column("D_E_L_E_T_").CustomSqlType("VARCHAR");
+            Map(s => s.Sacrementada);
             Map(s => s.R_E_C_N_O_);
+            References(s => s.Departamento);
 
         }
     }

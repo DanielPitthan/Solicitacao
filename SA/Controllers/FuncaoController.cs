@@ -31,7 +31,8 @@ namespace SA.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         public ActionResult FormInclui()
-        {           
+        {
+            ViewBag.ModeloValido = ModelState.IsValid;
             return View();
         }
 
@@ -41,6 +42,7 @@ namespace SA.Controllers
         /// <returns>ActionResult.</returns>
         public ActionResult FormAltera( int id)
         {
+            ViewBag.ModeloValido = ModelState.IsValid;
             var model = FuncaoDAO.GetById(id);
             return View(model);
         }
@@ -60,6 +62,7 @@ namespace SA.Controllers
                 return RedirectToAction("Index", "Funcao");
             }else
             {
+                ViewBag.ModeloValido = ModelState.IsValid;
                 return View("Form",dep);
             }
         }

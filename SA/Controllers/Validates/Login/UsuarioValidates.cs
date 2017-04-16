@@ -19,7 +19,7 @@ namespace SA.Controllers.Validates
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool TercerizadoValidate(Usuario user)
         {
-            if (user.Tercerizado.Substring(0,1) == "S" & !String.IsNullOrEmpty(user.EmpresaTercerizada))
+            if (user.Tercerizado.Substring(0,1) == "S" & String.IsNullOrEmpty(user.EmpresaTercerizada))
             {
                 return false;
             }

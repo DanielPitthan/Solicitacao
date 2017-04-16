@@ -32,7 +32,8 @@ namespace SA.Controllers
         /// <returns>ActionResult.</returns>
         public ActionResult FormInclui()
         {
-            //return View();
+            
+            ViewBag.ModeloValido = ModelState.IsValid;
             return PartialView("Departamento/_FormInclui");
         }
 
@@ -42,6 +43,7 @@ namespace SA.Controllers
         /// <returns>ActionResult.</returns>
         public ActionResult FormAltera( int id)
         {
+            ViewBag.ModeloValido = ModelState.IsValid;
             var model = departamentoDAO.GetById(id);
             return View(model);
         }
@@ -61,7 +63,7 @@ namespace SA.Controllers
                 return RedirectToAction("Index", "Departamento");
             }else
             {
-                //return View("Form",dep);
+                ViewBag.ModeloValido = ModelState.IsValid;
                 return PartialView("Departamento/_FormInclui");
             }
         }
@@ -84,7 +86,7 @@ namespace SA.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        [HttpPost]
+        //[HttpPost]
         public ActionResult Excluir (int id)
         {
             departamentoDAO.Delete(departamentoDAO.GetById(id));
