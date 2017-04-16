@@ -23,7 +23,7 @@
                     <fieldset>
                         <legend>Informações do Produto</legend>
                         <div class="form-group">
-                            @Html.LabelFor(s => s.Produto, "Produto:", new { @for = "produto", id = "produto" })
+                            @Html.LabelFor(s => s.Produto, "Produto:", new { @for = "produto"})
                             @Html.TextBoxFor(s => s.Produto, new { id = "produto", @class = "form-control" })
                         </div>
                         <div class="form-group">
@@ -35,8 +35,8 @@
                             @Html.TextAreaFor(s => s.Observacao, new { id = "observacao", @class = "form-control" })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(s => s.Departamento, "Departamento", new { @for = "departamento", id = "departamento" })
-                            @Html.DropDownListFor(s => s.Departamento, new SelectList(ViewBag.Departamento, "Id", "Departamentos"), new { @for = "departamento", @class = "form-control" })
+                            @Html.LabelFor(s => s.Departamento, "Departamento", new { @for = "departamento" })
+                            @Html.DropDownListFor(s => s.Departamento, new SelectList(ViewBag.Departamento, "Id", "Departamentos"), new {id="departamento",  @class = "form-control" })
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(s => s.CentroCusto, "Centro de Custo", new { @for = "centrocusto" })
@@ -59,16 +59,7 @@
                                 <th>Centro de Custo</th>
                                 <th colspan="2">Opções</th>
                             </thead>
-                            <tbody>
-                                <tr id="trSolicitacao">
-                                    <td id="tdProduto">Descrição deo produto</td>
-                                    <td id="tdQuantidadeEstoque">10.00</td>
-                                    <td id="tdQuantidadeSolicitada">5.00</td>
-                                    <td id="tdDepartamento">Elétrica</td>
-                                    <td id="tdCentrodCusto">101010</td>
-                                    <td id="tdEdit"><span class="glyphicon glyphicon-wrench"></span></td>
-                                    <td id="tdEdit"><span class="glyphicon glyphicon-trash"></span></td>
-                                </tr>
+                            <tbody id="tbselecionado">                               
                             </tbody>
                         </table>
                         <input type="submit" value="Gravar SA" class="btn btn-primary" />
@@ -77,3 +68,4 @@
             </div>
         </div>
 </div>
+

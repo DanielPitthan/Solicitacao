@@ -38,8 +38,7 @@ namespace SA.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult FormIncluir()
-        {
-            ViewBag.Solicitacao = saDAO.ListaByCodigo("000100");
+        {            
             ViewBag.TiposRequisicoes = saDAO.TiposRequisicoes();
             ViewBag.Departamento = depDAO.Lista();
             return View();

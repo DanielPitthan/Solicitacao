@@ -166,6 +166,7 @@
     <Content Include="Content\Scripts\jquery.validate.js" />
     <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\Scripts\npm.js" />
+    <Content Include="Content\Scripts\sa.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
@@ -190,9 +191,11 @@
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProdutosController.cs" />
     <Compile Include="Controllers\Validates\Login\UsuarioValidates.cs" />
     <Compile Include="DAO\FuncaoDAO.cs" />
     <Compile Include="DAO\DepartamentoDAO.cs" />
+    <Compile Include="DAO\ProdutosDAO.cs" />
     <Compile Include="DAO\RECNO.cs" />
     <Compile Include="DAO\SolicitacaoDAO.cs" />
     <Compile Include="DAO\UsuarioDAO.cs" />
@@ -206,10 +209,12 @@
     <Compile Include="Helpers\NhibernateHelper.cs" />
     <Compile Include="Mappings\FuncaoMapping.cs" />
     <Compile Include="Mappings\DepartamentoMapping.cs" />
+    <Compile Include="Mappings\ProdutosMapping.cs" />
     <Compile Include="Mappings\SolicitacaoMapping.cs" />
     <Compile Include="Mappings\UsuarioMapping.cs" />
     <Compile Include="Models\Funcao.cs" />
     <Compile Include="Models\Departamento.cs" />
+    <Compile Include="Models\Produtos.cs" />
     <Compile Include="Models\Solicitacao.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -252,6 +257,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\" />
+    <Folder Include="Views\Produtos\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
