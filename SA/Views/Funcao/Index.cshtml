@@ -2,11 +2,15 @@
 @{
     ViewBag.Title = "Index";
 }
-<br />
-@Html.ActionLink("Nova Funcao", "FormInclui", "Funcao")
-<br />
-<center>
-    <table>
+<div class="thumbnail text-right">
+
+    <button type="button" class="btn btn-default">
+       @Html.ActionLink("Nova Funcao", "FormInclui", "Funcao")
+    </button>
+</div>
+
+
+    <table class="table table-bordered">
         <thead>
         <th>Id</th>
         <th>Funcao</th>
@@ -19,10 +23,9 @@
                 <tr>
                     <td>@d.Id</td>
                     <td>@d.Funcoes</td>
-                    <td><a href=@Url.Action("FormAltera", "Funcao",new { id = d.Id })><i class="material-icons">mode_edit</i></a>@*@Html.ActionLink("Alterar", "Alter", "Funcao", new { id = d.Id },new { @class = "icon-mode-edit:before" })*@</td>
-                    <td><a href=@Url.Action("Excluir","Funcao",new { id = d.Id })><i class="material-icons">delete_forever</i></a>@*@Html.ActionLink("Excluir", "Delete", "Funcao", new { id = d.Id })*@</td> 
+                    <td><a href=@Url.Action("FormAltera", "Funcao",new { id = d.Id })><i class="glyphicon glyphicon-edit"></i></a>
+                    <td><a href=@Url.Action("Excluir","Funcao",new { id = d.Id })><i class="glyphicon glyphicon-erase"></i></a>
                 </tr>
             }
         </tbody>
     </table>
-</center>

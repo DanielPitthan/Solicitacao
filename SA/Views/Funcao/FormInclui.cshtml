@@ -3,16 +3,22 @@
     ViewBag.Title = "FormInclui";
     
 }
-
-<br />
-<br />
-<br />
-<center>
+<div>
+    <h3>Inclusão de Funções</h3>
+</div>
     @using (Html.BeginForm("Adiciona", "Funcao", FormMethod.Post))
     {
-        @Html.Partial("_FormFuncao")
-        <input type="submit" value="Cadastrar" />
+        <div class="form-control">
+            @Html.Partial("_FormFuncao")
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Cadastrar" class="btn btn-primary" />
+        </div>
     }
-    @Html.ValidationMessage("Funcao Inválido")
-    @Html.ValidationMessageFor(d => d.Funcoes)
-</center>
+@if (!ViewBag.ModeloValido)
+{ <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-alert"></span>
+        @Html.ValidationMessage("Funcao Inválido")
+        @Html.ValidationMessageFor(d => d.Funcoes)
+    </div>
+        }

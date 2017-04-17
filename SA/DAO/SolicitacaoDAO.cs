@@ -28,6 +28,17 @@ namespace SA.DAO
             IQuery query = session.CreateQuery(hql);
             return query.List<Solicitacao>();
         }
+        /// <summary>
+        /// Lista um grupo de solicitacao por Codigo
+        /// </summary>
+        /// <returns></returns>
+        public IList<Solicitacao> ListaByCodigo(string cod)
+        {
+            string hql = "select s from Solicitacao s where Codigo = :cod";
+            IQuery query = session.CreateQuery(hql);
+            query.SetParameter("cod", cod);
+            return query.List<Solicitacao>();
+        }
 
         /// <summary>
         /// Retorna uma Solicitacao buscando pelo código dela
@@ -47,6 +58,9 @@ namespace SA.DAO
         /// <param name="sa">The sa.</param>
         public void Add(Solicitacao sa)
         {
+            sa.Sacrementada = false;
+            sa.Codigo = "000100";
+            sa.R_E_C_N_O_ = RECNO.GetNextRecno("Z11010");
             session.Save(sa);
         }
 

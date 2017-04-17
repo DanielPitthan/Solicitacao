@@ -11,11 +11,11 @@
 
 
 
-  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-80206cf5276e283a2a42e750a19cfc777c5bc184c6509b5db88bac96930c339f.css" integrity="sha256-gCBs9SduKDoqQudQoZz8d3xbwYTGUJtduIuslpMMM58=" media="all" rel="stylesheet" />
-  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-fd7b1e8e10370ba25113909b97087b14d3e2212fe203d2d8fa681b2f4a5d438c.css" integrity="sha256-/XsejhA3C6JRE5Cblwh7FNPiIS/iA9LY+mgbL0pdQ4w=" media="all" rel="stylesheet" />
+  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-223154a4264e621d49411c69fd71062cb152480ce2de3bde5ae285e801db7185.css" integrity="sha256-IjFUpCZOYh1JQRxp/XEGLLFSSAzi3jveWuKF6AHbcYU=" media="all" rel="stylesheet" />
+  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-11c46449861d69b02a101da2d9e4232e7213635a4d2839dde7e30604f59cf718.css" integrity="sha256-EcRkSYYdabAqEB2i2eQjLnITY1pNKDnd5+MGBPWc9xg=" media="all" rel="stylesheet" />
   
   
-  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/site-f4fa6ace91e5f0fabb47e8405e5ecf6a9815949cd3958338f6578e626cd443d7.css" integrity="sha256-9PpqzpHl8Pq7R+hAXl7PapgVlJzTlYM49leOYmzUQ9c=" media="all" rel="stylesheet" />
+  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/site-d826c765b656f31c7d808168e332aa14ccb724820f292ecd2dfb74b156e2ebde.css" integrity="sha256-2CbHZbZW8xx9gIFo4zKqFMy3JIIPKS7NLft0sVbi694=" media="all" rel="stylesheet" />
   
 
   <meta name="viewport" content="width=device-width">
@@ -32,7 +32,7 @@
   
   <meta name="pjax-timeout" content="1000">
   
-  <meta name="request-id" content="DCCA:63A8:33B419D:4BE5D8E:58E110DD" data-pjax-transient>
+  <meta name="request-id" content="FC1A:4C50:2A95B29:40D7791:58F3BD05" data-pjax-transient>
   
 
   <meta name="selected-link" value="repo_source" data-pjax-transient>
@@ -41,7 +41,7 @@
 <meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
     <meta name="google-analytics" content="UA-3769691-2">
 
-<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="https://collector.githubapp.com/github-external/browser_event" name="octolytics-event-url" /><meta content="DCCA:63A8:33B419D:4BE5D8E:58E110DD" name="octolytics-dimension-request_id" />
+<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="https://collector.githubapp.com/github-external/browser_event" name="octolytics-event-url" /><meta content="FC1A:4C50:2A95B29:40D7791:58F3BD05" name="octolytics-dimension-request_id" />
 <meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" name="analytics-location" />
 
 
@@ -56,12 +56,12 @@
   <meta name="user-login" content="">
 
       <meta name="expected-hostname" content="github.com">
-    <meta name="js-proxy-site-detection-payload" content="NTU0MTEyZTA0ZjBiZjgwN2E0MmJhMzQ2OTE5NjEwZGRiMzU1ZWJkYTM0MjQ5OWNiM2RlZGEzZDEzOGRjYTQ1Ynx7InJlbW90ZV9hZGRyZXNzIjoiMTkxLjMyLjE5Mi4xNzkiLCJyZXF1ZXN0X2lkIjoiRENDQTo2M0E4OjMzQjQxOUQ6NEJFNUQ4RTo1OEUxMTBERCIsInRpbWVzdGFtcCI6MTQ5MTE0NDkzMiwiaG9zdCI6ImdpdGh1Yi5jb20ifQ==">
+    <meta name="js-proxy-site-detection-payload" content="Yzc2OGQ0NDkyMDNlNzgxZDJkY2Y3Nzk4NDljZjU0YTY2NDE3MjhhZDhmYjk1ZGRkY2NkNjY4MzljZTE1MmRkZXx7InJlbW90ZV9hZGRyZXNzIjoiMTc5LjE3Ny4yNDEuMTgwIiwicmVxdWVzdF9pZCI6IkZDMUE6NEM1MDoyQTk1QjI5OjQwRDc3OTE6NThGM0JEMDUiLCJ0aW1lc3RhbXAiOjE0OTIzNjg2NTEsImhvc3QiOiJnaXRodWIuY29tIn0=">
 
 
-  <meta name="html-safe-nonce" content="9f5e6443c4fe5d19a7a98dde92cae3e491e3d42a">
+  <meta name="html-safe-nonce" content="5666af9a89221eeccf0c50937c97dcacbfb5ff8c">
 
-  <meta http-equiv="x-pjax-version" content="c37e4eb056cfc27e288e49c5739f088d">
+  <meta http-equiv="x-pjax-version" content="687002853f6963ad768d20799cfd58be">
   
 
     
@@ -198,8 +198,8 @@
   </a>
 
     <a class="social-count js-social-count" href="/aspnet/jquery-validation-unobtrusive/stargazers"
-      aria-label="92 users starred this repository">
-      92
+      aria-label="95 users starred this repository">
+      95
     </a>
 
   </li>
@@ -213,8 +213,8 @@
       </a>
 
     <a href="/aspnet/jquery-validation-unobtrusive/network" class="social-count"
-       aria-label="38 users forked this repository">
-      38
+       aria-label="39 users forked this repository">
+      39
     </a>
   </li>
 </ul>
@@ -247,7 +247,7 @@
       <a href="/aspnet/jquery-validation-unobtrusive/issues" class="js-selected-navigation-item reponav-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /aspnet/jquery-validation-unobtrusive/issues" itemprop="url">
         <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"/></svg>
         <span itemprop="name">Issues</span>
-        <span class="counter">8</span>
+        <span class="counter">9</span>
         <meta itemprop="position" content="2">
 </a>    </span>
 
@@ -284,6 +284,7 @@
   <div class="repository-content">
 
     
+          
 
 <a href="/aspnet/jquery-validation-unobtrusive/blob/06634993b5451f76618036bf5d58457ceca85ba9/dist/jquery.validate.unobtrusive.js" class="d-none js-permalink-shortcut" data-hotkey="y">Permalink</a>
 
@@ -299,7 +300,7 @@
       <span class="js-select-button css-truncate-target">master</span>
   </button>
 
-  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax aria-hidden="true">
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax>
 
     <div class="select-menu-modal">
       <div class="select-menu-header">
@@ -2322,12 +2323,10 @@
     <button type="submit" class="btn">Go</button>
 </form></div>
 
+
   </div>
   <div class="modal-backdrop js-touch-events"></div>
 </div>
-
-
-
 
     </div>
   </div>
@@ -2350,7 +2349,7 @@
       <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
 </a>
     <ul class="site-footer-links">
-      <li>&copy; 2017 <span title="0.08353s from github-fe135-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+      <li>&copy; 2017 <span title="0.08479s from github-fe-df0f95a.cp1-iad.github.net">GitHub</span>, Inc.</li>
         <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
         <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
         <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
@@ -2375,7 +2374,7 @@
 
     <script crossorigin="anonymous" integrity="sha256-ikMY/+oJoM24IUt2zykmufagztMYoxe+1BnbGSFMaQ0=" src="https://assets-cdn.github.com/assets/compat-8a4318ffea09a0cdb8214b76cf2926b9f6a0ced318a317bed419db19214c690d.js"></script>
     <script crossorigin="anonymous" integrity="sha256-bRCeda2EcbpBUIJybADDX7kpzquXUIJJKDXxHsqMB9k=" src="https://assets-cdn.github.com/assets/frameworks-6d109e75ad8471ba415082726c00c35fb929ceab975082492835f11eca8c07d9.js"></script>
-    <script async="async" crossorigin="anonymous" integrity="sha256-zR98lyeeAJxENX6xnGvMxrY0pEIAHAxeGjaBd8IJv2o=" src="https://assets-cdn.github.com/assets/github-cd1f7c97279e009c44357eb19c6bccc6b634a442001c0c5e1a368177c209bf6a.js"></script>
+    <script async="async" crossorigin="anonymous" integrity="sha256-IloiriQg40qyPGpBMQQNF8DOryIzkuxVdkGoQS45GiM=" src="https://assets-cdn.github.com/assets/github-225a22ae2420e34ab23c6a4131040d17c0ceaf223392ec557641a8412e391a23.js"></script>
     
     
     

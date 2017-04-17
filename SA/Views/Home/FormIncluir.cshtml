@@ -3,18 +3,56 @@
     ViewBag.Title = "FormIncluir";
 }
 
-<br /><br /><br />
-
-<p>Fulano Beutrano - Empresa XYZ</p>
-@using (Html.BeginForm("Add", "Home", FormMethod.Post))
-{
-    @Html.Partial("_FormSa")
-    <input type="submit" value="Gravar" />
+@section ScriptsHead{
+    <script src="~/Content/Scripts/sa.js"></script>
 }
 
+@using (Html.BeginForm("Adicionar", "Home", FormMethod.Post))
+{
+    @Html.Partial("_FormSa")
+   
+}
 
-@section Scripts {
-    <script src="~/Scripts/jquery-3.2.1.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@section Scripts{
+    <script src="~/Content/Scripts/jquery-3.2.1.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/Scripts/bootstrap.min.js"></script>  
+    
+    
+    <script>
+
+      var btAdiciona = document.getElementById("btincluir");
+
+      btincluir.onclick =  function(){
+        AdicionaArray();
+        AtualizaGrid();
+      }
+    </script>
+
+    <script>
+        var produtodigita = document.getElementById("produto");
+
+
+        produtodigita.onkeypress = function () {
+            var urldest = "@Url.Action("GetLista", "Produtos")";
+            
+            if (produtodigita.value.length > 0) {
+             
+
+                $.ajax({
+                    url: urldest,
+                    type: "GET",
+                    data: {'produtoDesci': produtodigita.value},
+                    success: function (response) {
+                        $("#produto").html("Deu certo!");
+                    },
+                    erro: function (response) {
+                        $("#produto").html("Deu Merda!");
+                    }
+                })
+            }
+        }
+    </script>
+     
 }

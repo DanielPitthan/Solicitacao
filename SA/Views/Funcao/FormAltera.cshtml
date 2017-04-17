@@ -2,14 +2,24 @@
 @{
     ViewBag.Title = "FormAltera";
 }
-
-<center>
+<div>
+    <h3>Alteração de Funções</h3>
+</div>
     @using (Html.BeginForm("Alterar", "Funcao", FormMethod.Post))
     {
         @Html.HiddenFor(d => d.Id)
-        @Html.Partial("_FormFuncao")
-        <input type="submit" value="Alterar" />
+        <div class="form-control">
+            @Html.Partial("_FormFuncao")
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Alterar" class="btn btn-primary" />
+        </div>
     }
-    @Html.ValidationMessage("Funcao Inválido")
-    @Html.ValidationMessageFor(d => d.Funcaos)
-</center>
+@if (!ViewBag.ModeloValido)
+{
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-alert"></span>
+        @Html.ValidationMessage("Funcao Inválido")
+        @Html.ValidationMessageFor(d => d.Funcoes)
+    </div>
+}

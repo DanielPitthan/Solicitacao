@@ -4,15 +4,21 @@
     
 }
 
-<br />
-<br />
-<br />
-<center>
     @using (Html.BeginForm("Adiciona", "Departamento", FormMethod.Post))
     {
-        @Html.Partial("_FormDepartamento")
-        <input type="submit" value="Cadastrar" />
+        <div class="form-group">
+            @Html.Partial("_FormDepartamento")
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Cadastrar" class="btn btn-primary" />
+        </div>
     }
-    @Html.ValidationMessage("Departamento Inválido")
-    @Html.ValidationMessageFor(d => d.Departamentos)
-</center>
+@if (!ViewBag.ModeloValido)
+{
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-alert"></span>
+        @Html.ValidationMessage("Departamento Inválido")
+        @Html.ValidationMessageFor(d => d.Departamentos)
+    </div>
+        }
+

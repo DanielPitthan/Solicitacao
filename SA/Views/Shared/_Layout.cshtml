@@ -1,25 +1,37 @@
 ﻿<!DOCTYPE	html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
-    <title>Solicitações ao Almoxarifado</title>
-    @*<link href="~/Content/Css/material.css" rel="stylesheet" />*@ 
-    <link href="~/Content/Css/solicitacao.css" rel="stylesheet" />    
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />    
-    <script src="~/Scripts/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta name="viewport" content="width=device-width" charset="utf-8" />
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/css/padrao.css" /> 
+    @RenderSection("ScriptsHead", false)
+    <title>Solicitações ao Almoxarifado</title>    
 </head>
-<body class="fundodocorpo">
-    @Html.Partial("_Menu") 
-    <br />  
-    <header>        
-    </header>
-    <div class="col-xs-9 col-md-9">
+<body>       
+    <header class="col-lg-12 col-md-12 col-xs-12 col-sm-12">        
+        @Html.Partial("_Menu")        
+    </header>    
         <main>
-            @RenderBody()
-        </main>       
-    </div>
+            <div class="thumbnail col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                @RenderBody()
+            </div>
+        </main>        
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-1">
+                    <h6>Sistema de solicitação de peças ao Almoxarifado</h6>                    
+                </div>
+                <div class="col-md-6 col-sm-1">
+                    <h6>Sistemas DPS</h6>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
-@RenderSection("Scripts", false)    
-<script src="~/Content/Scripts/bootstrap.js"></script>
+@RenderSection("Scripts", false)
+<script src="~/Content/Scripts/jquery-3.2.1.js"></script>
+<script src="~/Content/Scripts/jquery.validate.js"></script>
+<script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Content/Scripts/bootstrap.min.js"></script>    
 </html>

@@ -1,4 +1,13 @@
 ﻿@model SA.Models.Departamento
 
-@Html.LabelFor(d => d.Departamentos,"Departamento")
-@Html.TextBoxFor(d => d.Departamentos)
+<table class="table table-bordered">
+   
+    <tbody>
+        <tr>
+            <td>@Html.LabelFor(d => d.Departamentos, "Departamento")</td>
+            <td>
+                @Html.TextBoxFor(d => d.Departamentos, new { @class = "form-control" })
+            </td>
+        </tr>
+    </tbody>
+</table>
