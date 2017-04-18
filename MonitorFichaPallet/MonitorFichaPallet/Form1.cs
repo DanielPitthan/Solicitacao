@@ -1,4 +1,19 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : MonitorFichaPallet
+// Author           : daniel
+// Created          : 04-10-2017
+//
+// Last Modified By : daniel
+// Last Modified On : 04-17-2017
+// ***********************************************************************
+// <copyright file="Form1.cs" company="Sanchez Cano Ltda e Fini Guloseiamas">
+//     Copyright ©  2017
+// </copyright>
+// <summary>Rotina resposnável pela monitoria do trânsito de palles, entre o
+// envase, expedição e recebimento do CD na Finiguloseimas</summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,9 +24,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MonitorFichaPallet.Helpers;
 using System.Threading;
+using System.Data.SqlClient;
 
+/// <summary>
+/// The MonitorFichaPallet namespace.
+/// </summary>
 namespace MonitorFichaPallet
 {
+    /// <summary>
+    /// Classe do formulário
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class Form1 : Form
     {
         public BindingSource binding = new BindingSource();
@@ -25,18 +48,26 @@ namespace MonitorFichaPallet
                                  " ZD3_LOTECT        as [Lote], 	        ZD3_NFICHA  as [Ficha Pallet],	    ZD3_CARGA   as [Carga]," +
                                  " ZD3_NF            as [Nota Fiscal],   ZD3_QTDLID  as [Quantidade Lida],	ZD3_QUANT   as [Quantidade Apontada]" +
                                  " FROM  ZD3010" +
-                                 " WHERE D_E_L_E_T_ = ''";
+                                 " WHERE D_E_L_E_T_ = '' ";
+        string order =           " ORDER BY ZD3_EMISSA desc, ZD3_HORA desc ";
+
+        public string queryOri = "";
 
         public Form1()
         {    
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Lida com os eventos que carregam os formulário em tela
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Form1_Load(object sender, EventArgs e)
         {
 
             dgMonitor.ColumnHeadersDefaultCellStyle.Font = oFonth;
-            
+            queryOri = query;
 
             CarregaDados();
             CarregaDadosasync();
@@ -45,6 +76,9 @@ namespace MonitorFichaPallet
 
         }
 
+        /// <summary>
+        /// Monta o relório na tela do formulário
+        /// </summary>
         private async void Tempoasync()
         {
            
@@ -74,7 +108,9 @@ namespace MonitorFichaPallet
         }
 
 
-
+        /// <summary>
+        /// Carrega de forma assíncrona os dados em tela com um time refresh de 1 minuto
+        /// </summary>
         private async void CarregaDadosasync()
         {
             while (true)
@@ -101,26 +137,45 @@ namespace MonitorFichaPallet
         }
 
         /// <summary>
-        /// Método responsável por carregar os dados na grid
+        /// Método responsável por carregar os dados na grid        
         /// </summary>
         private void CarregaDados()
         {
-           
+            SqlDataReader leitor;
+            SqlCommand cmd;
 
                 using (IDbConnection conexao = ConnectionFactory.CriaConexao())
                 using (IDbCommand comando = conexao.CreateCommand())
                 {
-                   
-                    comando.CommandText = query;
-                    IDataReader leitor = comando.ExecuteReader();
+
+                    cmd = (SqlCommand)comando;
+                    cmd.CommandText = query + order;
+
+                    //comando.CommandText = query;
+
+
+                leitor = cmd.ExecuteReader();// comando.ExecuteReader();
+
+                if (!leitor.HasRows)
+                {
+                    MessageBox.Show("Não há Pallets neste status", "Aviso", MessageBoxButtons.OK);
+                    return;
+                }
+                
                     binding.DataSource = leitor;
                     dgMonitor.DataSource = binding;
-                }
+
+            }
             
 
         }
 
 
+        /// <summary>
+        /// Realiza a formatação da Grid, na questão de tamenho das colunas
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void FormataGrid(object sender, EventArgs e)
         {
             dgMonitor.Columns["Status"].Width = 120;
@@ -137,6 +192,11 @@ namespace MonitorFichaPallet
 
         }
 
+        /// <summary>
+        /// Formata a grid com as cores e legendas
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="DataGridViewCellFormattingEventArgs"/> instance containing the event data.</param>
         private void formatagrid2(object sender, DataGridViewCellFormattingEventArgs e)
         {
 
@@ -175,6 +235,90 @@ namespace MonitorFichaPallet
             dgMonitor.Rows[e.RowIndex].Cells["Quantidade Lida"].Style.Font = oFontg;
             dgMonitor.Rows[e.RowIndex].Cells["Quantidade Apontada"].Style.Font = oFontg;
         }
+
+
+
+        /// <summary>
+        /// Filtra os Devolvidos
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void FiltraDevolvidos(object sender, EventArgs e)
+        {
+            CheckBox ck = (CheckBox)sender;
+            Filtra("DEVOLVIDO", ck.Checked);
+
+            checkbExpedidos.Checked = false;
+            checkbTransito.Checked = false;
+            checkbRecebido.Checked = false;
+
+        }
+
+        /// <summary>
+        /// Filtras Expedidos.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void FiltraExpedidos(object sender, EventArgs e)
+        {
+            CheckBox ck = (CheckBox)sender;
+            Filtra("EXPEDICAO", ck.Checked);
+
+            checkbDevolvidos.Checked = false;
+            checkbTransito.Checked = false;
+            checkbRecebido.Checked = false;
+        }
+
+        /// <summary>
+        /// Filtra Transito
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void FiltraTransito(object sender, EventArgs e)
+        {
+            CheckBox ck = (CheckBox)sender;
+            Filtra("TRANSITO", ck.Checked);
+            checkbDevolvidos.Checked = false;
+            checkbExpedidos.Checked = false;
+            checkbRecebido.Checked = false;
+        }
+
+        /// <summary>
+        /// Filtra Recebido
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void FiltraRecebido(object sender, EventArgs e)
+        {
+
+            CheckBox ck = (CheckBox)sender;
+            Filtra("RECEBIDO", ck.Checked);
+
+            checkbDevolvidos.Checked = false;
+            checkbExpedidos.Checked = false;
+            checkbTransito.Checked = false;
+        }
+
+        /// <summary>
+        /// Função que executa os filtros
+        /// </summary>
+        /// <param name="status">The status.</param>
+        /// <param name="fazFiltro">if set to <c>true</c> [faz filtro].</param>
+        private void Filtra(string status, bool fazFiltro)
+        {
+            if (fazFiltro)
+            {
+                query += "AND ZD3_STATUS ='"+ status + "' ";
+            }
+            else
+            {
+                query = queryOri;
+            }
+
+            CarregaDados();
+            query = queryOri;
+        }
+
     }
 
     

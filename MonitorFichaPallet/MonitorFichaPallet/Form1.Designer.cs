@@ -28,28 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgMonitor = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lbtime = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkbDevolvidos = new System.Windows.Forms.CheckBox();
+            this.checkbExpedidos = new System.Windows.Forms.CheckBox();
+            this.checkbTransito = new System.Windows.Forms.CheckBox();
+            this.checkbRecebido = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgMonitor)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgMonitor
             // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.dgMonitor.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.dgMonitor.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgMonitor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgMonitor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgMonitor.Location = new System.Drawing.Point(3, 53);
             this.dgMonitor.Name = "dgMonitor";
-            this.dgMonitor.Size = new System.Drawing.Size(1246, 548);
+            this.dgMonitor.Size = new System.Drawing.Size(1246, 492);
             this.dgMonitor.TabIndex = 0;
             this.dgMonitor.DataSourceChanged += new System.EventHandler(this.FormataGrid);
             this.dgMonitor.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.formatagrid2);
@@ -60,12 +66,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.dgMonitor, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1252, 604);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
@@ -118,6 +126,62 @@
             this.lbtime.Size = new System.Drawing.Size(10, 23);
             this.lbtime.TabIndex = 2;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.checkbDevolvidos);
+            this.flowLayoutPanel1.Controls.Add(this.checkbExpedidos);
+            this.flowLayoutPanel1.Controls.Add(this.checkbTransito);
+            this.flowLayoutPanel1.Controls.Add(this.checkbRecebido);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 551);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1246, 50);
+            this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // checkbDevolvidos
+            // 
+            this.checkbDevolvidos.AutoSize = true;
+            this.checkbDevolvidos.Location = new System.Drawing.Point(3, 3);
+            this.checkbDevolvidos.Name = "checkbDevolvidos";
+            this.checkbDevolvidos.Size = new System.Drawing.Size(79, 17);
+            this.checkbDevolvidos.TabIndex = 0;
+            this.checkbDevolvidos.Text = "Devolvidos";
+            this.checkbDevolvidos.UseVisualStyleBackColor = true;
+            this.checkbDevolvidos.Click += new System.EventHandler(this.FiltraDevolvidos);
+            // 
+            // checkbExpedidos
+            // 
+            this.checkbExpedidos.AutoSize = true;
+            this.checkbExpedidos.Location = new System.Drawing.Point(88, 3);
+            this.checkbExpedidos.Name = "checkbExpedidos";
+            this.checkbExpedidos.Size = new System.Drawing.Size(75, 17);
+            this.checkbExpedidos.TabIndex = 1;
+            this.checkbExpedidos.Text = "Expedidos";
+            this.checkbExpedidos.UseVisualStyleBackColor = true;
+            this.checkbExpedidos.Click += new System.EventHandler(this.FiltraExpedidos);
+            // 
+            // checkbTransito
+            // 
+            this.checkbTransito.AutoSize = true;
+            this.checkbTransito.Location = new System.Drawing.Point(169, 3);
+            this.checkbTransito.Name = "checkbTransito";
+            this.checkbTransito.Size = new System.Drawing.Size(64, 17);
+            this.checkbTransito.TabIndex = 2;
+            this.checkbTransito.Text = "Trânsito";
+            this.checkbTransito.UseVisualStyleBackColor = true;
+            this.checkbTransito.Click += new System.EventHandler(this.FiltraTransito);
+            // 
+            // checkbRecebido
+            // 
+            this.checkbRecebido.AutoSize = true;
+            this.checkbRecebido.Location = new System.Drawing.Point(239, 3);
+            this.checkbRecebido.Name = "checkbRecebido";
+            this.checkbRecebido.Size = new System.Drawing.Size(72, 17);
+            this.checkbRecebido.TabIndex = 3;
+            this.checkbRecebido.Text = "Recebido";
+            this.checkbRecebido.UseVisualStyleBackColor = true;
+            this.checkbRecebido.Click += new System.EventHandler(this.FiltraRecebido);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -134,6 +198,8 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -146,6 +212,11 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbtime;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.CheckBox checkbDevolvidos;
+        private System.Windows.Forms.CheckBox checkbExpedidos;
+        private System.Windows.Forms.CheckBox checkbTransito;
+        private System.Windows.Forms.CheckBox checkbRecebido;
     }
 }
 

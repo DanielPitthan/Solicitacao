@@ -6,8 +6,14 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
+/// <summary>
+/// The Helpers namespace.
+/// </summary>
 namespace MonitorFichaPallet.Helpers
 {
+    /// <summary>
+    /// Factory resposável por montar a conexão com o banco de dados
+    /// </summary>
     public class ConnectionFactory
     {
         public static IDbConnection CriaConexao()
