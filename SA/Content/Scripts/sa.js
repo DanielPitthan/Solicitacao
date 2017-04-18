@@ -1,6 +1,16 @@
 ﻿
 //Crio uma variável que va guardar os dados do array
 var dados = new Array();
+var tipoReq = document.getElementById("tprequisicao");
+var numReq = document.getElementById("numtpr");
+var prd = document.getElementById("produto");
+var prdDesc = prd.value.substring(15, prd.value.length);
+var qtd = document.getElementById("quantidade");
+var qtdEst = 10.00;
+var obs = document.getElementById("observacao");
+var dep = document.getElementById("departamento");
+var cc = document.getElementById("centrocusto");
+
 
 /*  
  * Atualiza a grid/tabela com os produtos selecionados 
@@ -43,20 +53,9 @@ function AtualizaGrid() {
  *  Monta o array com os produtos selecionados 
  */
 function AdicionaArray() {
-    var tipoReq = document.getElementById("tprequisicao");
-    var numReq = document.getElementById("numtpr");
-    var prd = document.getElementById("produto");
-    var prdDesc = "Parafuso";
-    var qtd = document.getElementById("quantidade");
-    var qtdEst = 10.00;
-    var obs = document.getElementById("observacao");
-    var dep = document.getElementById("departamento");
-    var cc = document.getElementById("centrocusto");
-
+  
 
     var aform = new Array(11);
-
-
 
     aform[0] = tipoReq[tipoReq.selectedIndex].textContent; //Pega o elemento selecionado
     aform[1] = tipoReq[tipoReq.selectedIndex].value; //Pega o elemento selecionado
@@ -71,16 +70,21 @@ function AdicionaArray() {
     aform[10] = cc.value;
 
     dados.push(aform);
+
+    ZeraForm();
 }
+
 
 /*
- * retorna uma lista de produtos conforme digitação 
+ * Zera o conteúdo do form após pegar todos os dados 
  */
-function GetProduto() {
+function ZeraForm() {
+    
 
-}
-
-
-function GetEstoque() {
-
+    numReq.textContent = "";
+    prd.textContent = "";
+    qtd.textContent = "";
+    obs.textContent = "";
+    dep.textContent = "";
+    cc.textContent = "";
 }

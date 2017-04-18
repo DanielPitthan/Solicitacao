@@ -32,27 +32,37 @@
 
     <script>
         var produtodigita = document.getElementById("produto");
+        var urldest = "@Url.Action("GetLista", "Produtos")";
+       
 
+        produtodigita.onkeypress = function()
+        {
+            var listaProduto = document.getElementById("lstproduto");
+            var listaHtml = "";
 
-        produtodigita.onkeypress = function () {
-            var urldest = "@Url.Action("GetLista", "Produtos")";
-            
-            if (produtodigita.value.length > 0) {
-             
+            //Verifica se a quantide digitada é maior que 2
+            if (produtodigita.value.length > 2) {
 
+                //Faz a consulta no server pela digitação
                 $.ajax({
                     url: urldest,
                     type: "GET",
-                    data: {'produtoDesci': produtodigita.value},
+                    data: { 'produtoDesci': produtodigita.value },
                     success: function (response) {
-                        $("#produto").html("Deu certo!");
+
+                        for (var i = 0; i < response.lista.length; i++) {
+                            var texto = response.lista[i].Codigo + response.lista[i].Descricao;
+                            listaHtml += "<option value='" + texto + "'>";
+                        }
+                        listaProduto.outerHTML = ' <datalist id="lstproduto">' + listaHtml + "</datalist>";
+
                     },
                     erro: function (response) {
-                        $("#produto").html("Deu Merda!");
+                        console.log("Fudeu!");
                     }
                 })
             }
         }
     </script>
      
-}
+};

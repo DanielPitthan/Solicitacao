@@ -12,14 +12,16 @@ namespace SA.Controllers
     [AutorizacaoFilter]
     public class HomeController : Controller
     {
-        SolicitacaoDAO saDAO;
         Usuario user;
+        SolicitacaoDAO saDAO;        
         DepartamentoDAO depDAO;
+        ProdutosDAO prodDAO;
 
-        public HomeController (SolicitacaoDAO saDAO, DepartamentoDAO dep)
+        public HomeController (SolicitacaoDAO saDAO, DepartamentoDAO dep, ProdutosDAO prd)
         {
             this.saDAO = saDAO;
             this.depDAO = dep;
+            this.prodDAO = prd;
         }
 
         // GET: Home
@@ -40,7 +42,7 @@ namespace SA.Controllers
         public ActionResult FormIncluir()
         {            
             ViewBag.TiposRequisicoes = saDAO.TiposRequisicoes();
-            ViewBag.Departamento = depDAO.Lista();
+            ViewBag.Departamento = depDAO.Lista();            
             return View();
         }
 
