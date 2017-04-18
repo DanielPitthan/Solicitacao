@@ -22,14 +22,25 @@ namespace SA.DAO
         /// <returns>IList&lt;Produtos&gt;.</returns>
         public IList<Produtos> ListaProdutosByDesc(string text)
         {
-            string hql = " SELECT p.Codigo,p.Descricao FROM Produtos p" +
-            " WHERE p.Tipo IN ('MM')" +
-            " AND B1_DESC LIKE :codpord";            
+            string hql = " select p from Produtos p" +
+            " where p.Tipo in ('MM')" +
+            " and p.Descricao LIKE :descri " +
+            " order by p.Descricao";
+                       
             IQuery query = session.CreateQuery(hql);
-            query.SetParameter("codpord", text.ToUpper() + "%");
-
+            query.SetParameter("descri", text.ToUpper() + "%");
             return query.List<Produtos>();
 
         }
+
+        /// <summary>
+        /// Retorna uma lista vazia
+        /// </summary>
+        /// <returns>List&lt;Produtos&gt;.</returns>
+        public List<Produtos> ListaVazia()
+        {
+            return new List<Produtos>();
+        }
+
     }
 }
