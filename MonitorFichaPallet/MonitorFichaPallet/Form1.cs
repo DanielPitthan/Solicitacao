@@ -38,15 +38,15 @@ namespace MonitorFichaPallet
     public partial class Form1 : Form
     {
         public BindingSource binding = new BindingSource();
-        public Font oFontg = new Font(new FontFamily("Calibri"), 14);
+        public Font oFontg = new Font(new FontFamily("Calibri"), 13);
         public Font oFonth = new Font(new FontFamily("Calibri"), 14, FontStyle.Bold);
         public CancellationTokenSource tcancel = new CancellationTokenSource();
         public int time = 60000;
 
         string query = "SELECT	TOP 300 ZD3_STATUS  as [Status],	    Cast(ZD3_EMISSA as Date)  as [Emissão],	        ZD3_HORA    as [Hora]," +
                                  " ZD3_SEQ           as [Sequência],	    ZD3_COD     as [Produto],	        ZD3_OP      as [OP]," +
-                                 " ZD3_LOTECT        as [Lote], 	        ZD3_NFICHA  as [Ficha Pallet],	    ZD3_CARGA   as [Carga]," +
-                                 " ZD3_NF            as [Nota Fiscal],   ZD3_QTDLID  as [Quantidade Lida],	ZD3_QUANT   as [Quantidade Apontada]" +
+                                 " ZD3_LOTECT        as [Lote], 	       	    ZD3_CARGA   as [Carga]," +
+                                 " ZD3_NF            as [Nota Fiscal],   ZD3_QUANTR  as [Quantidade Lida],	ZD3_QUANT   as [Quantidade Apontada]" +
                                  " FROM  ZD3010" +
                                  " WHERE D_E_L_E_T_ = '' ";
         string order =           " ORDER BY ZD3_EMISSA desc, ZD3_HORA desc ";
@@ -65,7 +65,7 @@ namespace MonitorFichaPallet
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //Define a Fonte
             dgMonitor.ColumnHeadersDefaultCellStyle.Font = oFonth;
             queryOri = query;
 
@@ -179,15 +179,16 @@ namespace MonitorFichaPallet
         private void FormataGrid(object sender, EventArgs e)
         {
             dgMonitor.Columns["Status"].Width = 120;
-            dgMonitor.Columns["Emissão"].Width = 120;
-            dgMonitor.Columns["Sequência"].Width = 120;
-            dgMonitor.Columns["Lote"].Width = 120;
-            dgMonitor.Columns["Produto"].Width = 150;
-            dgMonitor.Columns["Ficha Pallet"].Width = 120;
-            dgMonitor.Columns["OP"].Width = 150;
+            dgMonitor.Columns["Emissão"].Width = 100;
+            dgMonitor.Columns["Hora"].Width = 90;
+            dgMonitor.Columns["Sequência"].Width = 110;
+            dgMonitor.Columns["Lote"].Width = 110;
+            dgMonitor.Columns["Produto"].Width = 140;
+            dgMonitor.Columns["Carga"].Width = 110;
+            dgMonitor.Columns["OP"].Width = 140;
             dgMonitor.Columns["Nota Fiscal"].Width = 120;
-            dgMonitor.Columns["Quantidade Lida"].Width = 180;
-            dgMonitor.Columns["Quantidade Apontada"].Width = 230;
+            dgMonitor.Columns["Quantidade Lida"].Width = 110;
+            dgMonitor.Columns["Quantidade Apontada"].Width = 120;
 
 
         }
@@ -219,8 +220,8 @@ namespace MonitorFichaPallet
                 dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.Gold;
             }
 
-
-            dgMonitor.Rows[e.RowIndex].Height = 50;
+            //Altura da linha
+            dgMonitor.Rows[e.RowIndex].Height = 35;
 
             dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.Font = oFontg;
             dgMonitor.Rows[e.RowIndex].Cells["Emissão"].Style.Font = oFontg;
@@ -229,7 +230,7 @@ namespace MonitorFichaPallet
             dgMonitor.Rows[e.RowIndex].Cells["Produto"].Style.Font = oFontg;
             dgMonitor.Rows[e.RowIndex].Cells["OP"].Style.Font = oFontg;
             dgMonitor.Rows[e.RowIndex].Cells["Lote"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["Ficha Pallet"].Style.Font = oFontg;
+            //dgMonitor.Rows[e.RowIndex].Cells["Ficha Pallet"].Style.Font = oFontg;
             dgMonitor.Rows[e.RowIndex].Cells["Carga"].Style.Font = oFontg;
             dgMonitor.Rows[e.RowIndex].Cells["Nota Fiscal"].Style.Font = oFontg;
             dgMonitor.Rows[e.RowIndex].Cells["Quantidade Lida"].Style.Font = oFontg;
