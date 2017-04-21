@@ -27,8 +27,8 @@ namespace SA.Mappings
             Map(u => u.PathImpressora).Column("Z13_CAMIMP").CustomSqlType("VARCHAR");
             Map(u => u.NomeImpressora).Column("Z13_DESCIM").CustomSqlType("VARCHAR");
             Map(u => u.DELETE).Column("D_E_L_E_T_").CustomSqlType("VARCHAR");
-            Map(u => u.R_E_C_N_O_).Column("R_E_C_N_O_");
-            Map(u => u.IsAdmin).Column("Z13_ADMIN");
+            Map(u => u.R_E_C_N_O_).Column("R_E_C_N_O_");            
+            Map(u => u.Admin).Column("Z13_ISADMIN").CustomSqlType("VARCHAR");
         }
     }
 }

@@ -31,9 +31,9 @@
     </script>
 
     <script>
+        
+        var urlprd = "@Url.Action("GetLista", "Produtos")";
         var produtodigita = document.getElementById("produto");
-        var urldest = "@Url.Action("GetLista", "Produtos")";
-       
 
         produtodigita.onkeypress = function()
         {
@@ -45,24 +45,61 @@
 
                 //Faz a consulta no server pela digitação
                 $.ajax({
-                    url: urldest,
-                    type: "GET",
+                    url: urlprd,
+                    type: "POST",
                     data: { 'produtoDesci': produtodigita.value },
                     success: function (response) {
 
                         for (var i = 0; i < response.lista.length; i++) {
-                            var texto = response.lista[i].Codigo + response.lista[i].Descricao;
+                            var texto = response.lista[i].Codigo + response.lista[i].Descricao.trim();
                             listaHtml += "<option value='" + texto + "'>";
                         }
                         listaProduto.outerHTML = ' <datalist id="lstproduto">' + listaHtml + "</datalist>";
 
                     },
-                    erro: function (response) {
-                        console.log("Fudeu!");
+                    error: function (response) {
+                        console.log("Erro! Não encontrei o produto");
                     }
                 })
             }
         }
     </script>
+
+    <script>
+
+        var urlest = "@Url.Action("GetEstoque", "Produtos")";
+        var quant = document.getElementById("quantidade");
+        var produtodigita = document.getElementById("produto");
+        produtodigita.onblur = function () {
+
+            //Busca a lista de produtos
+            var listaProduto = document.getElementById("lstproduto");
+            var codigoPrd = this.value.substring(0, 15);
+
+            $.ajax({
+                url: urlest,
+                type: "POST",
+                data: { "produtoCod": codigoPrd },
+                success: function (response) {                    
+
+                    
+                    if (response.estoque <= 0) {
+                        quant.className = "alert alert-danger form-control";
+                        quant.placeholder = "Saldo Insuficiente: " + response.estoque;                        
+                    } else {
+                        quant.placeholder = "Saldo em Estoque: " + response.estoque;
+                        quant.className = "form-control";
+                    }
+                    qtdestoque = response.estoque;
+
+                    
+                },
+                error: function (response) {
+                    console.log("Produto não localizado!");
+                }
+            })
+
+        }
+    </script>
      
-};
+}

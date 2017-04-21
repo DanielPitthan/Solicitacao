@@ -34,12 +34,27 @@ namespace SA.DAO
         }
 
         /// <summary>
-        /// Retorna uma lista vazia
+        /// Retorna o saldo emestoque de um produto 
         /// </summary>
-        /// <returns>List&lt;Produtos&gt;.</returns>
-        public List<Produtos> ListaVazia()
+        /// <param name="codProduto"></param>
+        /// <returns></returns>
+        public double GetEstoque(string codProduto)
         {
-            return new List<Produtos>();
+            string hql = "select s.Saldo from SaldoEstoque s " +
+                         "where s.Codigo = :cod and s.Local = :local";
+            IQuery query = session.CreateQuery(hql);
+            query.SetParameter("cod", codProduto.Trim().ToUpper());
+            query.SetParameter("local", "03");
+
+            double retorno = 0;
+
+            if (!Convert.IsDBNull(query.UniqueResult()))
+            {
+                retorno = Convert.ToDouble(query.UniqueResult());
+            }
+
+            return retorno;
+
         }
 
     }

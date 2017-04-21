@@ -36,8 +36,13 @@
         <td>@u.Tercerizado</td>
         <td>@u.EmpresaTercerizada</td>
         <td><a href=@Url.Action("FormAltera", "Login",new { Cpf = u.Cpf })><i class="glyphicon glyphicon-edit"></i></a></td>
-        <td><a href=@Url.Action("Excluir","Login",new { Cpf = u.Cpf })><i class="glyphicon glyphicon-erase"></i></a></td> 
+        <td><a href=@Url.Action("Excluir","Login",new { Cpf = u.Cpf })><i class="glyphicon glyphicon-erase"></i></a></td>                                  
        </tr>
     }
     
 </table>
+@section Scripts {
+    <script src="~/Content/Scripts/jquery-3.2.1.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/Scripts/bootstrap.min.js"></script>    }

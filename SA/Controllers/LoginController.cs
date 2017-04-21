@@ -104,28 +104,30 @@ namespace SA.Controllers
         /// <param name="user">The user.</param>
         /// <returns>ActionResult.</returns>
         [HttpPost]
-        public ActionResult Add(Usuario user)
+        public ActionResult Add(UsuarioFormLogin usuarioFormLogin)
         {
-            Usuario usuario = usuarioDAO.ExisteUsuario(user);
+            //Cria um usuário
+            Usuario usuario = usuarioFormLogin.CriaUsuario();
 
-            if (usuario!=null)
+            //Valida se o usuário existe
+            if (usuarioDAO.ExisteUsuario(usuario) != null)
             {
                 ModelState.AddModelError("Usuario.jaexiste", "CPF já cadastrado");
             }
 
-            if (!UsuarioValidates.TercerizadoValidate(user))
+            if (!UsuarioValidates.TercerizadoValidate(usuario))
             {
                 ModelState.AddModelError("Usuario.tercerizado", "Você informou que essa pessoa é terceira, mas não preencheo o campo [Empresa Tercerizada]");
             }
 
-            if (!UsuarioValidates.CpfValidate(user.Cpf))
+            if (!UsuarioValidates.CpfValidate(usuario.Cpf))
             {
                 ModelState.AddModelError("Usuario.CPF", "Número de CPF Inválido");
             }
 
             if (ModelState.IsValid)
             {
-                usuarioDAO.Add(user);
+                usuarioDAO.Add(usuario);
                 return RedirectToAction("ListaUsuarios", "Login");
             }
            
@@ -133,7 +135,7 @@ namespace SA.Controllers
             ViewBag.Departamento = departamentoDAO.Lista();
             ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
             ViewBag.ModeloValido = ModelState.IsValid;
-            return View("NovoLogin",user);            
+            return View("NovoLogin", usuarioFormLogin);            
 
         }
 
@@ -144,7 +146,7 @@ namespace SA.Controllers
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>ActionResult.</returns>
-        [HttpPost]
+        //[HttpPost]
         public ActionResult Excluir(string cpf)
         {
             usuarioDAO.Delete(usuarioDAO.GetByCpf(cpf));
@@ -164,7 +166,12 @@ namespace SA.Controllers
             ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
             ViewBag.ModeloValido = ModelState.IsValid;
 
-            var model = usuarioDAO.GetByCpf(cpf);
+
+
+            Usuario usuario = usuarioDAO.GetByCpf(cpf);
+            UsuarioFormLogin model = new UsuarioFormLogin();
+            model.MontaUsuarioFormLogin(usuario);
+
             return View("FormAltera",model);
         }
 
@@ -174,8 +181,9 @@ namespace SA.Controllers
         /// <param name="user">The user.</param>
         /// <returns>ActionResult.</returns>
         [HttpPost]
-        public ActionResult Alterar(Usuario user)
+        public ActionResult Alterar(UsuarioFormLogin usuario)
         {
+            Usuario user = usuario.CriaUsuario();
             
             if (!UsuarioValidates.TercerizadoValidate(user))
             {
@@ -196,7 +204,7 @@ namespace SA.Controllers
             ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
             ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
-            return View("FormAltera", user);
+            return View("FormAltera", usuario);
 
         }
 
@@ -209,6 +217,7 @@ namespace SA.Controllers
             Session["usuario"] = null;
             return RedirectToAction("Index","Login");
         }
+
 
     }
 }

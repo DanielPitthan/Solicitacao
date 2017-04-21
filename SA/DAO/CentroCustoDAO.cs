@@ -24,7 +24,7 @@ namespace SA.DAO
             using (IDbConnection conexao = ConnectionFactory.CriaConexao())
             using (IDbCommand comando = conexao.CreateCommand())
             {
-                string query = "select CTT_DESC FROM CTT010 WHERE CTT_CUSTO = @Custo";
+                string query = "select CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO = @Custo";
 
                 comando.CommandText = query;
 
@@ -36,9 +36,9 @@ namespace SA.DAO
                 IDataReader leitor = comando.ExecuteReader();
                 while (leitor.Read())
                 {
-                    if (!Convert.IsDBNull(leitor["CTT_DESC"]))
+                    if (!Convert.IsDBNull(leitor["CTT_DESC01"]))
                     {
-                        return leitor["CTT_DESC"].ToString();
+                        return leitor["CTT_DESC01"].ToString();
                     }
                     else
                     {

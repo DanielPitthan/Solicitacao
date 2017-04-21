@@ -32,7 +32,7 @@ namespace SA.Filters
             }
             else
             {
-                if (!usuario.IsAdmin)
+                if (usuario.Admin !=null &&  !usuario.Admin.Equals("S"))
                 {
                     filterContext.Result = new RedirectToRouteResult(
                         new RouteValueDictionary(

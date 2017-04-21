@@ -8,11 +8,8 @@
     <h5>@ViewBag.Usuario.Requerente <small>Solicitações Feitas</small></h5> 
 </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="thumbnail">
-                @Html.ActionLink("Nova Solicitação", "FormIncluir", "Home", new { id = "FormSaInclui", @class = "btn btn-default" })
-            </div>
-        </div>
-    </div>
-
+@section Scripts {
+    <script src="~/Content/Scripts/jquery-3.2.1.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/Scripts/bootstrap.min.js"></script>    }

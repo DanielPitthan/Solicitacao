@@ -1,15 +1,7 @@
 ﻿
 //Crio uma variável que va guardar os dados do array
 var dados = new Array();
-var tipoReq = document.getElementById("tprequisicao");
-var numReq = document.getElementById("numtpr");
-var prd = document.getElementById("produto");
-var prdDesc = prd.value.substring(15, prd.value.length);
-var qtd = document.getElementById("quantidade");
-var qtdEst = 10.00;
-var obs = document.getElementById("observacao");
-var dep = document.getElementById("departamento");
-var cc = document.getElementById("centrocusto");
+var qtdestoque = 0;
 
 
 /*  
@@ -56,6 +48,15 @@ function AdicionaArray() {
   
 
     var aform = new Array(11);
+    var tipoReq = document.getElementById("tprequisicao");
+    var numReq = document.getElementById("numtpr");
+    var prd = document.getElementById("produto");
+    var prdDesc = prd.value.substring(15, prd.value.length);
+    var qtd = document.getElementById("quantidade");
+    var qtdEst = qtdestoque;
+    var obs = document.getElementById("observacao");
+    var dep = document.getElementById("departamento");
+    var cc = document.getElementById("centrocusto");
 
     aform[0] = tipoReq[tipoReq.selectedIndex].textContent; //Pega o elemento selecionado
     aform[1] = tipoReq[tipoReq.selectedIndex].value; //Pega o elemento selecionado
@@ -79,12 +80,17 @@ function AdicionaArray() {
  * Zera o conteúdo do form após pegar todos os dados 
  */
 function ZeraForm() {
-    
 
-    numReq.textContent = "";
-    prd.textContent = "";
-    qtd.textContent = "";
-    obs.textContent = "";
-    dep.textContent = "";
-    cc.textContent = "";
+   
+   
+    var prd = document.getElementById("produto");
+    var prdDesc = prd.value.substring(15, prd.value.length);
+    var qtd = document.getElementById("quantidade");    
+    var obs = document.getElementById("observacao");
+    qtdestoque = 0;
+    
+    prd.value = "";
+    qtd.value = "";
+    obs.value = "";
+    
 }

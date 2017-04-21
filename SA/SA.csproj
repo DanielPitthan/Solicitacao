@@ -153,6 +153,7 @@
     <Content Include="App_Data\SA_log.ldf">
       <DependentUpon>SA.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -167,6 +168,8 @@
     <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\Scripts\npm.js" />
     <Content Include="Content\Scripts\sa.js" />
+    <Content Include="Content\Scripts\wow.js" />
+    <Content Include="Content\Scripts\wow.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
@@ -210,15 +213,18 @@
     <Compile Include="Mappings\FuncaoMapping.cs" />
     <Compile Include="Mappings\DepartamentoMapping.cs" />
     <Compile Include="Mappings\ProdutosMapping.cs" />
+    <Compile Include="Mappings\SaldoEstoqueMapping.cs" />
     <Compile Include="Mappings\SolicitacaoMapping.cs" />
     <Compile Include="Mappings\UsuarioMapping.cs" />
     <Compile Include="Models\Funcao.cs" />
     <Compile Include="Models\Departamento.cs" />
     <Compile Include="Models\Produtos.cs" />
+    <Compile Include="Models\SaldoEstoque.cs" />
     <Compile Include="Models\Solicitacao.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Login.cs" />
+    <Compile Include="ViewModel\UsuarioFormLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
