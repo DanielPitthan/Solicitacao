@@ -12,6 +12,7 @@ namespace SA.Controllers.Validates
     public  class UsuarioValidates
     {
 
+
         /// <summary>
         /// Validação dos Tercerizados
         /// </summary>
@@ -26,6 +27,12 @@ namespace SA.Controllers.Validates
 
             return true;
         }
+
+
+        public static bool UsuarioValidate(Usuario user, UsuarioDAO dao) => dao.ExisteUsuario(user) == null;
+        
+
+
 
         /// <summary>
         /// Validação do CPF

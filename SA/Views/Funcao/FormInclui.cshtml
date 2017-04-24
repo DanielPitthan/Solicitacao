@@ -3,18 +3,22 @@
     ViewBag.Title = "FormInclui";
     
 }
-<div>
-    <h3>Inclusão de Funções</h3>
+<div class="panel panel-default">
+    <div class="panel-body">
+        @using (Html.BeginForm("Adiciona", "Funcao", FormMethod.Post))
+        {
+            
+             @Html.Partial("_FormFuncao")            
+            <div class="text-center">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        }
+    </div>
 </div>
-    @using (Html.BeginForm("Adiciona", "Funcao", FormMethod.Post))
-    {
-        <div class="form-control">
-            @Html.Partial("_FormFuncao")
-        </div>
-        <div class="text-center">
-            <input type="submit" value="Cadastrar" class="btn btn-primary" />
-        </div>
-    }
+    
+
+
+
 @if (!ViewBag.ModeloValido)
 { <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-alert"></span>
@@ -24,6 +28,5 @@
         }
 @section Scripts {
     <script src="~/Content/Scripts/jquery-3.2.1.js"></script>
-    <script src="~/Content/Scripts/jquery.validate.js"></script>
-    <script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.js"></script>    
     <script src="~/Content/Scripts/bootstrap.min.js"></script>    }

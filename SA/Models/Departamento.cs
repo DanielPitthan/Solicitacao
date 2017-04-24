@@ -13,5 +13,10 @@ namespace SA.Models
         [Required]
         [MinLength(5)]
         public virtual string Departamentos { get; set; }
+
+        [Required]
+        [MaxLength(9)]
+        [MinLength(3)]
+        public virtual string CentroCusto { get; set; }
     }
 }

@@ -57,5 +57,22 @@ namespace SA.DAO
 
         }
 
+        /// <summary>
+        /// Retorna um produto bucando pelo código
+        /// </summary>
+        /// <param name="cod">The cod.</param>
+        /// <returns></returns>
+        public Produtos GetProdutoByCod(string cod)
+        {
+            string hql = " select p from Produtos p" +
+            " where p.Tipo in ('MM')" +
+            " and p.Codigo = :cod " +
+            " order by p.Descricao";
+
+            IQuery query = session.CreateQuery(hql);
+            query.SetParameter("cod", cod.ToUpper());
+            return query.UniqueResult<Produtos>();
+        }
+
     }
 }

@@ -1,6 +1,8 @@
-﻿using SA.DAO;
+﻿using SA.Controllers.Validates.Solicitacao;
+using SA.DAO;
 using SA.Filters;
 using SA.Models;
+using SA.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +24,16 @@ namespace SA.Controllers
             this.saDAO = saDAO;
             this.depDAO = dep;
             this.prodDAO = prd;
+         
+
         }
 
         // GET: Home
         public ActionResult Index()
         {
-            //Recupera o usuário da sessão
-            Usuario user = (Usuario)Session["usuario"];
+            //Recupera o usuário da sessão            
+            user = (Usuario)Session["usuario"];
+
             ViewBag.Usuario = user;
             var model = saDAO.Lista();
             return View(model);
@@ -56,23 +61,32 @@ namespace SA.Controllers
         /// </summary>
         /// <param name="sa">The sa.</param>
         /// <returns>ActionResult.</returns>
-        public ActionResult Adicionar(Solicitacao sa)
+        public ActionResult Adicionar(IList<SolicitacaoJSon> itenSa)
         {
 
-            saDAO.Add(sa);
-            ViewBag.Solicitacao = saDAO.ListaByCodigo("000100");
-            return View("FormIncluir");
+            if (!SolicitacaoValidates.ProdutoValidate(itenSa,prodDAO))
+            {
+                ModelState.AddModelError("ProdutoInvalido","Há um código de produto Inválido. Corrija antes de continuar.");
+            }
+
+            if (SolicitacaoValidates.QuantidadeValidate(itenSa, prodDAO))
+            {
+                ModelState.AddModelError("QuantidadeInvalida", "Há um produto com a quantidade inválida. Corrija antes de continuar.");
+            }
 
             if (ModelState.IsValid)
             {
-                saDAO.Add(sa);
+              //  saDAO.Add(sa);
                 return RedirectToAction("Index");
             }
             else
             {
                 ViewBag.TiposRequisicoes = saDAO.TiposRequisicoes();
                 ViewBag.Departamento = depDAO.Lista();
-                return View("FormIncluir", sa);
+
+                //Converte o itenSA em Solicitacao e devolve para a view
+                //return View("FormIncluir", sa);
+                return View();
             }
         }
 

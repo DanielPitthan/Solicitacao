@@ -5,10 +5,14 @@ main {
     padding-top: 60px;
 }
 footer {
-    background: #222;
+    background: #ffffff;
     color:#fff;
     text-align: center;   
     bottom: 0;
     width: 100%;
     position: fixed;
+}
+
+table {
+    margin-bottom: 5%;
 }

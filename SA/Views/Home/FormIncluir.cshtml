@@ -7,6 +7,17 @@
     <script src="~/Content/Scripts/sa.js"></script>
 }
 
+<div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-alert"></span>
+    @Html.ValidationMessage("ProdutoInvalido")    
+    @Html.ValidationMessage("QuantidadeInvalida")
+    @Html.ValidationMessageFor(s => s.Produto)
+    @Html.ValidationMessageFor(s => s.Quantidade)
+    @Html.ValidationMessageFor(s => s.CentroCusto)
+    @Html.ValidationMessageFor(s => s.Departamento)
+    @Html.ValidationMessageFor(s => s.TipoRequisicao)
+</div>
+
 @using (Html.BeginForm("Adicionar", "Home", FormMethod.Post))
 {
     @Html.Partial("_FormSa")
@@ -15,30 +26,29 @@
 
 @section Scripts{
     <script src="~/Content/Scripts/jquery-3.2.1.js"></script>
-    <script src="~/Content/Scripts/jquery.validate.js"></script>
-    <script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.js"></script>    
     <script src="~/Content/Scripts/bootstrap.min.js"></script>  
     
     
     <script>
-
       var btAdiciona = document.getElementById("btincluir");
-
-      btincluir.onclick =  function(){
-        AdicionaArray();
-        AtualizaGrid();
-      }
+        btincluir.onclick = function ()
+        {   
+            if (TudoValido()) {
+                AdicionaArray();        
+            }
+            
+        }
     </script>
 
-    <script>
-        
+    <script>        
         var urlprd = "@Url.Action("GetLista", "Produtos")";
         var produtodigita = document.getElementById("produto");
 
         produtodigita.onkeypress = function()
         {
-            var listaProduto = document.getElementById("lstproduto");
-            var listaHtml = "";
+            
+          
 
             //Verifica se a quantide digitada é maior que 2
             if (produtodigita.value.length > 2) {
@@ -50,11 +60,7 @@
                     data: { 'produtoDesci': produtodigita.value },
                     success: function (response) {
 
-                        for (var i = 0; i < response.lista.length; i++) {
-                            var texto = response.lista[i].Codigo + response.lista[i].Descricao.trim();
-                            listaHtml += "<option value='" + texto + "'>";
-                        }
-                        listaProduto.outerHTML = ' <datalist id="lstproduto">' + listaHtml + "</datalist>";
+                        MontaListaProduto(response);
 
                     },
                     error: function (response) {
@@ -82,16 +88,7 @@
                 data: { "produtoCod": codigoPrd },
                 success: function (response) {                    
 
-                    
-                    if (response.estoque <= 0) {
-                        quant.className = "alert alert-danger form-control";
-                        quant.placeholder = "Saldo Insuficiente: " + response.estoque;                        
-                    } else {
-                        quant.placeholder = "Saldo em Estoque: " + response.estoque;
-                        quant.className = "form-control";
-                    }
-                    qtdestoque = response.estoque;
-
+                    AtualizaEstoque(response);
                     
                 },
                 error: function (response) {
@@ -100,6 +97,35 @@
             })
 
         }
+    </script>
+
+    <script>
+        var quantidade = document.getElementById("quantidade");
+        quantidade.onblur = function () {
+            ValidaQuantidade();
+        }
+
+    </script>
+
+    <script>
+        var btnInclui = document.getElementById("btnGravarSA");
+        var urlIncluir = "@Url.Action("Adicionar", "Home")";
+
+        btnInclui.onclick = function () {
+            $.ajax({
+                url: urlIncluir,
+                type: "POST",
+                data: { "itenSa": dados },
+                dataType: "json",
+                success: function (response) {
+                    console.log("Solicitação Gravada com sucesso!")
+                },
+                error: function (response) {
+                    console.log("Erro ao salvar SA!");
+                }
+            })
+        }
+
     </script>
      
 }

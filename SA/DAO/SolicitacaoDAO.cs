@@ -58,10 +58,10 @@ namespace SA.DAO
         /// <param name="sa">The sa.</param>
         public void Add(Solicitacao sa)
         {
-            sa.Sacrementada = false;
-            sa.Codigo = "000100";
-            sa.R_E_C_N_O_ = RECNO.GetNextRecno("Z11010");
-            session.Save(sa);
+            //sa.Sacrementada = false;
+            //sa.Codigo = "000100";
+            //sa.R_E_C_N_O_ = RECNO.GetNextRecno("Z11010");
+            //session.Save(sa);
         }
 
         /// <summary>

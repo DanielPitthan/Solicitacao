@@ -160,6 +160,8 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\padrao.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Images\glyphicons-478-hygiene-kit-inverse.png" />
+    <Content Include="Content\Images\glyphicons-478-hygiene-kit.png" />
     <Content Include="Content\Scripts\bootstrap.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
     <Content Include="Content\Scripts\jquery-3.2.1.js" />
@@ -196,6 +198,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProdutosController.cs" />
     <Compile Include="Controllers\Validates\Login\UsuarioValidates.cs" />
+    <Compile Include="Controllers\Validates\Solicitacao\SolicitacaoValidates.cs" />
     <Compile Include="DAO\FuncaoDAO.cs" />
     <Compile Include="DAO\DepartamentoDAO.cs" />
     <Compile Include="DAO\ProdutosDAO.cs" />
@@ -224,6 +227,7 @@
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Login.cs" />
+    <Compile Include="ViewModel\SolicitacaoJSon.cs" />
     <Compile Include="ViewModel\UsuarioFormLogin.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -262,7 +266,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Images\" />
     <Folder Include="Views\Produtos\" />
   </ItemGroup>
   <PropertyGroup>

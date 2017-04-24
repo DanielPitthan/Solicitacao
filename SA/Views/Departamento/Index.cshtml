@@ -7,15 +7,16 @@
 
 <div class="thumbnail text-right">
 
-    <button type="button" class="btn btn-default">
-        @Html.ActionLink("Novo Departamento", "FormInclui", "Departamento")
-    </button>
+    <button type="button" class="btn btn-default" id="btnNewDep">Novo Departamento</button>
+    
+
 </div>
 
     <table class="table table-bordered">
         <thead>
         <th>Id</th>
         <th>Departamento</th>
+        <th>Centro de Custo</th>
         <th colspan="2">Opções</th>
         </thead>
         <tbody>
@@ -25,6 +26,7 @@
                 <tr>
                     <td>@d.Id</td>
                     <td>@d.Departamentos</td>
+                    <td>@d.CentroCusto</td>
                     <td><a href=@Url.Action("FormAltera", "Departamento",new { id = d.Id })><i class="glyphicon glyphicon-edit"></i></a></td>
                     <td><a href=@Url.Action("Excluir","Departamento",new { id = d.Id })><i class="glyphicon glyphicon-erase"></i></a></td>
                 </tr>
@@ -37,25 +39,17 @@
 
 @section Scripts
 {
-   <script src="~/Content/Scripts/jquery-3.2.1.js"></script>
+ <script src="~/Content/Scripts/jquery-3.2.1.js"></script>
 <script src="~/Content/Scripts/jquery.validate.js"></script>
-<script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
 <script src="~/Content/Scripts/bootstrap.min.js"></script>   
+    
+    
     <script type="text/javascript">
+        var urlNewDep = "@Url.Action("FormInclui","Departamento")"       
 
-        $(function () {
-            $("#FormLogin").on("click", function (e) {
-                e.preventDefault();
-                
-                $.ajax({
-                    url: "Departamento/FormInclui",
-                    type: this.method,
-                    data: $(this).serialize(),
-                    success: function (data) {
-                        $("#result").html(data);
-                    }
-                });
-            });
-        });
+        var btnNovoDep = document.getElementById("btnNewDep");
+        btnNovoDep.onclick = function () {
+            window.location.replace(urlNewDep);
+        }
     </script>
 }

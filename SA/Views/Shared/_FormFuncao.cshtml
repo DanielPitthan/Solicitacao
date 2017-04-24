@@ -1,4 +1,10 @@
 ﻿@model SA.Models.Funcao
 
-@Html.LabelFor(d => d.Funcoes,"Departamento")
-@Html.TextBoxFor(d => d.Funcoes, new { @class = "form - control" })
+
+<div class="form-group">
+    <fieldset>
+        <legend>Inclusão de Função</legend>
+        @Html.LabelFor(d => d.Funcoes, "Nome da Função:")
+        @Html.TextBoxFor(d => d.Funcoes, new { @class = "form-control" })
+    </fieldset>
+</div>

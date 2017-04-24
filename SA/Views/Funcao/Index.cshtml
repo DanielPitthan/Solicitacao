@@ -4,9 +4,7 @@
 }
 <div class="thumbnail text-right">
 
-    <button type="button" class="btn btn-default">
-       @Html.ActionLink("Nova Funcao", "FormInclui", "Funcao")
-    </button>
+    <button type="button" class="btn btn-default" id="btnfuncao">Nova Função</button>
 </div>
 
 
@@ -32,5 +30,15 @@
 @section Scripts {
     <script src="~/Content/Scripts/jquery-3.2.1.js"></script>
     <script src="~/Content/Scripts/jquery.validate.js"></script>
-    <script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
-    <script src="~/Content/Scripts/bootstrap.min.js"></script>    }
+    <script src="~/Content/Scripts/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        var urlNewDep = "@Url.Action("FormInclui", "Funcao")"       
+
+        var bntfuncao = document.getElementById("btnfuncao");
+        btnfuncao.onclick = function () {
+            window.location.replace(urlNewDep);
+        }
+    </script>
+
+    }

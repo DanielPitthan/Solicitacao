@@ -13,6 +13,7 @@ namespace SA.Mappings
         {
             Id(d => d.Id).GeneratedBy.Identity();
             Map(d => d.Departamentos);
+            Map(d => d.CentroCusto);
         }
     }
 }

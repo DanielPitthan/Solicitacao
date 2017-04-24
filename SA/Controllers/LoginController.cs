@@ -110,7 +110,8 @@ namespace SA.Controllers
             Usuario usuario = usuarioFormLogin.CriaUsuario();
 
             //Valida se o usuário existe
-            if (usuarioDAO.ExisteUsuario(usuario) != null)
+            //if (usuarioDAO.ExisteUsuario(usuario) != null)
+            if(UsuarioValidates.UsuarioValidate(usuario, usuarioDAO))
             {
                 ModelState.AddModelError("Usuario.jaexiste", "CPF já cadastrado");
             }

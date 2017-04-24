@@ -15,10 +15,11 @@ namespace SA.Models
         
         public virtual string Codigo { get; set; } //Código da Solicitacao
 
-        [Required]
+        [Required(ErrorMessage ="Código do produto não informado")]
+        [MaxLength(15,ErrorMessage ="O codigo do produto excede 15 caracteres")]
         public virtual string Produto { get; set; } //Código do produto 
 
-        [Required]
+        [Required(ErrorMessage ="Quantidade não informada")]
         public virtual double Quantidade { get; set; } //Quantidade
 
 
@@ -28,19 +29,19 @@ namespace SA.Models
         public virtual string Data { get; set; }
         public virtual string Hora { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Centro de Custo não Informado")]
         public virtual string CentroCusto { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Departamento não pode ficar em branco")]
         public virtual Departamento Departamento { get; set; }
 
         public virtual string StatusAtual { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Tipo da Requisição não pode ficar em branco")]
         public virtual string TipoRequisicao { get; set; }
         public virtual string NUMTPR { get; set; }
 
-        public virtual bool Sacrementada { get; set; }
+        public virtual string Sacrementada { get; set; }
 
         public virtual string DELETE { get; set;}
         public virtual int R_E_C_N_O_ { get; set; }
