@@ -12,7 +12,7 @@ namespace SA.Helpers
     {
         public static IDbConnection CriaConexao()
         {
-            var stringConexao = ConfigurationManager.ConnectionStrings["sys"];
+            var stringConexao = ConfigurationManager.ConnectionStrings["local"];
             IDbConnection conexao = new SqlConnection();
             conexao.ConnectionString = stringConexao.ConnectionString;
             conexao.Open();
