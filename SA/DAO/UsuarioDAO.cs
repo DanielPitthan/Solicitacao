@@ -78,19 +78,7 @@ namespace SA.DAO
             tran.Commit();
         }
 
-        /// <summary>
-        /// função Auxiliar para montar um combox
-        /// </summary>
-        /// <returns>IList&lt;System.String&gt;.</returns>
-        public IList<string> SimNaoTerceiro()
-        {
-            IList<string> sn = new List<string>();
-            sn.Add("Não");
-            sn.Add("Sim");
-
-            return sn;
-        }
-       
+        
         /// <summary>
         /// Procura um usuario pelo CPF
         /// </summary>

@@ -85,19 +85,6 @@ namespace SA.DAO
         }
 
 
-        /// <summary>
-        /// Tipos de Requisições Válidas
-        /// </summary>
-        /// <returns>IList&lt;System.String&gt;.</returns>
-        public IList<string> TiposRequisicoes()
-        {
-            List<string> t = new List<string>();
-            t.Add("OU");
-            t.Add("OS");
-            t.Add("CO");
-            return (t);
-        }
-
-
+       
     }
 }
