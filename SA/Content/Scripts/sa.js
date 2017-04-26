@@ -220,7 +220,7 @@ function ValidaCentroCusto() {
 function ValidaProduto() {
     var produto = document.getElementById("produto").value;
 
-    if (produto != NaN && produto.length > 0) {
+    if (produto != NaN && produto.length > 0 && produto.substring(0,15).length <= 15) {
         return true;
     }
 
@@ -247,7 +247,7 @@ function ValidaQuantdInsert() {
  */
 function TudoValido(){
     if (!ValidaProduto()) {
-        EscreveAviso("Produto não preechido!")
+        EscreveAviso("O código do produto está inválido! Código de produto não existe")
         return false;
     }
 

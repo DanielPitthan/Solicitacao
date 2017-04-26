@@ -75,6 +75,7 @@ namespace SA.Controllers
             {
                 ModelState.AddModelError("QuantidadeInvalida", "Há um produto com a quantidade inválida. Corrija antes de continuar.");
             }
+            
 
             if (true)//ModelState.IsValid)
             {
