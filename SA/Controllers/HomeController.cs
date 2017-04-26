@@ -1,5 +1,6 @@
 ﻿using SA.Controllers.Validates.Solicitacao;
 using SA.DAO;
+using SA.DAO.ViewDAO;
 using SA.Filters;
 using SA.Models;
 using SA.ViewModel;
@@ -76,7 +77,8 @@ namespace SA.Controllers
 
             if (ModelState.IsValid)
             {
-              //  saDAO.Add(sa);
+                
+                saDAO.Add(SolicitacaoJsonDAO.CriaListaSa(itenSa, user) );
                 return RedirectToAction("Index");
             }
             else

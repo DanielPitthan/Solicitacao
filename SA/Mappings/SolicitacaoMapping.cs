@@ -15,7 +15,13 @@ namespace SA.Mappings
         {
             Table("Z11010");
 
-            Id(s => s.Codigo).Column("Z11_COD").CustomSqlType("VARCHAR");
+            //Chave composta
+            //CompositeId().KeyProperty(s => s.Filial)
+            //             .KeyProperty(s => s.Codigo);
+
+
+            Id(s => s.R_E_C_N_O_).CustomSqlType("INT");
+            Map(s => s.Codigo).Column("Z11_COD").CustomSqlType("VARCHAR");            
             Map(s => s.Filial).Column("Z11_FILIAL").CustomSqlType("VARCHAR");
             Map(s => s.Produto).Column("Z11_PRODUT").CustomSqlType("VARCHAR");
             Map(s => s.Observacao).Column("Z11_OBS");
@@ -26,11 +32,10 @@ namespace SA.Mappings
             Map(s => s.CentroCusto).Column("Z11_CC").CustomSqlType("VARCHAR");
             Map(s => s.StatusAtual).Column("Z11_FLAGDH").CustomSqlType("VARCHAR");
             Map(s => s.TipoRequisicao).Column("Z11_TPREQW").CustomSqlType("VARCHAR");
-            Map(s => s.NUMTPR).Column("Z11_NUMTPR").CustomSqlType("VARCHAR");
-            Map(s => s.DELETE).Column("D_E_L_E_T_").CustomSqlType("VARCHAR");
-            Map(s => s.Sacrementada).CustomSqlType("VARCHAR");
-            Map(s => s.R_E_C_N_O_);
+            Map(s => s.NUMTPR).Column("Z11_NUMTPR").CustomSqlType("VARCHAR");            
+            Map(s => s.Sacrementada).CustomSqlType("VARCHAR");            
             References(s => s.Departamento);
+            Map(s => s.DELETE).Column("D_E_L_E_T_").CustomSqlType("VARCHAR");
 
         }
     }

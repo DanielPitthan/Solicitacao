@@ -56,12 +56,12 @@ namespace SA.DAO
         /// Grava uma nova solicitacao no banco de dados
         /// </summary>
         /// <param name="sa">The sa.</param>
-        public void Add(Solicitacao sa)
+        public void Add(IList<Solicitacao> sa)
         {
-            //sa.Sacrementada = false;
-            //sa.Codigo = "000100";
-            //sa.R_E_C_N_O_ = RECNO.GetNextRecno("Z11010");
-            //session.Save(sa);
+            foreach (var s in sa)
+            {   
+                session.Save(s);
+            }
         }
 
         /// <summary>
@@ -98,6 +98,14 @@ namespace SA.DAO
             return (t);
         }
 
+
+        public string GetCodigo()
+        {
+            string cq = "select max(Z11_COD) from Z11010";
+            return "";
+        }
+
+      
 
     }
 }

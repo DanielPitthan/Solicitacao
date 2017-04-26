@@ -33,14 +33,16 @@ namespace SA.ViewModel
         /// Método resposável por criar e devolver uma Solicitação com base no SolicitacaoJson
         /// </summary>
         /// <returns></returns>
-        public Solicitacao CriaSA()
+        public Solicitacao CriaSingleItemSa(Usuario user)
         {
             Solicitacao sa = new Solicitacao();
-            
-            
-            
+
+
+            //sa.Codigo  =???
+            sa.Filial = "01";
             string data = DateTime.Now.ToString("yyyyMMdd");
             string hora = DateTime.Now.ToString("HH:mm:ss");
+            sa.Usuario = user.Cpf;
             sa.Data = data;
             sa.Hora = hora;            
             sa.CentroCusto = this.CentroCusto;
@@ -50,9 +52,12 @@ namespace SA.ViewModel
             sa.Quantidade = this.QuantidadeSolicitada;
             sa.TipoRequisicao = this.TipoRequisicao;
             sa.StatusAtual = "Aguardando Processamento " + DateTime.Now.ToString();
+            sa.DELETE = "";
+            sa.R_E_C_N_O_ = RECNO.GetNextRecno("Z11010");
+            sa.Sacrementada = "P";
             return sa;
-    }
-
+        }
+        
     }
 
 }

@@ -13,7 +13,8 @@ namespace SA.Mappings
         {
             Table("Z13010");
 
-            Id(u => u.Cpf).Column("Z13_CPF").CustomSqlType("VARCHAR");
+            Id(u => u.R_E_C_N_O_).Column("R_E_C_N_O_").CustomSqlType("INT");
+            Map(u => u.Cpf).Column("Z13_CPF").CustomSqlType("VARCHAR");
             Map(u => u.Filial).Column("Z13_FILIAL").CustomSqlType("VARCHAR");
             Map(u => u.Requerente).Column("Z13_REQUIS").CustomSqlType("VARCHAR");
             Map(u => u.Departamento).Column("Z13_DEPART").CustomSqlType("VARCHAR");
@@ -25,10 +26,9 @@ namespace SA.Mappings
             Map(u => u.EmpresaTercerizada).Column("Z13_EMPTER").CustomSqlType("VARCHAR");
             Map(u => u.CodImpressaora).Column("Z13_CODIMP").CustomSqlType("VARCHAR");
             Map(u => u.PathImpressora).Column("Z13_CAMIMP").CustomSqlType("VARCHAR");
-            Map(u => u.NomeImpressora).Column("Z13_DESCIM").CustomSqlType("VARCHAR");
-            Map(u => u.DELETE).Column("D_E_L_E_T_").CustomSqlType("VARCHAR");
-            Map(u => u.R_E_C_N_O_).Column("R_E_C_N_O_");            
+            Map(u => u.NomeImpressora).Column("Z13_DESCIM").CustomSqlType("VARCHAR");                        
             Map(u => u.Admin).Column("Z13_ISADMIN").CustomSqlType("VARCHAR");
+            Map(u => u.DELETE).Column("D_E_L_E_T_").CustomSqlType("VARCHAR");
         }
     }
 }
