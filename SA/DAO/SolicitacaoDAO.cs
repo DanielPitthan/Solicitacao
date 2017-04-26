@@ -56,12 +56,12 @@ namespace SA.DAO
         /// Grava uma nova solicitacao no banco de dados
         /// </summary>
         /// <param name="sa">The sa.</param>
-        public void Add(IList<Solicitacao> sa)
+        public void Add(Solicitacao sa)
         {
-            foreach (var s in sa)
-            {   
-                session.Save(s);
-            }
+            //sa.Sacrementada = false;
+            //sa.Codigo = "000100";
+            //sa.R_E_C_N_O_ = RECNO.GetNextRecno("Z11010");
+            //session.Save(sa);
         }
 
         /// <summary>
@@ -85,27 +85,6 @@ namespace SA.DAO
         }
 
 
-        /// <summary>
-        /// Tipos de Requisições Válidas
-        /// </summary>
-        /// <returns>IList&lt;System.String&gt;.</returns>
-        public IList<string> TiposRequisicoes()
-        {
-            List<string> t = new List<string>();
-            t.Add("OU");
-            t.Add("OS");
-            t.Add("CO");
-            return (t);
-        }
-
-
-        public string GetCodigo()
-        {
-            string cq = "select max(Z11_COD) from Z11010";
-            return "";
-        }
-
-      
-
+       
     }
 }

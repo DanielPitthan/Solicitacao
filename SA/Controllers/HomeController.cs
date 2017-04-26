@@ -1,6 +1,6 @@
 ﻿using SA.Controllers.Validates.Solicitacao;
 using SA.DAO;
-using SA.DAO.ViewDAO;
+using SA.Factorys;
 using SA.Filters;
 using SA.Models;
 using SA.ViewModel;
@@ -46,8 +46,8 @@ namespace SA.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult FormIncluir()
-        {            
-            ViewBag.TiposRequisicoes = saDAO.TiposRequisicoes();
+        {
+            ViewBag.TiposRequisicoes = ChoiceFactory.ListaTiposRequisicoes();
             ViewBag.Departamento = depDAO.Lista();            
             return View();
         }
@@ -77,13 +77,12 @@ namespace SA.Controllers
 
             if (ModelState.IsValid)
             {
-                
-                saDAO.Add(SolicitacaoJsonDAO.CriaListaSa(itenSa, user) );
+              //  saDAO.Add(sa);
                 return RedirectToAction("Index");
             }
             else
             {
-                ViewBag.TiposRequisicoes = saDAO.TiposRequisicoes();
+                ViewBag.TiposRequisicoes = ChoiceFactory.ListaTiposRequisicoes();
                 ViewBag.Departamento = depDAO.Lista();
 
                 //Converte o itenSA em Solicitacao e devolve para a view

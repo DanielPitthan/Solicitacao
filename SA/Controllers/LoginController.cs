@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using SA.Filters;
 using System.Net;
+using SA.Factorys;
 
 namespace SA.Controllers
 {
@@ -94,7 +95,7 @@ namespace SA.Controllers
             ViewBag.ModeloValido = ModelState.IsValid;
             ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
-            ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
+            ViewBag.Tercerizado = ChoiceFactory.SimNao();
             return View();
         }
 
@@ -134,7 +135,7 @@ namespace SA.Controllers
            
             ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
-            ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
+            ViewBag.Tercerizado = ChoiceFactory.SimNao();
             ViewBag.ModeloValido = ModelState.IsValid;
             return View("NovoLogin", usuarioFormLogin);            
 
@@ -164,7 +165,7 @@ namespace SA.Controllers
         {
             ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
-            ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
+            ViewBag.Tercerizado = ChoiceFactory.SimNao();
             ViewBag.ModeloValido = ModelState.IsValid;
 
 
@@ -204,7 +205,7 @@ namespace SA.Controllers
             ViewBag.ModeloValido = ModelState.IsValid;
             ViewBag.Funcao = funcaoDAO.Lista();
             ViewBag.Departamento = departamentoDAO.Lista();
-            ViewBag.Tercerizado = usuarioDAO.SimNaoTerceiro();
+            ViewBag.Tercerizado = ChoiceFactory.SimNao();
             return View("FormAltera", usuario);
 
         }
