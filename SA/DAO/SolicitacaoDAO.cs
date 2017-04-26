@@ -1,4 +1,6 @@
 ﻿using NHibernate;
+using NHibernate.Criterion;
+using NHibernate.Linq;
 using SA.Models;
 using System;
 using System.Collections.Generic;
@@ -56,13 +58,25 @@ namespace SA.DAO
         /// Grava uma nova solicitacao no banco de dados
         /// </summary>
         /// <param name="sa">The sa.</param>
-        public void Add(Solicitacao sa)
+        public void Add(IList<Solicitacao> sa)
         {
-            //sa.Sacrementada = false;
-            //sa.Codigo = "000100";
-            //sa.R_E_C_N_O_ = RECNO.GetNextRecno("Z11010");
-            //session.Save(sa);
+            string saCod = GetCod();
+
+            foreach(var s in sa)
+            {
+                session.Save(s);
+            }
+            
         }
+
+        public string GetCod()
+        {
+            string hql = "select s from Solicitacao";
+
+            var resultado = session.Query<SA.Models.Solicitacao>().Max<SA.Models.Solicitacao>();          
+            return "";
+        }
+
 
         /// <summary>
         /// Faz a exclusão de uma solicitacao

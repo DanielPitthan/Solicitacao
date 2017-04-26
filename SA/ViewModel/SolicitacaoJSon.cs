@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NHibernate;
 
 namespace SA.ViewModel
 {
@@ -12,7 +13,6 @@ namespace SA.ViewModel
     /// </summary>
     public class SolicitacaoJSon
     {
-        
         
         public string TipoRequisicao { get; set; }
         public int TipoRequisicaoValor { get; set; }
@@ -36,9 +36,7 @@ namespace SA.ViewModel
         public Solicitacao CriaSingleItemSa(Usuario user)
         {
             Solicitacao sa = new Solicitacao();
-
-
-            //sa.Codigo  =???
+            
             sa.Filial = "01";
             string data = DateTime.Now.ToString("yyyyMMdd");
             string hora = DateTime.Now.ToString("HH:mm:ss");

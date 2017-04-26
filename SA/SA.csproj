@@ -206,6 +206,7 @@
     <Compile Include="DAO\SolicitacaoDAO.cs" />
     <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="Factorys\ChoiceFactory.cs" />
+    <Compile Include="Factorys\SolicitacaoFactory.cs" />
     <Compile Include="Filters\AutorizacaoAdminFilterAttribute.cs" />
     <Compile Include="Filters\AutorizacaoFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">

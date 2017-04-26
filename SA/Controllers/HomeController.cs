@@ -64,20 +64,21 @@ namespace SA.Controllers
         /// <returns>ActionResult.</returns>
         public ActionResult Adicionar(IList<SolicitacaoJSon> itenSa)
         {
+            user = (Usuario)Session["usuario"];
 
             if (!SolicitacaoValidates.ProdutoValidate(itenSa,prodDAO))
             {
                 ModelState.AddModelError("ProdutoInvalido","Há um código de produto Inválido. Corrija antes de continuar.");
             }
 
-            if (SolicitacaoValidates.QuantidadeValidate(itenSa, prodDAO))
+            if (!SolicitacaoValidates.QuantidadeValidate(itenSa, prodDAO))
             {
                 ModelState.AddModelError("QuantidadeInvalida", "Há um produto com a quantidade inválida. Corrija antes de continuar.");
             }
 
-            if (ModelState.IsValid)
+            if (true)//ModelState.IsValid)
             {
-              //  saDAO.Add(sa);
+                saDAO.Add(SolicitacaoFactory.CriaListaSolicitacao(itenSa,user));
                 return RedirectToAction("Index");
             }
             else
