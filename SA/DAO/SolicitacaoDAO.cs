@@ -1,9 +1,11 @@
 ﻿using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
+using SA.Factorys;
 using SA.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -24,11 +26,22 @@ namespace SA.DAO
         /// retorna uma Lista de Solicitações da sessão atual do usuário
         /// </summary>
         /// <returns>IList&lt;Solicitacao&gt;.</returns>
-        public IList<Solicitacao> Lista()
+        public IList<Solicitacao> Lista(Usuario user)
         {
-            string hql = "select s from Solicitacao s";
-            IQuery query = session.CreateQuery(hql);
-            return query.List<Solicitacao>();
+            IList<Solicitacao> solicitacoes = session.QueryOver<Solicitacao>()
+                                                .Where(s => s.Usuario == user.Cpf) 
+                                                //.SelectList(lista => lista //Necessita de um DTO
+                                                //.SelectGroup( p=> p.Codigo)
+                                                //.SelectGroup( p=> p.Data)
+                                                //)
+                                                .OrderBy(s => s.Data)
+                                                .Desc()
+                                                .List();
+                                                
+                                                
+
+
+            return solicitacoes;
         }
         /// <summary>
         /// Lista um grupo de solicitacao por Codigo
@@ -61,20 +74,40 @@ namespace SA.DAO
         public void Add(IList<Solicitacao> sa)
         {
             string saCod = GetCod();
+            string obs;
+            string user;
+          
 
             foreach(var s in sa)
             {
+               
+                user = s.Usuario;
+                s.Codigo = saCod;
+
+                ITransaction tran = session.BeginTransaction();
                 session.Save(s);
+                tran.Commit();                
+
             }
             
-        }
+        }       
 
+
+        /// <summary>
+        /// Obtem o pr[oximo código libvre de Solicitação
+        /// </summary>
+        /// <returns></returns>
         public string GetCod()
         {
-            string hql = "select s from Solicitacao";
+            int size = 6;// tamanho máximo do código
 
-            var resultado = session.Query<SA.Models.Solicitacao>().Max<SA.Models.Solicitacao>();          
-            return "";
+            var maximo = session.QueryOver<Solicitacao>()
+                                        .Select(s => s.Codigo)
+                                        .List<string>().Max<string>();
+
+
+            maximo = Soma1c.soma(maximo,size);
+            return maximo;
         }
 
 
@@ -86,7 +119,9 @@ namespace SA.DAO
         {
             //TODO
             //Verificar se a SA já não foi consumida 
+            ITransaction tran = session.BeginTransaction();
             session.Delete(GetBySa(sa));
+            tran.Commit();
         }
 
         /// <summary>
@@ -95,7 +130,9 @@ namespace SA.DAO
         /// <param name="sa">The sa.</param>
         public void Alter(Solicitacao sa)
         {
+            ITransaction tran = session.BeginTransaction();
             session.Merge(sa);
+            tran.Commit();
         }
 
 

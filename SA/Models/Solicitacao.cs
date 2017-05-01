@@ -39,6 +39,8 @@ namespace SA.Models
 
         [Required(ErrorMessage ="Tipo da Requisição não pode ficar em branco")]
         public virtual string TipoRequisicao { get; set; }
+
+        [RegularExpression(@"\d{10}",ErrorMessage ="Formato inválido")]
         public virtual string NUMTPR { get; set; }
 
         public virtual string Sacrementada { get; set; }

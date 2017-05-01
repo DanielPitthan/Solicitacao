@@ -19,6 +19,8 @@ namespace SA.Controllers
         SolicitacaoDAO saDAO;        
         DepartamentoDAO depDAO;
         ProdutosDAO prodDAO;
+        bool jsonIsvalid =true;
+        List<string> errors = new List<string>();
 
         public HomeController (SolicitacaoDAO saDAO, DepartamentoDAO dep, ProdutosDAO prd)
         {
@@ -36,7 +38,7 @@ namespace SA.Controllers
             user = (Usuario)Session["usuario"];
 
             ViewBag.Usuario = user;
-            var model = saDAO.Lista();
+            var model = saDAO.Lista(user);
             return View(model);
         }
 
@@ -47,8 +49,10 @@ namespace SA.Controllers
         /// <returns></returns>
         public ActionResult FormIncluir()
         {
+            ViewBag.jsonIsvalid = this.jsonIsvalid;
             ViewBag.TiposRequisicoes = ChoiceFactory.ListaTiposRequisicoes();
-            ViewBag.Departamento = depDAO.Lista();            
+            ViewBag.Departamento = depDAO.Lista();
+            ViewBag.json = null;
             return View();
         }
 
@@ -69,27 +73,34 @@ namespace SA.Controllers
             if (!SolicitacaoValidates.ProdutoValidate(itenSa,prodDAO))
             {
                 ModelState.AddModelError("ProdutoInvalido","Há um código de produto Inválido. Corrija antes de continuar.");
+                errors.Add( "Há um código de produto Inválido. Corrija antes de continuar.");
+                ViewBag.Error = errors;
+                this.jsonIsvalid = false;
             }
 
             if (!SolicitacaoValidates.QuantidadeValidate(itenSa, prodDAO))
             {
                 ModelState.AddModelError("QuantidadeInvalida", "Há um produto com a quantidade inválida. Corrija antes de continuar.");
+                this.jsonIsvalid = false;
             }
             
 
-            if (true)//ModelState.IsValid)
+            if (this.jsonIsvalid)
             {
                 saDAO.Add(SolicitacaoFactory.CriaListaSolicitacao(itenSa,user));
-                return RedirectToAction("Index");
+                return new EmptyResult();
             }
             else
             {
+
+                ViewBag.jsonIsvalid = this.jsonIsvalid;
                 ViewBag.TiposRequisicoes = ChoiceFactory.ListaTiposRequisicoes();
                 ViewBag.Departamento = depDAO.Lista();
+                ViewBag.json = itenSa;
 
                 //Converte o itenSA em Solicitacao e devolve para a view
-                //return View("FormIncluir", sa);
-                return View();
+                return View("FormIncluir");
+                
             }
         }
 

@@ -20,16 +20,30 @@ namespace SA.DAO
         /// </summary>
         /// <param name="text">The text.</param>
         /// <returns>IList&lt;Produtos&gt;.</returns>
-        public IList<Produtos> ListaProdutosByDesc(string text)
+        public List<Produtos> ListaProdutosByDesc(string text)
         {
             string hql = " select p from Produtos p" +
             " where p.Tipo in ('MM')" +
-            " and p.Descricao LIKE :descri " +
+            " and (p.Descricao LIKE :descri )" +
+            
             " order by p.Descricao";
+
+            IList<Produtos> produtosDesc = session.QueryOver<Produtos>().Where(p => p.Tipo == "MM" )
+                                                                    .AndRestrictionOn(p =>p.Descricao).IsLike(text+"%")                                                                    
+                                                                    .List();
+
+            IList<Produtos> produtosCod = session.QueryOver<Produtos>().Where(p => p.Tipo == "MM")
+                                                                    .AndRestrictionOn(p => p.Codigo).IsLike(text + "%")
+                                                                    .List();
+            
+            IEnumerable<Produtos> produtos = produtosDesc.Union(produtosCod) ;
+            //IList<Produtos> produtos = (IList<Produtos>)iprodutos;
+
+            return produtos.ToList<Produtos>();
                        
-            IQuery query = session.CreateQuery(hql);
-            query.SetParameter("descri", text.ToUpper() + "%");
-            return query.List<Produtos>();
+            //IQuery query = session.CreateQuery(hql);
+            //query.SetParameter("descri", text.ToUpper() + "%");
+            //return query.List<Produtos>();
 
         }
 

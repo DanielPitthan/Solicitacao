@@ -1,23 +1,42 @@
-﻿//Variáveis globais
-
-var qtdestoque = 0;
-var dados = new Array();    
-
+﻿
 
 /*  
  * Atualiza a grid/tabela com os produtos selecionados 
  */
-function AtualizaGrid(dados) {
+function AtualizaGrid(itemSa,index){ //(dados) {
 
-    var tabela = document.getElementById("tbselecionado");
+   
     var textab = "";
     var classe = "";
+    
 
-    for (var i = 0; i <= dados.length - 1; i++) {
 
-        if (dados[i].QuantidadeEstoque < dados[i].QuantidadeSolicitada) {
+   // for (var i = 0; i <= dados.length - 1; i++) {
+
+        //if (dados[i].QuantidadeEstoque < dados[i].QuantidadeSolicitada) {
+        //    classe = "alert alert-danger";
+        //} else if (dados[i].QuantidadeEstoque == dados[i].QuantidadeSolicitada) {
+        //    classe = "alert alert-warning";
+        //} else {
+        //    classe = "";
+        //}
+
+
+
+        //textab += "<tr class='" + classe + "' id='trSolicitacao" + i + "'>";
+        //textab += "<td id='tdProduto" + i + "'>" + dados[i].DescricaoProduto + "</td>";
+        //textab += "<td id='tdQuantidadeEstoque" + i + "'>" + dados[i].QuantidadeEstoque + "</td>";
+        //textab += "<td id='tdQuantidadeSolicitada" + i + "'>" + dados[i].QuantidadeSolicitada + "</td>";
+        //textab += "<td id='tdDepartamento" + i + "'>" + dados[i].Departamento + "</td>";
+        //textab += "<td id='tdCentrodCusto" + i + "'>" + dados[i].CentroCusto + "</td>";
+        //textab += "<td id='tdobservacao" + i + "'>" + dados[i].Observacao + "</td>";
+        //textab += "<td id='tdEdit" + i + "'><a href='#' id='a1'><span class='glyphicon glyphicon-wrench'></span></a></td>";
+        //textab += "<td id='tdEdit" + i + "'><a href='#' onclick='SubtraiArray("+i+")' id='a2'><span class='glyphicon glyphicon-trash'></span></a></td>";
+        //textab += "</tr>";
+
+    if (itemSa.QuantidadeEstoque < itemSa.QuantidadeSolicitada) {
             classe = "alert alert-danger";
-        } else if (dados[i].QuantidadeEstoque == dados[i].QuantidadeSolicitada) {
+        } else if (itemSa.QuantidadeEstoque == itemSa.QuantidadeSolicitada) {
             classe = "alert alert-warning";
         } else {
             classe = "";
@@ -25,42 +44,63 @@ function AtualizaGrid(dados) {
 
 
 
-        textab += "<tr class='" + classe + "' id='trSolicitacao'" + i + ">"
-        textab += "<td id='tdProduto'" + i + ">" + dados[i].DescricaoProduto + "</td>"
-        textab += "<td id='tdQuantidadeEstoque'" + i + ">" + dados[i].QuantidadeEstoque + "</td>"
-        textab += "<td id='tdQuantidadeSolicitada'" + i + ">" + dados[i].QuantidadeSolicitada + "</td>"
-        textab += "<td id='tdDepartamento'" + i + ">" + dados[i].Departamento + "</td>"
-        textab += "<td id='tdCentrodCusto'" + i + ">" + dados[i].CentroCusto + "</td>"
-        textab += "<td id='tdobservacao'" + i + ">" + dados[i].Observacao + "</td>"
-        textab += "<td id='tdEdit'" + i + "><span class='glyphicon glyphicon-wrench'></span></td>"
-        textab += "<td id='tdEdit'" + i + "><span class='glyphicon glyphicon-trash'></span></td>"
-        textab += "</tr>"
+        textab += "<tr class='" + classe + "' id='trSolicitacao'>";
+        textab += "<td id='tdProduto'>" + itemSa.DescricaoProduto + "</td>";
+        textab += "<td id='tdQuantidadeEstoque'>" + itemSa.QuantidadeEstoque + "</td>";
+        textab += "<td id='tdQuantidadeSolicitada'>" + itemSa.QuantidadeSolicitada + "</td>";
+        textab += "<td id='tdDepartamento'>" + itemSa.Departamento + "</td>";
+        textab += "<td id='tdCentrodCusto'>" + itemSa.CentroCusto + "</td>";
+        textab += "<td id='tdobservacao'>" + itemSa.Observacao + "</td>";
+        textab += "<td id='tdEdit'><a href='#' onclick= EditaArray(" + index +")  ><span class='glyphicon glyphicon-wrench'></span></a></td>";
+        textab += "<td id='tdEdit'><a href='#' onclick='SubtraiArray(" + index +")' ><span class='glyphicon glyphicon-trash'></span></a></td>";
+        textab += "</tr>";
 
-    }
+        
 
-    tabela.outerHTML = '<tbody id="tbselecionado">' + textab + '</tbody>';
+    //}
+
+        tabela.innerHTML += textab; // '<tbody id="tbselecionado">' + textab + '</tbody>';
 
 }
 
 
+function EditaArray(posicao) {
+    var trsSolicitacao = document.querySelectorAll("#trSolicitacao");
+    trsSolicitacao[posicao].innerHTML = "";
+   
+                                                                  
+    numtpr.value = dados[posicao].NumeroReq;
+    prd.value = dados[posicao].CodigoProduto + dados[posicao].DescricaoProduto;
+    qtd.value = dados[posicao].QuantidadeSolicitada;
+    obs.value = dados[posicao].Observacao;
+    dep.value = dados[posicao].DepartamentoValor;
+    cc.value = dados[posicao].CentroCusto;
+
+
+    SubtraiArray(posicao)
+
+}
+
+
+/**
+ * Remove um item da Lista
+ * @param {any} posicao
+ */
+function SubtraiArray(posicao) {
+    var trsSolicitacao = document.querySelectorAll("#trSolicitacao");
+    trsSolicitacao[posicao].innerHTML = "";
+    dados.splice(posicao, 1);
+    
+}
 
 
 /*
  *  Monta o array com os produtos selecionados 
  */
 function AdicionaArray() {
-   
 
-    var tipoReq = document.getElementById("tprequisicao");
-    var numReq = document.getElementById("numtpr");
-    var prd = document.getElementById("produto");
-    var prdDesc = prd.value.substring(15, prd.value.length);
-    var qtd = document.getElementById("quantidade");
-    var qtdEst = qtdestoque;
-    var obs = document.getElementById("observacao");
-    var dep = document.getElementById("departamento");
-    var cc = document.getElementById("centrocusto");
-    var obs = document.getElementById("observacao");
+    var qtdEst = qtdestoque;    
+    
 
     //Verifica se o produto já não foi selecionado
     if (!BuscaProduto(prd.value.substring(0, 15)))
@@ -72,7 +112,7 @@ function AdicionaArray() {
     var ItemSA = {
         TipoRequisicao: tipoReq[tipoReq.selectedIndex].textContent,
         TipoRequisicaoValor: tipoReq[tipoReq.selectedIndex].value,
-        NumeroReq: numReq.value,
+        NumeroReq: numtpr.value,
         CodigoProduto: prd.value.substring(0, 15),
         DescricaoProduto: prd.value.substring(15, prd.value.length),
         QuantidadeEstoque: qtdEst,
@@ -83,8 +123,8 @@ function AdicionaArray() {
         Observacao: obs.value
     };        
 
-    dados.push(ItemSA);    
-    AtualizaGrid(dados);
+    dados.push(ItemSA);
+    AtualizaGrid(ItemSA, dados.length-1);//(dados);
     ZeraForm();
 }
 
@@ -117,16 +157,9 @@ function BuscaProduto(codprod)
 /**
  * Zera os atributos em tela
  */
-function ZeraForm() {
-
-   
-   
-    var prd = document.getElementById("produto");
-    var prdDesc = prd.value.substring(15, prd.value.length);
-    var qtd = document.getElementById("quantidade");    
-    var obs = document.getElementById("observacao");
-    qtdestoque = 0;
-    
+function ZeraForm() {    
+    quant.placeholder = "";
+    qtdestoque = 0;    
     prd.value = "";
     qtd.value = "";
     obs.value = "";
@@ -142,13 +175,13 @@ function ZeraForm() {
  */
 function MontaListaProduto(response) {
     var listaHtml = "";
-    var listaProduto = document.getElementById("lstproduto");
+  
         
     for (var i = 0; i < response.lista.length; i++) {
         var texto = response.lista[i].Codigo + response.lista[i].Descricao.trim();
         listaHtml += "<option value='" + texto + "'>";
     }
-    listaProduto.outerHTML = ' <datalist id="lstproduto">' + listaHtml + "</datalist>";
+    listaProduto.innerHTML = ' <datalist id="lstproduto">' + listaHtml + "</datalist>";
 }
 
 
@@ -168,98 +201,25 @@ function AtualizaEstoque(response) {
 
 
 
-/**
- * Valida se o que foi digitado no campo quantidade é um número
- */
-function ValidaQuantidade() {
-    var quantidade = parseFloat(document.getElementById("quantidade").value);
-
-    if (!IsNumber(quantidade)) {
-        EscreveAviso("O valor que você informou não me parece ser um número");
-    }
-
-}
-
-
-
-
-/**
- * Valida se um argumento é um número
- * @param {any} argumento
- */
-function IsNumber(argumento) {
-    return result = (typeof argumento === 'number' && !isNaN(argumento));
-}
-
-
 
 
 /**
  * Escreve o aviso logo após o botão de adicionar
  */
-function EscreveAviso(texto) {
-var avisos = document.getElementById("avisos");
-avisos.outerHTML = '<div id="avisos" class="alert alert-warning">' + texto+'</div>';
+function EscreveAviso(texto) {    
+    avisos.innerHTML = '<div id="avisos" class="alert alert-warning">' + texto+'</div>';
 }
 
-/**
- * Valida se o centro de custo está preechido
- */
-function ValidaCentroCusto() {
-    var CentroCusto = document.getElementById("centrocusto").value;
 
-    if (CentroCusto != NaN && CentroCusto.length > 0) {
-        return true;
-    }
-    return false;
-}
-
-/**
- * Valida se o produto foi inserido
- */
-function ValidaProduto() {
-    var produto = document.getElementById("produto").value;
-
-    if (produto != NaN && produto.length > 0 && produto.substring(0,15).length <= 15) {
-        return true;
-    }
-
-    return false
+function LimpaAviso() {
+    avisos.innerHTML = '<div id="avisos"></div>';
 }
 
 
 
-/**
- * Valida se a quatidade foi inserida
- */
-function ValidaQuantdInsert() {
-    var quantidade = document.getElementById("quantidade").value;
+function AvisoModal(titulo,texto) {
+    modalTitulo.innerHTML = titulo;
+    modalTexto.innerHTML = texto;
 
-    if (quantidade != NaN && quantidade.length>0) {
-        return true;
-    }
-    return false;
-
-}
-
-/**
- * Faz todas as validações de campo
- */
-function TudoValido(){
-    if (!ValidaProduto()) {
-        EscreveAviso("O código do produto está inválido! Código de produto não existe")
-        return false;
-    }
-
-    if (!ValidaQuantdInsert()) {
-        EscreveAviso("Quantidade não preechida!")
-        return false;
-    }
-
-    if (!ValidaCentroCusto()) {
-        EscreveAviso("Centro de Custo não preechido!")
-        return false;
-    }
-
-    return true;
+    $('#avisomodal').modal('show');    
 }

@@ -16,3 +16,7 @@ footer {
 table {
     margin-bottom: 5%;
 }
+.modal-dialog.avisomodal {
+    background: white;
+    top: 30%;
+}
