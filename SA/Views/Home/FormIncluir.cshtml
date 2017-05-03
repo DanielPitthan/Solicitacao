@@ -4,19 +4,9 @@
 }
 
 @section ScriptsHead{
-    <script src="~/Content/Scripts/sa.js"></script>
+    
 }
 
-<div class="alert alert-danger" role="alert">
-    <span class="glyphicon glyphicon-alert"></span>
-    @Html.ValidationMessage("ProdutoInvalido")    
-    @Html.ValidationMessage("QuantidadeInvalida")
-    @Html.ValidationMessageFor(s => s.Produto)
-    @Html.ValidationMessageFor(s => s.Quantidade)
-    @Html.ValidationMessageFor(s => s.CentroCusto)
-    @Html.ValidationMessageFor(s => s.Departamento)
-    @Html.ValidationMessageFor(s => s.TipoRequisicao)
-</div>
 
 @using (Html.BeginForm("Adicionar", "Home", FormMethod.Post))
 {
@@ -24,23 +14,46 @@
    
 }
 
+
+
+<div class="modal fade" id="avisomodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog avisomodal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title alert alert-danger"></h4>
+        </div>
+        <div class="modal-body">
+            <p></p>
+        </div>
+        <div class="modal-footer">           
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 @section Scripts{
       <script src="~/Content/Scripts/jquery.validate.js"></script>    
       <script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
-    
-    
-    <script>
-      var btAdiciona = document.getElementById("btincluir");
-        btincluir.onclick = function ()
-        {   
-            if (TudoValido()) {
-                AdicionaArray();        
-            }
-            
-        }
-    </script>
+      <script src="~/Content/Scripts/sa-vars.js"></script>
+      <script src="~/Content/Scripts/sa-validacoes.js"></script>
+      <script src="~/Content/Scripts/sa.js"></script>
+      <script src="~/Content/Scripts/sa-eventos.js"></script>
+      
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+</script>
+
 
     <script>        
+        /**
+         * Pega a lista de produtos
+         */
         var urlprd = "@Url.Action("GetLista", "Produtos")";
         var produtodigita = document.getElementById("produto");
 
@@ -72,6 +85,9 @@
 
     <script>
 
+        /**
+         * Recupera o saldo em estoque
+         */
         var urlest = "@Url.Action("GetEstoque", "Produtos")";
         var quant = document.getElementById("quantidade");
         var produtodigita = document.getElementById("produto");
@@ -87,7 +103,7 @@
                 data: { "produtoCod": codigoPrd },
                 success: function (response) {                    
 
-                    AtualizaEstoque(response);
+                    AtualizaEstoque(response, codigoPrd);
                     
                 },
                 error: function (response) {
@@ -97,16 +113,10 @@
 
         }
     </script>
-
     <script>
-        var quantidade = document.getElementById("quantidade");
-        quantidade.onblur = function () {
-            ValidaQuantidade();
-        }
-
-    </script>
-
-    <script>
+        /**
+         * Envia os dados para o SERVER
+         */
         var btnInclui = document.getElementById("btnGravarSA");
         var urlIncluir = "@Url.Action("Adicionar", "Home")";
 
@@ -118,6 +128,11 @@
                 dataType: "json",
                 success: function (response) {
                     console.log("Solicitação Gravada com sucesso!")
+
+                    var url = "@Url.Action("Index", "Home")";
+                    dados = new Array();
+                    tabela.innerHTML = "";
+                    window.location.replace(url);
                 },
                 error: function (response) {
                     console.log("Erro ao salvar SA!");

@@ -27,7 +27,7 @@ namespace SA.Controllers
         [HttpPost]
         public ActionResult GetLista(string produtoDesci)
         {
-            return Json(new { lista = prodDAO.ListaProdutosByDesc(produtoDesci) }, JsonRequestBehavior.AllowGet);
+            return Json(new { lista = prodDAO.ListaProdutosByDesc(produtoDesci.ToUpper()) }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -39,7 +39,7 @@ namespace SA.Controllers
             }              
             else
             {
-                return Json(new { estoque = prodDAO.GetEstoque(produtoCod) }, JsonRequestBehavior.AllowGet);
+                return Json(new { estoque = prodDAO.GetEstoque(produtoCod.ToUpper()) }, JsonRequestBehavior.AllowGet);
             }
             
             

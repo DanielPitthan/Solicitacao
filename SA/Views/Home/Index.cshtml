@@ -5,8 +5,49 @@
 }
 
 <div class="page-header">
-    <h5>@ViewBag.Usuario.Requerente <small>Solicitações Feitas</small></h5> 
+    <h5>@ViewBag.Usuario.Requerente/ <small>Solicitações Feitas</small></h5>
 </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <table class="table table-bordered table-responsive table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Solicitação</th>
+                        <th>Data</th>
+                        <th>Produto</th>
+                        <th>Descricao</th>
+                        <th>Observação</th>
+                        <th>Quantidade</th>
+                        <th>Situação</th>
+                        <th colspan="2">Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model)
+                    {
+                        <tr>
+                            <td>@s.Codigo</td>
+                            <td>@s.Data</td>
+                            <td>@s.Produto</td>
+                            <td>Descrição de Teste</td>
+                            <td>@s.Observacao</td>
+                            <td>@s.Quantidade</td>
+                            <td>@s.StatusAtual</td>
+                            <td><a href="#"><span class="glyphicon glyphicon-edit"</a></td>
+                            <td><a href="#"><span class="glyphicon glyphicon-erase"</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
 @section Scripts {
-          }
+}

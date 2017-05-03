@@ -169,6 +169,9 @@
     <Content Include="Content\Scripts\jquery.validate.js" />
     <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\Scripts\npm.js" />
+    <Content Include="Content\Scripts\sa-eventos.js" />
+    <Content Include="Content\Scripts\sa-validacoes.js" />
+    <Content Include="Content\Scripts\sa-vars.js" />
     <Content Include="Content\Scripts\sa.js" />
     <Content Include="Content\Scripts\wow.js" />
     <Content Include="Content\Scripts\wow.min.js" />
@@ -204,9 +207,11 @@
     <Compile Include="DAO\ProdutosDAO.cs" />
     <Compile Include="DAO\RECNO.cs" />
     <Compile Include="DAO\SolicitacaoDAO.cs" />
+    <Compile Include="DAO\UpdateTable.cs" />
     <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="Factorys\ChoiceFactory.cs" />
     <Compile Include="Factorys\SolicitacaoFactory.cs" />
+    <Compile Include="Factorys\Soma1c.cs" />
     <Compile Include="Filters\AutorizacaoAdminFilterAttribute.cs" />
     <Compile Include="Filters\AutorizacaoFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -268,6 +273,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DTO\" />
     <Folder Include="Views\Produtos\" />
   </ItemGroup>
   <PropertyGroup>
