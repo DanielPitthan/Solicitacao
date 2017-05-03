@@ -103,7 +103,7 @@
                 data: { "produtoCod": codigoPrd },
                 success: function (response) {                    
 
-                    AtualizaEstoque(response);
+                    AtualizaEstoque(response, codigoPrd);
                     
                 },
                 error: function (response) {
@@ -115,7 +115,7 @@
     </script>
     <script>
         /**
-         * Envia os dados para o serer
+         * Envia os dados para o SERVER
          */
         var btnInclui = document.getElementById("btnGravarSA");
         var urlIncluir = "@Url.Action("Adicionar", "Home")";
@@ -128,8 +128,10 @@
                 dataType: "json",
                 success: function (response) {
                     console.log("Solicitação Gravada com sucesso!")
-                    dados = new Array();
+
                     var url = "@Url.Action("Index", "Home")";
+                    dados = new Array();
+                    tabela.innerHTML = "";
                     window.location.replace(url);
                 },
                 error: function (response) {

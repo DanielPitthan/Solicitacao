@@ -3,7 +3,7 @@
 /*  
  * Atualiza a grid/tabela com os produtos selecionados 
  */
-function AtualizaGrid(itemSa,index){ //(dados) {
+function AtualizaGrid(itemSa,index){
 
    
     var textab = "";
@@ -11,29 +11,7 @@ function AtualizaGrid(itemSa,index){ //(dados) {
     
 
 
-   // for (var i = 0; i <= dados.length - 1; i++) {
-
-        //if (dados[i].QuantidadeEstoque < dados[i].QuantidadeSolicitada) {
-        //    classe = "alert alert-danger";
-        //} else if (dados[i].QuantidadeEstoque == dados[i].QuantidadeSolicitada) {
-        //    classe = "alert alert-warning";
-        //} else {
-        //    classe = "";
-        //}
-
-
-
-        //textab += "<tr class='" + classe + "' id='trSolicitacao" + i + "'>";
-        //textab += "<td id='tdProduto" + i + "'>" + dados[i].DescricaoProduto + "</td>";
-        //textab += "<td id='tdQuantidadeEstoque" + i + "'>" + dados[i].QuantidadeEstoque + "</td>";
-        //textab += "<td id='tdQuantidadeSolicitada" + i + "'>" + dados[i].QuantidadeSolicitada + "</td>";
-        //textab += "<td id='tdDepartamento" + i + "'>" + dados[i].Departamento + "</td>";
-        //textab += "<td id='tdCentrodCusto" + i + "'>" + dados[i].CentroCusto + "</td>";
-        //textab += "<td id='tdobservacao" + i + "'>" + dados[i].Observacao + "</td>";
-        //textab += "<td id='tdEdit" + i + "'><a href='#' id='a1'><span class='glyphicon glyphicon-wrench'></span></a></td>";
-        //textab += "<td id='tdEdit" + i + "'><a href='#' onclick='SubtraiArray("+i+")' id='a2'><span class='glyphicon glyphicon-trash'></span></a></td>";
-        //textab += "</tr>";
-
+ 
     if (itemSa.QuantidadeEstoque < itemSa.QuantidadeSolicitada) {
             classe = "alert alert-danger";
         } else if (itemSa.QuantidadeEstoque == itemSa.QuantidadeSolicitada) {
@@ -55,11 +33,7 @@ function AtualizaGrid(itemSa,index){ //(dados) {
         textab += "<td id='tdEdit'><a href='#' onclick='SubtraiArray(" + index +")' ><span class='glyphicon glyphicon-trash'></span></a></td>";
         textab += "</tr>";
 
-        
-
-    //}
-
-        tabela.innerHTML += textab; // '<tbody id="tbselecionado">' + textab + '</tbody>';
+        tabela.innerHTML += textab; 
 
 }
 
@@ -186,16 +160,35 @@ function MontaListaProduto(response) {
 
 
 
+function SaldoDisponivel(saldoEmEstoque, codigoDoProduto) {
+    return saldoEmEstoque - SomaSaldoSelecionado(codigoDoProduto)
+}
 
-function AtualizaEstoque(response) {
-    if (response.estoque <= 0) {
+
+function SomaSaldoSelecionado(codigoDoProduto) {
+    var saldoSelecionado=0;
+
+    for (var posicao = 0; posicao < dados.length; posicao++) {
+        if (dados[posicao].CodigoProduto == codigoDoProduto) {
+            saldoSelecionado += parseFloat(dados[posicao].QuantidadeSolicitada);
+        }
+    }
+    return saldoSelecionado;
+}
+
+
+function AtualizaEstoque(saldo, codigoDoProduto) {
+
+    var saldoDisponivel = SaldoDisponivel(saldo.estoque, codigoDoProduto);
+
+    if (saldoDisponivel <= 0) {
         quant.className = "alert alert-danger form-control";
-        quant.placeholder = "Saldo Insuficiente: " + response.estoque;
+        quant.placeholder = "Saldo Disponível: " + saldoDisponivel;
     } else {
-        quant.placeholder = "Saldo em Estoque: " + response.estoque;
+        quant.placeholder = "Saldo em Disponível: " + saldoDisponivel;
         quant.className = "form-control";
     }
-    qtdestoque = response.estoque;
+    qtdestoque = saldo.estoque;
 
 }
 

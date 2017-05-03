@@ -56,7 +56,7 @@ function ValidaCentroCusto() {
  */
 function ValidaProduto() {
 
-    if (prd != NaN && prd.value.length > 0 && prd.value.substring(0, 15).length <= 15) {
+    if (prd != NaN && prd.value.length > 0 && (prd.value.substring(0, 15).length >= 6 && prd.value.substring(0, 15).length<=15) ) {
         return true;
     }
 
@@ -86,8 +86,7 @@ function ValidaQuantidade() {
     var quantidade = parseFloat(qtd.value);
 
     if (!IsNumber(quantidade)) {
-        EscreveAviso("O valor que você informou não me parece ser um número");
-        qtd.focus();
+        EscreveAviso("O valor que você informou não me parece ser um número");       
         return false;
     }
     return true;

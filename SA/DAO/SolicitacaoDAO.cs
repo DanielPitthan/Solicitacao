@@ -73,17 +73,13 @@ namespace SA.DAO
         /// <param name="sa">The sa.</param>
         public void Add(IList<Solicitacao> sa)
         {
-            string saCod = GetCod();
-            string obs;
-            string user;
-          
+            string saCod = GetCod();            
+                      
 
             foreach(var s in sa)
             {
-               
-                user = s.Usuario;
+                               
                 s.Codigo = saCod;
-
                 ITransaction tran = session.BeginTransaction();
                 session.Save(s);
                 tran.Commit();                
