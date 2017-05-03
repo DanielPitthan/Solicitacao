@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgMonitor = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -49,12 +51,34 @@
             // 
             // dgMonitor
             // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.dgMonitor.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            this.dgMonitor.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgMonitor.BackgroundColor = System.Drawing.Color.White;
+            this.dgMonitor.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgMonitor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgMonitor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgMonitor.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgMonitor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgMonitor.GridColor = System.Drawing.Color.Silver;
             this.dgMonitor.Location = new System.Drawing.Point(3, 53);
             this.dgMonitor.Name = "dgMonitor";
+            this.dgMonitor.RowTemplate.Height = 35;
             this.dgMonitor.Size = new System.Drawing.Size(1246, 492);
             this.dgMonitor.TabIndex = 0;
             this.dgMonitor.DataSourceChanged += new System.EventHandler(this.FormataGrid);
@@ -141,9 +165,10 @@
             // checkbDevolvidos
             // 
             this.checkbDevolvidos.AutoSize = true;
+            this.checkbDevolvidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkbDevolvidos.Location = new System.Drawing.Point(3, 3);
             this.checkbDevolvidos.Name = "checkbDevolvidos";
-            this.checkbDevolvidos.Size = new System.Drawing.Size(79, 17);
+            this.checkbDevolvidos.Size = new System.Drawing.Size(104, 24);
             this.checkbDevolvidos.TabIndex = 0;
             this.checkbDevolvidos.Text = "Devolvidos";
             this.checkbDevolvidos.UseVisualStyleBackColor = true;
@@ -152,9 +177,10 @@
             // checkbExpedidos
             // 
             this.checkbExpedidos.AutoSize = true;
-            this.checkbExpedidos.Location = new System.Drawing.Point(88, 3);
+            this.checkbExpedidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkbExpedidos.Location = new System.Drawing.Point(113, 3);
             this.checkbExpedidos.Name = "checkbExpedidos";
-            this.checkbExpedidos.Size = new System.Drawing.Size(75, 17);
+            this.checkbExpedidos.Size = new System.Drawing.Size(102, 24);
             this.checkbExpedidos.TabIndex = 1;
             this.checkbExpedidos.Text = "Expedidos";
             this.checkbExpedidos.UseVisualStyleBackColor = true;
@@ -163,9 +189,10 @@
             // checkbTransito
             // 
             this.checkbTransito.AutoSize = true;
-            this.checkbTransito.Location = new System.Drawing.Point(169, 3);
+            this.checkbTransito.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkbTransito.Location = new System.Drawing.Point(221, 3);
             this.checkbTransito.Name = "checkbTransito";
-            this.checkbTransito.Size = new System.Drawing.Size(64, 17);
+            this.checkbTransito.Size = new System.Drawing.Size(85, 24);
             this.checkbTransito.TabIndex = 2;
             this.checkbTransito.Text = "Trânsito";
             this.checkbTransito.UseVisualStyleBackColor = true;
@@ -174,9 +201,10 @@
             // checkbRecebido
             // 
             this.checkbRecebido.AutoSize = true;
-            this.checkbRecebido.Location = new System.Drawing.Point(239, 3);
+            this.checkbRecebido.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkbRecebido.Location = new System.Drawing.Point(312, 3);
             this.checkbRecebido.Name = "checkbRecebido";
-            this.checkbRecebido.Size = new System.Drawing.Size(72, 17);
+            this.checkbRecebido.Size = new System.Drawing.Size(96, 24);
             this.checkbRecebido.TabIndex = 3;
             this.checkbRecebido.Text = "Recebido";
             this.checkbRecebido.UseVisualStyleBackColor = true;
@@ -190,7 +218,7 @@
             this.ClientSize = new System.Drawing.Size(1252, 604);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
-            this.Text = "Movimentação de Pallet";
+            this.Text = "Movimentação de Pallet - v1.01";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgMonitor)).EndInit();

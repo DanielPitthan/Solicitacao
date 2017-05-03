@@ -41,20 +41,23 @@ namespace MonitorFichaPallet
         public Font oFontg = new Font(new FontFamily("Calibri"), 13);
         public Font oFonth = new Font(new FontFamily("Calibri"), 14, FontStyle.Bold);
         public CancellationTokenSource tcancel = new CancellationTokenSource();
-        public int time = 60000;
+        public int time = 6000;//30000;
+        private bool lcontinua = true;
 
-        string query = "SELECT	TOP 300 ZD3_STATUS  as [Status],	    Cast(ZD3_EMISSA as Date)  as [Emissão],	        ZD3_HORA    as [Hora]," +
-                                 " ZD3_SEQ           as [Sequência],	    ZD3_COD     as [Produto],	        ZD3_OP      as [OP]," +
-                                 " ZD3_LOTECT        as [Lote], 	       	    ZD3_CARGA   as [Carga]," +
-                                 " ZD3_NF            as [Nota Fiscal],   ZD3_QUANTR  as [Quantidade Lida],	ZD3_QUANT   as [Quantidade Apontada]" +
+        string query = "SELECT	  ZD3_STATUS   as [Status],	 Cast(ZD3_EMISSA as Date)  as [Emissão],	        ZD3_HORA    as [Hora]," +
+                                 " ZD3_SEQ           as [Sequência],	    ZD3_COD            as [Produto],	        ZD3_OP      as [OP]," +
+                                 " ZD3_LOTECT        as [Lote], 	       	    ZD3_CARGA      as [Carga]," +
+                                 " ZD3_NF            as [Nota Fiscal],  ZD3_SERINF             as [Serie] ,ZD3_QUANTR               as [Quantidade Lida]," +
+                                 " ZD3_QUANT         as [Quantidade Apontada],  ZD3_NUMPED     as [Pedido]" +
                                  " FROM  ZD3010" +
                                  " WHERE D_E_L_E_T_ = '' ";
-        string order =           " ORDER BY ZD3_EMISSA desc, ZD3_HORA desc ";
+        string order = " ORDER BY ZD3_EMISSA desc, ZD3_HORA desc ";
 
         public string queryOri = "";
 
         public Form1()
-        {    
+        {
+
             InitializeComponent();
         }
 
@@ -65,14 +68,13 @@ namespace MonitorFichaPallet
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Define a Fonte
-            dgMonitor.ColumnHeadersDefaultCellStyle.Font = oFonth;
+            //Define a Fonte do cabeçalho
             queryOri = query;
 
             CarregaDados();
             CarregaDadosasync();
             Tempoasync();
-          
+
 
         }
 
@@ -81,59 +83,41 @@ namespace MonitorFichaPallet
         /// </summary>
         private async void Tempoasync()
         {
-           
+
 
 
             while (true)
             {
-                //Inicia uma  Tarefa
-                try
-                {
-                    await Task.Delay(60, tcancel.Token);
-                }
-                catch (TaskCanceledException ex)
-                {
-                    //Verifica se a task foi cancelada 
-                    if (tcancel.IsCancellationRequested)
-                    {
-                        tcancel.Dispose();
-                        tcancel = new CancellationTokenSource();
-                        Thread.Sleep(2000); //Da um tempinho para parar a thread, dá só uma seguradinha fera                    
-                    }
-                }
-
-                
+                await Task.Delay(60);
                 lbtime.Text = Convert.ToString(DateTime.Now);
             }
         }
 
 
+     
         /// <summary>
         /// Carrega de forma assíncrona os dados em tela com um time refresh de 1 minuto
         /// </summary>
         private async void CarregaDadosasync()
         {
-            while (true)
+
+            while (lcontinua)
             {
-                //Inicia uma  Tarefa
+
                 try
                 {
                     await Task.Delay(time, tcancel.Token);
+                    CarregaDados();
                 }
                 catch (TaskCanceledException ex)
                 {
-                    //Verifica se a task foi cancelada 
-                    if (tcancel.IsCancellationRequested)
-                    {
-                        tcancel.Dispose();
-                        tcancel = new CancellationTokenSource();
-                        Thread.Sleep(2000); //Da um tempinho para parar a thread, dá só uma seguradinha fera                    
-                    }
+                    //MessageBox.Show(ex.Message);
                 }
+                
 
-                CarregaDados();
             }
-            
+
+
         }
 
         /// <summary>
@@ -144,14 +128,14 @@ namespace MonitorFichaPallet
             SqlDataReader leitor;
             SqlCommand cmd;
 
-                using (IDbConnection conexao = ConnectionFactory.CriaConexao())
-                using (IDbCommand comando = conexao.CreateCommand())
-                {
+            using (IDbConnection conexao = ConnectionFactory.CriaConexao())
+            using (IDbCommand comando = conexao.CreateCommand())
+            {
 
-                    cmd = (SqlCommand)comando;
-                    cmd.CommandText = query + order;
+                cmd = (SqlCommand)comando;
+                cmd.CommandText = query + order;
 
-                    //comando.CommandText = query;
+                //comando.CommandText = query;
 
 
                 leitor = cmd.ExecuteReader();// comando.ExecuteReader();
@@ -161,12 +145,12 @@ namespace MonitorFichaPallet
                     MessageBox.Show("Não há Pallets neste status", "Aviso", MessageBoxButtons.OK);
                     return;
                 }
-                
-                    binding.DataSource = leitor;
-                    dgMonitor.DataSource = binding;
+
+                binding.DataSource = leitor;
+                dgMonitor.DataSource = binding;
 
             }
-            
+
 
         }
 
@@ -202,39 +186,25 @@ namespace MonitorFichaPallet
         {
 
             if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "DEVOLVIDO")
-            {                
+            {
                 dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.OrangeRed;
-            }                  
-                               
+            }
+
             if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "EXPEDICAO")
-            {                  
+            {
                 dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.DeepSkyBlue;
-            }                  
-                               
+            }
+
             if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "RECEBIDO")
-            {                  
+            {
                 dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.GreenYellow;
-            }                  
+            }
             if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "TRANSITO")
-            {                  
+            {
                 dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.Gold;
             }
 
-            //Altura da linha
-            dgMonitor.Rows[e.RowIndex].Height = 35;
 
-            dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["Emissão"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["Hora"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["Sequência"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["Produto"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["OP"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["Lote"].Style.Font = oFontg;
-            //dgMonitor.Rows[e.RowIndex].Cells["Ficha Pallet"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["Carga"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["Nota Fiscal"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["Quantidade Lida"].Style.Font = oFontg;
-            dgMonitor.Rows[e.RowIndex].Cells["Quantidade Apontada"].Style.Font = oFontg;
         }
 
 
@@ -251,7 +221,9 @@ namespace MonitorFichaPallet
 
             checkbExpedidos.Checked = false;
             checkbTransito.Checked = false;
-            checkbRecebido.Checked = false;
+            checkbRecebido.Checked = false;     
+           
+            //lcontinua = false;
 
         }
 
@@ -309,20 +281,33 @@ namespace MonitorFichaPallet
         {
             if (fazFiltro)
             {
-                query += "AND ZD3_STATUS ='"+ status + "' ";
+                query = queryOri;
+                query += "AND ZD3_STATUS ='" + status + "' ";
+
+                lcontinua = false;                
+                tcancel.Cancel();
+                CarregaDados();
             }
             else
             {
                 query = queryOri;
+
+                if (tcancel.IsCancellationRequested)
+                {
+                    tcancel.Dispose();
+                    tcancel = new CancellationTokenSource();
+                    //Thread.Sleep(2000); //Da um tempinho para parar a thread, dá só uma seguradinha fera                    
+                }
+
+                lcontinua = true;
+                CarregaDados();
+                CarregaDadosasync();
             }
 
-            CarregaDados();
-            query = queryOri;
         }
-
     }
 
-    
+
 
 }
 

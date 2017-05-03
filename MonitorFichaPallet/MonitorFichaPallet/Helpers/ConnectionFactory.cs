@@ -18,7 +18,7 @@ namespace MonitorFichaPallet.Helpers
     {
         public static IDbConnection CriaConexao()
         {
-            var stringConexao = "Server = SRV-FINI-DBH; Database = P_DEV; User Id = SIGA; Password = SIGA";
+            var stringConexao = "Server = SERVIDOR7; Database =P1180_PRODUCAO; User Id = SIGA; Password = SIGA";
             IDbConnection conexao = new SqlConnection();
             conexao.ConnectionString = stringConexao;//stringConexao.ConnectionString;
             conexao.Open();
