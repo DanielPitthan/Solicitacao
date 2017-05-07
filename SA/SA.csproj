@@ -165,6 +165,7 @@
     <Content Include="Content\Scripts\bootstrap.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
     <Content Include="Content\Scripts\jquery-3.2.1.js" />
+    <Content Include="Content\Scripts\jquery.tablesorter.js" />
     <Content Include="Content\Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\Scripts\jquery.validate.js" />
     <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
@@ -186,6 +187,10 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\SA.pubxml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -220,12 +225,14 @@
     <Compile Include="DAO\CentroCustoDAO.cs" />
     <Compile Include="Helpers\ConnectionFactory.cs" />
     <Compile Include="Helpers\NhibernateHelper.cs" />
+    <Compile Include="Mappings\CentroDeCustoMapping.cs" />
     <Compile Include="Mappings\FuncaoMapping.cs" />
     <Compile Include="Mappings\DepartamentoMapping.cs" />
     <Compile Include="Mappings\ProdutosMapping.cs" />
     <Compile Include="Mappings\SaldoEstoqueMapping.cs" />
     <Compile Include="Mappings\SolicitacaoMapping.cs" />
     <Compile Include="Mappings\UsuarioMapping.cs" />
+    <Compile Include="Models\CentroDeCusto.cs" />
     <Compile Include="Models\Funcao.cs" />
     <Compile Include="Models\Departamento.cs" />
     <Compile Include="Models\Produtos.cs" />

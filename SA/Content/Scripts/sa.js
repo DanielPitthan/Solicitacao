@@ -3,18 +3,16 @@
 /*  
  * Atualiza a grid/tabela com os produtos selecionados 
  */
-function AtualizaGrid(itemSa,index){
+function AtualizaGrid(itemSa){
 
    
     var textab = "";
     var classe = "";
-    
-
-
- 
+   
+       
     if (itemSa.QuantidadeEstoque < itemSa.QuantidadeSolicitada) {
             classe = "alert alert-danger";
-        } else if (itemSa.QuantidadeEstoque == itemSa.QuantidadeSolicitada) {
+        } else if (itemSa.QuantidadeEstoque === itemSa.QuantidadeSolicitada) {
             classe = "alert alert-warning";
         } else {
             classe = "";
@@ -22,49 +20,20 @@ function AtualizaGrid(itemSa,index){
 
 
 
-        textab += "<tr class='" + classe + "' id='trSolicitacao'>";
+        textab += "<tr class='" + classe + "' id='trSolicitacao" + dados.length  +"'>";
+        textab += "<td id='tdCodigoProduto" + dados.length+"'>" + itemSa.CodigoProduto + "</td>";
         textab += "<td id='tdProduto'>" + itemSa.DescricaoProduto + "</td>";
         textab += "<td id='tdQuantidadeEstoque'>" + itemSa.QuantidadeEstoque + "</td>";
         textab += "<td id='tdQuantidadeSolicitada'>" + itemSa.QuantidadeSolicitada + "</td>";
         textab += "<td id='tdDepartamento'>" + itemSa.Departamento + "</td>";
         textab += "<td id='tdCentrodCusto'>" + itemSa.CentroCusto + "</td>";
         textab += "<td id='tdobservacao'>" + itemSa.Observacao + "</td>";
-        textab += "<td id='tdEdit'><a href='#' onclick= EditaArray(" + index +")  ><span class='glyphicon glyphicon-wrench'></span></a></td>";
-        textab += "<td id='tdEdit'><a href='#' onclick='SubtraiArray(" + index +")' ><span class='glyphicon glyphicon-trash'></span></a></td>";
+        textab += "<td id='tdEdit'><a href='#' onclick='EditaArray(" + dados.length  +")'  ><span class='glyphicon glyphicon-wrench'></span></a></td>";
+        textab += "<td id='tdEdit'><a href='#' onclick='SubtraiArray(" + dados.length  +")' ><span class='glyphicon glyphicon-trash'></span></a></td>";
         textab += "</tr>";
 
-        tabela.innerHTML += textab; 
+        tabela.innerHTML = textab + tabela.innerHTML; 
 
-}
-
-
-function EditaArray(posicao) {
-    var trsSolicitacao = document.querySelectorAll("#trSolicitacao");
-    trsSolicitacao[posicao].innerHTML = "";
-   
-                                                                  
-    numtpr.value = dados[posicao].NumeroReq;
-    prd.value = dados[posicao].CodigoProduto + dados[posicao].DescricaoProduto;
-    qtd.value = dados[posicao].QuantidadeSolicitada;
-    obs.value = dados[posicao].Observacao;
-    dep.value = dados[posicao].DepartamentoValor;
-    cc.value = dados[posicao].CentroCusto;
-
-
-    SubtraiArray(posicao)
-
-}
-
-
-/**
- * Remove um item da Lista
- * @param {any} posicao
- */
-function SubtraiArray(posicao) {
-    var trsSolicitacao = document.querySelectorAll("#trSolicitacao");
-    trsSolicitacao[posicao].innerHTML = "";
-    dados.splice(posicao, 1);
-    
 }
 
 
@@ -98,10 +67,46 @@ function AdicionaArray() {
     };        
 
     dados.push(ItemSA);
-    AtualizaGrid(ItemSA, dados.length-1);//(dados);
+    AtualizaGrid(ItemSA);
     ZeraForm();
+    prd.focus();
 }
 
+
+
+
+function EditaArray(posicao) {
+    
+    var indexJson = posicao - 1;
+
+    numtpr.value    = dados[indexJson].NumeroReq;
+    prd.value       = dados[indexJson].CodigoProduto + dados[indexJson].DescricaoProduto;
+    qtd.value       = dados[indexJson].QuantidadeSolicitada;
+    obs.value       = dados[indexJson].Observacao;
+    dep.value       = dados[indexJson].DepartamentoValor;
+    cc.value        = dados[indexJson].CentroCusto;
+
+
+    SubtraiArray(posicao)
+
+}
+
+
+/**
+ * Remove um item da Lista
+ * @param {any} posicao
+ */
+function SubtraiArray(posicao) {
+    var trItemSelecionado = document.querySelector("#trSolicitacao" + posicao);
+
+    dados = dados.filter(function (sa) {
+        var tdProduto = document.querySelector("#tdCodigoProduto" + posicao);
+        return sa.CodigoProduto != tdProduto.textContent;
+    })
+
+    trItemSelecionado.innerHTML = "";
+
+}
 
 
 
@@ -114,7 +119,7 @@ function BuscaProduto(codprod)
     
 
     for (var i = 0; i < dados.length; i++) {
-        if (dados[i].CodigoProduto == codprod) {
+        if (dados[i].CodigoProduto === codprod) {
 
             EscreveAviso("Esse produto já consta na Solicitação");
             return false;
@@ -141,6 +146,15 @@ function ZeraForm() {
 }
 
 
+function ReiniciaFormulario(){
+    dados = new Array();
+    tabela.innerHTML = "";
+    quant.placeholder = "";
+    qtdestoque = 0;
+    prd.value = "";
+    qtd.value = "";
+    obs.value = "";
+}
 
 
 /**
@@ -169,7 +183,7 @@ function SomaSaldoSelecionado(codigoDoProduto) {
     var saldoSelecionado=0;
 
     for (var posicao = 0; posicao < dados.length; posicao++) {
-        if (dados[posicao].CodigoProduto == codigoDoProduto) {
+        if (dados[posicao].CodigoProduto === codigoDoProduto) {
             saldoSelecionado += parseFloat(dados[posicao].QuantidadeSolicitada);
         }
     }
@@ -198,6 +212,7 @@ function AtualizaEstoque(saldo, codigoDoProduto) {
 
 /**
  * Escreve o aviso logo após o botão de adicionar
+ * @param texto
  */
 function EscreveAviso(texto) {    
     avisos.innerHTML = '<div id="avisos" class="alert alert-warning">' + texto+'</div>';
@@ -210,9 +225,31 @@ function LimpaAviso() {
 
 
 
-function AvisoModal(titulo,texto) {
+function AvisoModalErro(titulo,texto) {
     modalTitulo.innerHTML = titulo;
     modalTexto.innerHTML = texto;
 
-    $('#avisomodal').modal('show');    
+    $('#avisoModalErro').modal('show');    
+}
+
+
+function AvisoModalSucess(titulo, texto) {
+    var modalTiTuloSucess = document.querySelector("#moda_sucess_title");
+    var modalBodySucess = document.querySelector("#moda_sucess_body");
+
+    modalTiTuloSucess.innerHTML = titulo;
+    modalBodySucess.innerHTML = texto;
+
+    $('#avisoModalSucesso').modal('show');
+}
+
+function SolicitacaoGravada(numeroDaSolicitacao,url) {
+    ReiniciaFormulario();
+
+    AvisoModalSucess("Solicitação gravada com sucesso", "Solicitação Criada :" + numeroDaSolicitacao);
+
+    setTimeout(function () {
+        //var url = "@Url.Action("Index", "Home")";
+        window.location.replace(url);
+    }, 3000);
 }

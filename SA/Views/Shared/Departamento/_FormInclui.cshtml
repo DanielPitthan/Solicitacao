@@ -23,3 +23,54 @@
     </div>
         }
 
+
+@section Scripts{
+
+    <script>
+        var CentroDeCusto = document.querySelector("#CentroDeCusto");
+        var listaCentroDeCusto = document.querySelector("#listaCentroDeCusto");   
+        
+        CentroDeCusto.onkeypress = function () {
+
+            var urlcc = "@Url.Action("GetListaCentroDeCusto", "Departamento")";
+
+            if (CentroDeCusto.value.length > 2) {
+
+                $.ajax({
+                    url: urlcc,
+                    type: "POST",
+                    data: { 'centroDeCusto': CentroDeCusto.value },
+                    success: function (response) {
+
+                        MontaLista(response.lista);
+
+                    },
+                    error: function (response) {
+                        console.log("Erro! Não encontrei centro de custo");
+                    }
+                })
+            }
+        }
+
+
+        function MontaLista(lista) {
+            var listaHtml = "";
+
+            for (var i = 0; i < lista.length; i++) {
+                listaHtml += "<option value='" + lista[i].Codigo + " "+lista[i].Descricao + "'>";
+            }
+            listaCentroDeCusto.innerHTML = ' <datalist id="listaCentroDeCusto">' + listaHtml + "</datalist>";
+        }
+
+
+        CentroDeCusto.addEventListener("change", function () {
+            var CentroDeCusto = document.querySelector("#CentroDeCusto");
+            CentroDeCusto.value = CentroDeCusto.value.substring(0, 9);
+            
+        })
+
+
+
+    </script>
+    
+}

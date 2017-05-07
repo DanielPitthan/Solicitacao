@@ -7,16 +7,15 @@
     
 }
 
+   @using (Html.BeginForm("Adicionar", "Home", FormMethod.Post))
+    {
+        @Html.Partial("_FormSa")
 
-@using (Html.BeginForm("Adicionar", "Home", FormMethod.Post))
-{
-    @Html.Partial("_FormSa")
-   
-}
-
+    }
 
 
-<div class="modal fade" id="avisomodal" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="modal fade" id="avisoModalErro" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog avisomodal">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -32,6 +31,17 @@
 </div>
 
 
+<div class="modal fade" id="avisoModalSucesso" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog avisomodal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 id="moda_sucess_title" class="modal-title alert alert-success"></h4>
+        </div>
+        <div id="moda_sucess_body" class="modal-body">
+            <p></p>
+        </div>       
+    </div>
+</div>
 
 
 
@@ -43,7 +53,12 @@
       <script src="~/Content/Scripts/sa.js"></script>
       <script src="~/Content/Scripts/sa-eventos.js"></script>
       
+    
+
 <script type="text/javascript">
+        /**
+        * Ativa os ToolTips do bootstrap
+        */
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
@@ -52,16 +67,13 @@
 
     <script>        
         /**
-         * Pega a lista de produtos
+         * Monta a lista deprodutos 
          */
         var urlprd = "@Url.Action("GetLista", "Produtos")";
         var produtodigita = document.getElementById("produto");
 
         produtodigita.onkeypress = function()
         {
-            
-          
-
             //Verifica se a quantide digitada é maior que 2
             if (produtodigita.value.length > 2) {
 
@@ -91,7 +103,9 @@
         var urlest = "@Url.Action("GetEstoque", "Produtos")";
         var quant = document.getElementById("quantidade");
         var produtodigita = document.getElementById("produto");
-        produtodigita.onblur = function () {
+        produtodigita.onblur = function (event) {
+
+            event.preventDefault();
 
             //Busca a lista de produtos
             var listaProduto = document.getElementById("lstproduto");
@@ -113,33 +127,33 @@
 
         }
     </script>
+
     <script>
         /**
-         * Envia os dados para o SERVER
+         * Envia a Solicitacao para o servidor
          */
         var btnInclui = document.getElementById("btnGravarSA");
         var urlIncluir = "@Url.Action("Adicionar", "Home")";
 
-        btnInclui.onclick = function () {
+        btnInclui.onclick = function (event) {
+            event.preventDefault();
+
             $.ajax({
                 url: urlIncluir,
                 type: "POST",
                 data: { "itenSa": dados },
                 dataType: "json",
                 success: function (response) {
-                    console.log("Solicitação Gravada com sucesso!")
-
+                    console.log("Solicitação Gravada com sucesso!");
                     var url = "@Url.Action("Index", "Home")";
-                    dados = new Array();
-                    tabela.innerHTML = "";
-                    window.location.replace(url);
+                    SolicitacaoGravada(response.NumeroSolicitacao,url);
+
                 },
                 error: function (response) {
                     console.log("Erro ao salvar SA!");
                 }
             })
         }
-
     </script>
      
 }

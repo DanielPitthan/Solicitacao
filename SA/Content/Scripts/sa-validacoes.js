@@ -5,16 +5,16 @@
 function ValidaMascaraCC() {
     if (cc.value.length > 9) {
         cc.focus();       
-        AvisoModal("Erro", "Tamanho do Centro de Custo informado é maior 9 dígitos.")
+        EscreveAviso("Tamanho do Centro de Custo informado é maior 9 dígitos.")
         return false;
     }
-    if (!IsNumber(parseFloat(cc.value))) {
+    if (!IsNumber(cc.value)) {
         cc.focus();
         EscreveAviso("O valor informado não é um número");
         return false;
-    }
-    return true;
+    }    
     LimpaAviso();
+    return true;
 }
 
 
@@ -32,9 +32,9 @@ function ValidaMascaraNumTpr() {
         numtpr.focus();
         EscreveAviso("O valor informado não é um número");
         return false;
-    }
-    return true;
+    }    
     LimpaAviso();
+    return true;
 
 }
 
@@ -70,7 +70,7 @@ function ValidaProduto() {
  */
 function ValidaQuantdInsert() {
   
-    if (qtd != NaN && qtd.value.length > 0) {
+    if (qtd != NaN && parseFloat(qtd.value) > 0) {
         return true;
     }
     return false;
@@ -86,11 +86,11 @@ function ValidaQuantidade() {
     var quantidade = parseFloat(qtd.value);
 
     if (!IsNumber(quantidade)) {
-        EscreveAviso("O valor que você informou não me parece ser um número");       
+        EscreveAviso("O valor que você informou precisa ser um número");       
         return false;
-    }
-    return true;
+    }    
     LimpaAviso();
+    return true;
 
 }
 
@@ -102,7 +102,7 @@ function ValidaQuantidade() {
  * @param {any} argumento
  */
 function IsNumber(argumento) {
-    return result = (typeof argumento === 'number' && !isNaN(argumento));
+    return result = (!isNaN(argumento));
 }
 
 
@@ -110,7 +110,7 @@ function IsNumber(argumento) {
 
 
 /**
- * Faz todas as validações de campo
+ * Faz todas as validações de campo ao confirmar a pre inclusao 
  */
 function TudoValido() {
     if (!ValidaProduto()) {
@@ -125,6 +125,14 @@ function TudoValido() {
 
     if (!ValidaCentroCusto()) {
         EscreveAviso("Centro de Custo não preechido!");
+        return false;
+    }
+
+    if (!ValidaMascaraCC()) {
+        return false;
+    }
+
+    if (!ValidaMascaraNumTpr()) {
         return false;
     }
     LimpaAviso();
