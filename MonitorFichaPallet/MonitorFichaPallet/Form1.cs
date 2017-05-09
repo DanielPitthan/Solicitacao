@@ -184,28 +184,52 @@ namespace MonitorFichaPallet
         /// <param name="e">The <see cref="DataGridViewCellFormattingEventArgs"/> instance containing the event data.</param>
         private void formatagrid2(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "EXPEDICAO")
+            {
+                dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.DeepSkyBlue;
+            }
+
+            if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "ESTORNADO")
+            {
+                dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.Black;
+                dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.ForeColor = Color.White;
+            }
+
+            if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "TRANSITO")
+            {
+                dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.Gold;
+            }
 
             if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "DEVOLVIDO")
             {
                 dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.OrangeRed;
             }
 
-            if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "EXPEDICAO")
-            {
-                dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.DeepSkyBlue;
-            }
-
+           
             if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "RECEBIDO")
             {
                 dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.GreenYellow;
             }
-            if (dgMonitor.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim() == "TRANSITO")
-            {
-                dgMonitor.Rows[e.RowIndex].Cells["Status"].Style.BackColor = Color.Gold;
-            }
+          
+
+          
 
 
         }
+
+        private void FiltraEstornados(object sender, EventArgs e)
+        {
+            CheckBox ck = (CheckBox)sender;
+            Filtra("ESTORNADO", ck.Checked);
+
+            checkbExpedidos.Checked = false;
+            checkbTransito.Checked = false;
+            checkbRecebido.Checked = false;
+
+            //lcontinua = false;
+
+        }
+
 
 
 
@@ -221,9 +245,8 @@ namespace MonitorFichaPallet
 
             checkbExpedidos.Checked = false;
             checkbTransito.Checked = false;
-            checkbRecebido.Checked = false;     
-           
-            //lcontinua = false;
+            checkbRecebido.Checked = false;
+            checkEstornado.Checked = false;              
 
         }
 
@@ -240,6 +263,7 @@ namespace MonitorFichaPallet
             checkbDevolvidos.Checked = false;
             checkbTransito.Checked = false;
             checkbRecebido.Checked = false;
+            checkEstornado.Checked = false;
         }
 
         /// <summary>
@@ -254,6 +278,7 @@ namespace MonitorFichaPallet
             checkbDevolvidos.Checked = false;
             checkbExpedidos.Checked = false;
             checkbRecebido.Checked = false;
+            checkEstornado.Checked = false;
         }
 
         /// <summary>
@@ -270,6 +295,7 @@ namespace MonitorFichaPallet
             checkbDevolvidos.Checked = false;
             checkbExpedidos.Checked = false;
             checkbTransito.Checked = false;
+            checkEstornado.Checked = false;
         }
 
         /// <summary>
