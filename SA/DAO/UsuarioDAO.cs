@@ -13,11 +13,13 @@ namespace SA.DAO
     {
         ISession session;
         DepartamentoDAO departamentoDAO;
+        CentroCustoDAO centrodeCustoDao;
 
-        public UsuarioDAO(ISession session, DepartamentoDAO dep)
+        public UsuarioDAO(ISession session, DepartamentoDAO dep, CentroCustoDAO ccdao)
         {
             this.session = session;
             this.departamentoDAO = dep;
+            this.centrodeCustoDao = ccdao;
         }
 
         //Lista os Usuarios 
@@ -116,7 +118,7 @@ namespace SA.DAO
             Departamento dep = departamentoDAO.GetById(Convert.ToInt32(user.Departamento));
             user.DescricaoDepartamento = dep.Departamentos;
 
-            user.DescricaoCentroCusto = CentroCustoDAO.GetCustoName(user.CentroCusto);
+            user.DescricaoCentroCusto = centrodeCustoDao.GetNomeCentroDeCusto(user.CentroCusto);
 
             user.Tercerizado = user.Tercerizado.Substring(0, 1);
             if (String.IsNullOrEmpty(user.EmpresaTercerizada))

@@ -12,11 +12,13 @@ namespace SA.Controllers
     [AutorizacaoAdminFilter]
     public class DepartamentoController : Controller
     {
-        private DepartamentoDAO departamentoDAO; 
+        private DepartamentoDAO departamentoDAO;
+        private CentroCustoDAO centroDeCustoDao;
 
-        public DepartamentoController(DepartamentoDAO dep)
+        public DepartamentoController(DepartamentoDAO dep, CentroCustoDAO ccdao)
         {
             this.departamentoDAO = dep;
+            this.centroDeCustoDao = ccdao;
         }
 
        
@@ -92,6 +94,13 @@ namespace SA.Controllers
             departamentoDAO.Delete(departamentoDAO.GetById(id));
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult GetListaCentroDeCusto (string centroDeCusto)
+        {
+            return Json(new { sucess = true,lista = centroDeCustoDao.GetCodByName(centroDeCusto.ToUpper()) });
+        }
+
 
     }
 }

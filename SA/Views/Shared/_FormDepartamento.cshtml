@@ -8,7 +8,8 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(d => d.CentroCusto,"Centro de Custo")
-            @Html.TextBoxFor(d=> d.CentroCusto, new { @class = "form-control" })
+            @Html.TextBoxFor(d=> d.CentroCusto, new { @class = "form-control", id="CentroDeCusto", @list = "listaCentroDeCusto" })
+            <datalist id="listaCentroDeCusto"></datalist>
         </div>
     </div>
 </div>

@@ -7,6 +7,7 @@ using SA.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,14 +20,19 @@ namespace SA.Controllers
         SolicitacaoDAO saDAO;        
         DepartamentoDAO depDAO;
         ProdutosDAO prodDAO;
+        CentroCustoDAO ccDao;
+
         bool jsonIsvalid =true;
         List<string> errors = new List<string>();
 
-        public HomeController (SolicitacaoDAO saDAO, DepartamentoDAO dep, ProdutosDAO prd)
+        public HomeController (SolicitacaoDAO saDAO, DepartamentoDAO dep, ProdutosDAO prd, CentroCustoDAO cc)
         {
+           
+
             this.saDAO = saDAO;
             this.depDAO = dep;
             this.prodDAO = prd;
+            this.ccDao = cc;
          
 
         }
@@ -34,6 +40,8 @@ namespace SA.Controllers
         // GET: Home
         public ActionResult Index()
         {
+
+            
             //Recupera o usuário da sessão            
             user = (Usuario)Session["usuario"];
 
@@ -51,8 +59,7 @@ namespace SA.Controllers
         {
             ViewBag.jsonIsvalid = this.jsonIsvalid;
             ViewBag.TiposRequisicoes = ChoiceFactory.ListaTiposRequisicoes();
-            ViewBag.Departamento = depDAO.Lista();
-            ViewBag.json = null;
+            ViewBag.Departamento = depDAO.Lista();           
             return View();
         }
 
@@ -68,6 +75,8 @@ namespace SA.Controllers
         /// <returns>ActionResult.</returns>
         public ActionResult Adicionar(IList<SolicitacaoJSon> itenSa)
         {
+
+            string numeroDaSolicitacao;
             user = (Usuario)Session["usuario"];
 
             if (!SolicitacaoValidates.ProdutoValidate(itenSa,prodDAO))
@@ -87,8 +96,8 @@ namespace SA.Controllers
 
             if (this.jsonIsvalid)
             {
-                saDAO.Add(SolicitacaoFactory.CriaListaSolicitacao(itenSa,user));
-                return new EmptyResult();
+                numeroDaSolicitacao= saDAO.Add(SolicitacaoFactory.CriaListaSolicitacao(itenSa,user));
+                return Json(new { success = true, NumeroSolicitacao= numeroDaSolicitacao }); 
             }
             else
             {

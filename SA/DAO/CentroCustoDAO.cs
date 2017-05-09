@@ -1,5 +1,6 @@
 ﻿using NHibernate;
 using SA.Helpers;
+using SA.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,36 +20,33 @@ namespace SA.DAO
             this.session = session;
         }
 
-        public static string GetCustoName(string cod)
+        /// <summary>
+        /// Retorna o nome do Centro de Custo
+        /// </summary>
+        /// <param name="codigo">The codigo.</param>
+        /// <returns></returns>
+        public string GetNomeCentroDeCusto(string codigo)
         {
-            using (IDbConnection conexao = ConnectionFactory.CriaConexao())
-            using (IDbCommand comando = conexao.CreateCommand())
-            {
-                string query = "select CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO = @Custo";
 
-                comando.CommandText = query;
-
-                IDbDataParameter paramTitulo = comando.CreateParameter();
-                paramTitulo.ParameterName = "Custo";
-                paramTitulo.Value = cod;
-                comando.Parameters.Add(paramTitulo);
-
-                IDataReader leitor = comando.ExecuteReader();
-                while (leitor.Read())
-                {
-                    if (!Convert.IsDBNull(leitor["CTT_DESC01"]))
-                    {
-                        return leitor["CTT_DESC01"].ToString();
-                    }
-                    else
-                    {
-                        return "";
-                    }
-                }
-                return "";
-                
-            }
+            IList<CentroDeCusto> CentroDeCusto  = session.QueryOver<CentroDeCusto>()
+                                .Where(c => c.Codigo == codigo)
+                                .List();
+            return CentroDeCusto[0].Descricao;
             
+        }
+
+
+        /// <summary>
+        /// Retorna uma lista de Centro de Custos buscando pelo Nome 
+        /// </summary>
+        /// <param name="nome">The nome.</param>
+        /// <returns></returns>
+        public IList<CentroDeCusto> GetCodByName(string nome)
+        {
+            IList<CentroDeCusto> CentroDeCusto = session.QueryOver<CentroDeCusto>()
+                                .WhereRestrictionOn(c=> c.Descricao).IsLike("%"+nome+"%")
+                                .List();
+            return CentroDeCusto;
         }
 
     }

@@ -29,12 +29,14 @@ namespace SA.DAO
         public IList<Solicitacao> Lista(Usuario user)
         {
             IList<Solicitacao> solicitacoes = session.QueryOver<Solicitacao>()
-                                                .Where(s => s.Usuario == user.Cpf) 
+                                                .Where(s => s.Usuario == user.Cpf)
                                                 //.SelectList(lista => lista //Necessita de um DTO
                                                 //.SelectGroup( p=> p.Codigo)
                                                 //.SelectGroup( p=> p.Data)
                                                 //)
                                                 .OrderBy(s => s.Data)
+                                                .Desc()
+                                                .OrderBy(s => s.Hora)
                                                 .Desc()
                                                 .List();
                                                 
@@ -71,21 +73,24 @@ namespace SA.DAO
         /// Grava uma nova solicitacao no banco de dados
         /// </summary>
         /// <param name="sa">The sa.</param>
-        public void Add(IList<Solicitacao> sa)
+        public string Add(IList<Solicitacao> sa)
         {
-            string saCod = GetCod();            
+            string CodigoDaSolicitacao = GetCod();            
                       
 
             foreach(var s in sa)
             {
                                
-                s.Codigo = saCod;
+                s.Codigo = CodigoDaSolicitacao;
                 ITransaction tran = session.BeginTransaction();
                 session.Save(s);
                 tran.Commit();                
 
             }
-            
+
+            return CodigoDaSolicitacao;
+
+
         }       
 
 
