@@ -37,6 +37,12 @@ namespace SA.Controllers.Validates.Solicitacao
         /// <returns>Retorna false se o código do produto não existir</returns>
         public static bool ProdutoValidate(IList<SolicitacaoJSon> sa, ProdutosDAO dao)
         {
+            if (sa == null)
+            {
+                return false;
+            }
+                
+            
 
             foreach (var q in sa)
             {

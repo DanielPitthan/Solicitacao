@@ -192,6 +192,7 @@
       <DependentUpon>Dockerfile</DependentUpon>
     </None>
     <None Include="Properties\PublishProfiles\SA.pubxml" />
+    <Content Include="Querys\IniQuery.sql" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
