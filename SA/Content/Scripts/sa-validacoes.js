@@ -70,7 +70,7 @@ function ValidaProduto() {
  */
 function ValidaQuantdInsert() {
   
-    if (qtd != NaN && parseFloat(qtd.value) > 0) {
+    if (qtd !== NaN && parseFloat(qtd.value) > 0) {
         return true;
     }
     return false;

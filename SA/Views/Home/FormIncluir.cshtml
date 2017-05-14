@@ -155,5 +155,32 @@
             })
         }
     </script>
+
+    <script>
+        /*
+         Evento da escolha do Departamento vs Centro de Custo
+        */
+
+        dep.addEventListener("click", function (event) {
+            event.preventDefault();
+            var urldestino = "@Url.Action("GetCentroDeCustoByDepartamento", "Departamento")";
+
+            $.ajax({
+                url: urldestino,
+                type: "POST",
+                data: { "id": dep.value },
+                dataType: "json",
+                success: function (response) {
+                    cc.document.value = response.centroDeCusto;
+                },
+                error: function (response) {
+                    console.log("Não consegui pegar o centro de custo")
+                }
+
+            })
+
+        })
+    </script>
+
      
 }

@@ -29,6 +29,18 @@ namespace SA.Controllers
         }
 
         /// <summary>
+        /// Obtem um Centro de Custo, com base no Id do Departamento.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public ActionResult GetCentroDeCustoByDepartamento(int id)
+        {
+            Departamento departamento = departamentoDAO.GetById(id);
+
+            return Json(new { centroDeCusto = departamento.CentroCusto });
+        }
+
+        /// <summary>
         /// Formulário de inclusão desse Controller
         /// </summary>
         /// <returns>ActionResult.</returns>
